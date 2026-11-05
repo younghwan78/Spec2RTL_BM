@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwbench-local"
+version = "0.1.0"
+description = "Offline-capable RTL grading and detailed evidence reports"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+hwbench = "hwbench.cli:main"
+
+[tool.setuptools]
+packages = ["hwbench"]

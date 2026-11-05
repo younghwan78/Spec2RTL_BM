@@ -1,0 +1,138 @@
+version: 2
+goal:
+  title: Portable RTL benchmark and evidence reports
+  slug: rtl-benchmark
+  kind: existing_plan
+  tranche: Implement an executable offline starter benchmark, upstream bridge, independent grading and detailed reports; validate using positive and negative controls.
+  status: done
+  oracle:
+    signal: stdlib tests, real RTL positive/negative controls, offline run, generated JSON/CSV/HTML reports, upstream integration smoke
+    cadence: after implementation and final audit
+    final_proof: passing commands and explicit separation of fixtures, real models, upstream and untested commercial tools
+  intake:
+    original_request: 쉽게 적용해 테스트/정확한 평가/상세 보고서가 되게 구현/검증
+    interpreted_outcome: Working local benchmark with portable adapters, reliable grading and detailed reports
+    input_shape: existing_plan
+    audience: HW engineers
+    authority: requested
+    proof_type: test
+    completion_proof: A one-command reproducible demo and tests with reference and faulty RTL
+    likely_misfire: Reporting fixture success as model ability or native tasks as official CVDP/HWE scores
+    blind_spots_considered:
+      - Docker unavailable
+      - No actual model credentials or commercial EDA provided
+      - Offline toolchain and hidden grader separation
+    existing_plan_facts:
+      - CVDP and HWE bridge
+      - model/harness metadata
+      - independent evaluation
+      - functional gate before PPA
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  exact_human_approval_can_terminal_wait: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+agents:
+  scout: unknown
+  worker: unknown
+  judge: unknown
+visual_board:
+  selected: none
+  local:
+    status: not_requested
+    url: null
+    command: null
+active_task: null
+tasks:
+  - id: T001
+    type: pm
+    assignee: PM
+    status: done
+    objective: Implement and validate portable benchmark; delegate disjoint fixture files, read-only upstream inspection and audit
+    allowed_files:
+      - hwbench/**
+      - tests/**
+      - benchmarks/**
+      - configs/**
+      - scripts/**
+      - docs/**
+      - README.md
+      - pyproject.toml
+      - .gitignore
+      - artifacts/**
+      - third_party/**
+    constraints:
+      - 'Delegated Worker scope: benchmarks/core/** then hwbench/reporting.py and tests/test_reporting.py; PM owns remaining files'
+      - Do not infer model results from reference fixtures
+      - Do not expose grading data in export
+    receipt:
+      result: done
+      summary: Implemented runnable offline starter benchmark, independent grading, model/harness adapters, public source bridge and detailed reports. Fixed findings from independent code review.
+      changed_files:
+        - hwbench/
+        - benchmarks/
+        - tests/
+        - scripts/
+        - configs/
+        - README.md
+        - docs/VALIDATION.md
+        - third_party/cvdp/
+      commands:
+        - cmd: python3 scripts/validate.py --out artifacts/validated
+          status: pass
+        - cmd: 'HTML local link check: 588 links'
+          status: pass
+      evidence:
+        - artifacts/validated/index.html
+        - artifacts/validated/validation.json
+      harness: codex
+    verify:
+      - python3 benchmarks/core/verify.py
+      - python3 -m unittest discover -s tests -v
+      - python3 -m hwbench demo --out artifacts/demo
+    stop_if:
+      - Writes outside assigned ownership are needed
+      - Reference or mutant failures cannot be explained after two fixes
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Audit implementation, grading validity and generated evidence against original request
+    receipt:
+      result: done
+      task_id: T999
+      board_path: docs/goals/rtl-benchmark/state.yaml
+      decision: complete
+      full_outcome_complete: true
+      rationale: 'The requested easy-to-apply initial benchmark implementation is executable, independently checked, and produces detailed offline reports. Previously reported deadline, evidence-validation, comparison, relocated-log and sandbox-classification defects are fixed with regressions. The current validation artifact passes every step and matches current implementation hashes. Completion applies to the documented starter MVP: six authored tasks, one CVDP adapted example, adapters and HWE result import. It does not claim the proposed 24 upstream tasks, actual model evaluation, official upstream evaluator execution, or commercial EDA validation.'
+      evidence:
+        - 'Independent unittest run: 34 tests passed'
+        - 'artifacts/validated/validation.json: all five stages pass'
+        - six core references, twelve mutants; one CVDP adapted reference, two mutants
+        - Network-disabled counter reference and negative controls pass
+        - Current source hashes match final validation
+      parallel_safety:
+        decision: approved
+        condition: Separate fixture and runner ownership; Judge made no edits.
+checks:
+  dirty_fingerprint: unknown
+  last_verification:
+    result: pass
+    task: T999
+    commands:
+      - python3 scripts/validate.py --out artifacts/validated

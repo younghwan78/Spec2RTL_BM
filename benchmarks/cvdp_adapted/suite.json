@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "cvdp-v1.1.0-lfsr-adapted",
+  "title": "CVDP LFSR native adapted smoke",
+  "origin": "cvdp_adapted_not_official_score",
+  "tasks": [
+    {
+      "id": "cvdp_copilot_lfsr_0001",
+      "category": "generation",
+      "title": "CVDP 8-bit Galois LFSR (adapted)",
+      "path": "tasks/lfsr",
+      "files": [
+        "rtl/lfsr_8bit.sv"
+      ],
+      "checks": [
+        {
+          "id": "transition",
+          "tb": "checks/transition.sv",
+          "top": "tb",
+          "description": "All nonzero initial states and 16 bit-exact transitions each"
+        },
+        {
+          "id": "period",
+          "tb": "checks/period.sv",
+          "top": "tb",
+          "description": "255 unique nonzero states and return to seed"
+        },
+        {
+          "id": "reset",
+          "tb": "checks/reset.sv",
+          "top": "tb",
+          "description": "Asynchronous reset and restart for 40 seeded inputs"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "wrong_tap",
+          "path": "mutants/wrong_tap",
+          "expected_fail_checks": [
+            "transition"
+          ]
+        },
+        {
+          "id": "synchronous_reset",
+          "path": "mutants/synchronous_reset",
+          "expected_fail_checks": [
+            "reset"
+          ]
+        }
+      ],
+      "upstream_id": "cvdp_copilot_lfsr_0001"
+    }
+  ]
+}

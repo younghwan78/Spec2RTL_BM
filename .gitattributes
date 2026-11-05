@@ -1,0 +1,4 @@
+# Preserve upstream CVDP text verbatim in materialized reference/control files.
+benchmarks/cvdp_adapted/tasks/lfsr/prompt.md -whitespace
+benchmarks/cvdp_adapted/tasks/lfsr/reference/rtl/lfsr_8bit.sv -whitespace
+benchmarks/cvdp_adapted/tasks/lfsr/mutants/*/rtl/lfsr_8bit.sv -whitespace

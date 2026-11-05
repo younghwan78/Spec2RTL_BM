@@ -1,0 +1,9 @@
+{
+  "type": "command",
+  "label": "internal-agent-config",
+  "model": "RECORD_MODEL_NAME",
+  "harness": "RECORD_HARNESS_NAME",
+  "harness_version": "RECORD_HARNESS_VERSION",
+  "argv": ["/absolute/path/to/company-agent-wrapper", "{workspace}", "{prompt}"],
+  "notes": "Wrapper must edit allowed RTL files in the workspace and exit. No shell expansion. Run agent in an external isolated environment for blind evaluation."
+}

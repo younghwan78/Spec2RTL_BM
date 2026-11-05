@@ -1,0 +1,1 @@
+module elastic_stage(input clk,rst,v,input[7:0]d,output ready,input take,output reg valid,output reg[7:0]data); assign ready=!valid||take; always @(posedge clk) if(rst)begin valid<=0;data<=0;end else if(ready)begin valid<=v;if(v)data<=d;end endmodule
