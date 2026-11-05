@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "id": "rtl-core-v1",
+  "title": "Portable RTL starter controls",
+  "origin": "locally_authored",
+  "tasks": [
+    {
+      "id": "saturating_add",
+      "category": "generation",
+      "title": "saturating add",
+      "path": "tasks/saturating_add",
+      "files": [
+        "rtl/saturating_add.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Overflow boundary"
+        },
+        {
+          "id": "exhaustive",
+          "tb": "checks/exhaustive.sv",
+          "top": "tb",
+          "description": "All 65536 pairs"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded pairs"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "wrap",
+          "path": "mutants/wrap",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "bad_flag",
+          "path": "mutants/bad_flag",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    },
+    {
+      "id": "priority_encoder",
+      "category": "generation",
+      "title": "priority encoder",
+      "path": "tasks/priority_encoder",
+      "files": [
+        "rtl/priority_encoder.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Competing requests"
+        },
+        {
+          "id": "exhaustive",
+          "tb": "checks/exhaustive.sv",
+          "top": "tb",
+          "description": "All request masks"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded masks"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "highest",
+          "path": "mutants/highest",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "invalid",
+          "path": "mutants/invalid",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    },
+    {
+      "id": "counter",
+      "category": "repair",
+      "title": "counter",
+      "path": "tasks/counter",
+      "files": [
+        "rtl/counter.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Increment and hold"
+        },
+        {
+          "id": "wrap",
+          "tb": "checks/wrap.sv",
+          "top": "tb",
+          "description": "Wrap and reset priority"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded enable/reset"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "step2",
+          "path": "mutants/step2",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "no_hold",
+          "path": "mutants/no_hold",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    },
+    {
+      "id": "fifo",
+      "category": "repair",
+      "title": "fifo",
+      "path": "tasks/fifo",
+      "files": [
+        "rtl/fifo.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Fill stall simultaneous drain"
+        },
+        {
+          "id": "reset",
+          "tb": "checks/reset.sv",
+          "top": "tb",
+          "description": "Reset occupied FIFO"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded FIFO scoreboard"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "wrong_read",
+          "path": "mutants/wrong_read",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "bad_count",
+          "path": "mutants/bad_count",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    },
+    {
+      "id": "stream_pipeline",
+      "category": "repository",
+      "title": "stream pipeline",
+      "path": "tasks/stream_pipeline",
+      "files": [
+        "rtl/stream_pipeline.sv",
+        "rtl/helper.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Stall stability and replacement"
+        },
+        {
+          "id": "reset",
+          "tb": "checks/reset.sv",
+          "top": "tb",
+          "description": "Reset occupied stage"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded elastic scoreboard"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop",
+          "path": "mutants/drop",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "corrupt",
+          "path": "mutants/corrupt",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    },
+    {
+      "id": "round_robin",
+      "category": "repository",
+      "title": "round robin",
+      "path": "tasks/round_robin",
+      "files": [
+        "rtl/round_robin.sv",
+        "rtl/helper.sv"
+      ],
+      "checks": [
+        {
+          "id": "boundary",
+          "tb": "checks/boundary.sv",
+          "top": "tb",
+          "description": "Fairness and held preference"
+        },
+        {
+          "id": "reset",
+          "tb": "checks/reset.sv",
+          "top": "tb",
+          "description": "Reset priority and no requests"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Seeded arbitration scoreboard"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "stuck",
+          "path": "mutants/stuck",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        },
+        {
+          "id": "advance_stall",
+          "path": "mutants/advance_stall",
+          "expected_fail_checks": [
+            "boundary"
+          ]
+        }
+      ],
+      "tags": [
+        "locally_authored",
+        "starter_scale"
+      ]
+    }
+  ]
+}

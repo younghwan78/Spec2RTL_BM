@@ -1,0 +1,22 @@
+[
+  {
+    "file": "example.jsonl",
+    "url": "https://raw.githubusercontent.com/NVlabs/cvdp_benchmark/main/example_dataset/cvdp_v1.1.0_example_nonagentic_code_generation_no_commercial_with_solutions.jsonl",
+    "sha256": "ab4a25cbc7c9827db560e45219058e313081a83f4859b9d8e2c84fd832f258ef"
+  },
+  {
+    "file": "LICENSE",
+    "url": "https://raw.githubusercontent.com/NVlabs/cvdp_benchmark/main/LICENSE",
+    "sha256": "94fc060effda8b8b950639c87ece92aa212ab25024434350b5bd6623f6d26a88"
+  },
+  {
+    "file": "DATASET_NOTICE",
+    "url": "https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/raw/main/NOTICE",
+    "sha256": "3d8753e57eab52910ccb61a1ee09113c43e9382ccd98d5860b5621aff8d932dd"
+  },
+  {
+    "file": "DATASET_LICENSE",
+    "url": "https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/raw/main/LICENSE",
+    "sha256": "cedcd612607018ad841d87d7f1c877630778a50c71692610fe76acdc22700719"
+  }
+]

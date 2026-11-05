@@ -1,0 +1,172 @@
+{
+  "status": "pass",
+  "created_at": "20261105T161707Z",
+  "unit_tests": 34,
+  "steps": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "<workspace>",
+      "log": "<workspace>/artifacts/validated/unit-tests.log",
+      "returncode": 0,
+      "timeout": false,
+      "output_limit": false,
+      "seconds": 2.914962,
+      "name": "unit-tests"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "benchmarks/core/verify.py"
+      ],
+      "cwd": "<workspace>",
+      "log": "<workspace>/artifacts/validated/fixture-controls.log",
+      "returncode": 0,
+      "timeout": false,
+      "output_limit": false,
+      "seconds": 0.724117,
+      "name": "fixture-controls"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "hwbench",
+        "demo",
+        "--out",
+        "<workspace>/artifacts/validated/core",
+        "--sandbox",
+        "required"
+      ],
+      "cwd": "<workspace>",
+      "log": "<workspace>/artifacts/validated/core-demo.log",
+      "returncode": 0,
+      "timeout": false,
+      "output_limit": false,
+      "seconds": 6.33119,
+      "name": "core-demo"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "hwbench",
+        "demo",
+        "--suite",
+        "benchmarks/cvdp_adapted/suite.json",
+        "--out",
+        "<workspace>/artifacts/validated/cvdp",
+        "--sandbox",
+        "required"
+      ],
+      "cwd": "<workspace>",
+      "log": "<workspace>/artifacts/validated/cvdp-adapted.log",
+      "returncode": 0,
+      "timeout": false,
+      "output_limit": false,
+      "seconds": 1.20634,
+      "name": "cvdp-adapted"
+    },
+    {
+      "argv": [
+        "bwrap",
+        "--ro-bind",
+        "/",
+        "/",
+        "--bind",
+        "<workspace>/artifacts/validated",
+        "<workspace>/artifacts/validated",
+        "--tmpfs",
+        "/tmp",
+        "--proc",
+        "/proc",
+        "--dev",
+        "/dev",
+        "--unshare-net",
+        "--die-with-parent",
+        "--setenv",
+        "PYTHONDONTWRITEBYTECODE",
+        "1",
+        "--",
+        "/usr/bin/python3",
+        "-m",
+        "hwbench",
+        "demo",
+        "--tasks",
+        "counter",
+        "--out",
+        "<workspace>/artifacts/validated/offline",
+        "--sandbox",
+        "required"
+      ],
+      "cwd": "<workspace>",
+      "log": "<workspace>/artifacts/validated/offline.log",
+      "returncode": 0,
+      "timeout": false,
+      "output_limit": false,
+      "seconds": 1.206598,
+      "name": "network-denied-smoke"
+    }
+  ],
+  "actual_model_evaluated": false,
+  "commercial_eda_evaluated": false,
+  "official_cvdp_evaluator_executed": false,
+  "official_hwe_evaluator_executed": false,
+  "source_hashes": {
+    "hwbench/__init__.py": "2dcfe0c311deb88b24423e7b0808e92659ed3a7ffee71139a1af76bee8787189",
+    "hwbench/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "hwbench/cli.py": "c76d63103cdfd8a8644b5551dd5178c3d027301fdd5f290e1e714e0a343b54d5",
+    "hwbench/common.py": "48b9774601eb8999e7ebdf51c014810856310fdd38426abf962312f283519f1a",
+    "hwbench/execution.py": "d32a125a21dc7351a3a09ba5b81d3e228a954545b160dcd15cf1b501feb20ee4",
+    "hwbench/grader.py": "db3dfc8536474bc5a867739beff9995c61bb9635d969bdf1ca4ff0db79df7004",
+    "hwbench/http_worker.py": "bd9af23a72d899c16284b37bd92e5f62b90a1f0aaed568125c4076ce3c22afb9",
+    "hwbench/reporting.py": "2b58033d6e754764ce9b5542e877682819a38a1231ef3946045cfbd3b152ce49",
+    "hwbench/upstream.py": "f185794053b380034b0624cde4bbadefe5982c2d2d15c6683aee8ef10225df7a"
+  },
+  "publication_note": "Snapshot of the actual local validation record; workspace absolute paths replaced by <workspace>. Full generated reports are local artifacts and can be reproduced with python3 scripts/validate.py.",
+  "controls": {
+    "core": {
+      "status": "pass",
+      "suite_fingerprint": "33d17ce2cf3629c1c247dbb805e0463f6cbc57a474796545b09ebb56b3359d85",
+      "references_passed": 6,
+      "mutants_detected": 12,
+      "real_model_evaluated": false,
+      "seeds": [
+        1,
+        7,
+        42
+      ]
+    },
+    "cvdp": {
+      "status": "pass",
+      "suite_fingerprint": "f9bad0e5957f6bcb433480b54015f28a85daa0ce3f31aa1300857b97f04257f6",
+      "references_passed": 1,
+      "mutants_detected": 2,
+      "real_model_evaluated": false,
+      "seeds": [
+        1,
+        7,
+        42
+      ]
+    },
+    "offline": {
+      "status": "pass",
+      "suite_fingerprint": "a4a2c88037faa644f8bb7e515a03d0a5c4af1a1308ed1a00635c5b52fd4cf99d",
+      "references_passed": 1,
+      "mutants_detected": 2,
+      "real_model_evaluated": false,
+      "seeds": [
+        1,
+        7,
+        42
+      ]
+    }
+  }
+}
