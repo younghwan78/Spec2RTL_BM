@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "native": ["source"],
+    "heavy": ["source", "dataset", "bundles", "evaluator", "images", "wheels", "notices"],
+    "eda": ["source", "eda-installation", "eda-configuration"]
+  },
+  "resources": [
+    {"id": "source", "role": "source_bundle", "path": "/transfer/hwbench-source.tar.gz", "destination": "source.tar.gz"},
+    {"id": "dataset", "role": "dataset", "path": "/transfer/cvdp/datasets", "destination": "datasets", "revision": "5b807d945f6a99aa645f7e43a64a2115e281b4bf"},
+    {"id": "bundles", "role": "git_bundle", "path": "/transfer/cvdp/bundles", "destination": "bundles"},
+    {"id": "evaluator", "role": "evaluator", "path": "/transfer/cvdp/evaluator", "destination": "evaluator", "revision": "REPLACE_WITH_PINNED_REVISION"},
+    {"id": "images", "role": "image_archive", "path": "/transfer/cvdp/images.tar", "destination": "images.tar"},
+    {"id": "wheels", "role": "runtime_package", "path": "/transfer/runtime", "destination": "runtime"},
+    {"id": "notices", "role": "license_notice", "path": "/transfer/notices", "destination": "notices"},
+    {"id": "eda-installation", "role": "tool_installation", "path": "/transfer/company-eda-installation.json", "destination": "company-eda-installation.json"},
+    {"id": "eda-configuration", "role": "configuration", "path": "/transfer/company-eda-config", "destination": "eda-config"}
+  ]
+}

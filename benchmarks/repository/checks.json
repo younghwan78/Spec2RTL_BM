@@ -1,0 +1,1 @@
+{"local_repository_saturation":{"files":["rtl/top.sv","rtl/adder.sv"],"checks":[{"id":"saturation","tb":"checks/saturation.sv","top":"tb","description":"Exhaustive unsigned four-bit saturating addition"}]}}

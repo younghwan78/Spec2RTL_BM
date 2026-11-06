@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "scope": "2026-11-07 offline/Heavy/EDA integration; fixture evidence, not model scores",
+  "integration": {
+    "path": "artifacts/validation-20261106T174734Z/validation.json",
+    "sha256": "74d636526e4a82f73d529d153b70be12a1529ee834754d1ebeb4574f0505c68a",
+    "created_at": "20261106T174734Z",
+    "status": "pass",
+    "unit_tests": 76,
+    "steps": [
+      {
+        "name": "unit-tests",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      },
+      {
+        "name": "fixture-controls",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      },
+      {
+        "name": "core-demo",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      },
+      {
+        "name": "cvdp-adapted",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      },
+      {
+        "name": "network-denied-smoke",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      },
+      {
+        "name": "relocated-offline-controls",
+        "returncode": 0,
+        "timeout": false,
+        "skipped": false
+      }
+    ]
+  },
+  "relocated_official_preparation": {
+    "path": "artifacts/offline-t005/cvdp-final/results/validation.json",
+    "sha256": "557bdcf89f68d9a89deb4194f5436cc45b65ff9e1fef49025fb9efb2abf3ff78",
+    "status": "pass",
+    "steps": [
+      {
+        "name": "native",
+        "returncode": 0,
+        "timeout": false
+      },
+      {
+        "name": "repository",
+        "returncode": 0,
+        "timeout": false
+      },
+      {
+        "name": "eda",
+        "returncode": 0,
+        "timeout": false
+      },
+      {
+        "name": "repository-transfer",
+        "returncode": 0,
+        "timeout": false
+      }
+    ],
+    "boundaries": {
+      "original_checkout_visible": false,
+      "external_network_available": false,
+      "source_bundle_has_agents": true,
+      "resource_readiness": {
+        "status": "resources_verified",
+        "fingerprint": "051ccbe4f7b1dab02c400e4c9f63be34cc39881308bed4f6a90b8bc6d4b64af3",
+        "profile": "native",
+        "resources": [
+          "source"
+        ],
+        "runtime_status": "not_checked; files are not installed tools or loaded images",
+        "external_network_used": false
+      },
+      "runtime": "preinstalled system tools mounted read-only; OS package installation not tested",
+      "cvdp_catalog_tasks": 469,
+      "actual_rvx_prepared": true,
+      "official_cvdp_evaluator_executed": false,
+      "commercial_eda_executed": false,
+      "actual_model_evaluated": false
+    }
+  },
+  "source_hashes": {
+    "hwbench/__init__.py": "2dcfe0c311deb88b24423e7b0808e92659ed3a7ffee71139a1af76bee8787189",
+    "hwbench/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "hwbench/cli.py": "cbfb8f6c051250d6864aa742ee137b35ff901801743d114669e9cd017230af09",
+    "hwbench/common.py": "a4e7b8726e857b809aa1fa1844f5f910c6803df7405077d89b0b63eaa068c1c1",
+    "hwbench/eda.py": "52c1d518ab01ad1fbfbbf61048ca4d1180d99b95fde4d90a8743e25799eb2c22",
+    "hwbench/eda_supervisor.py": "5e6a64d6edf7df6c7f4d14e8c67d3229c104bc88452f93d16580281d37ade495",
+    "hwbench/execution.py": "1383259fc25ec5ebe92e896b39b43bf12119cb070d8d6c285f49f6509d442649",
+    "hwbench/grader.py": "764d7e010c5b1bc20ec5fd21f88464089c26ba9910ee409d437e3032555f4ade",
+    "hwbench/http_worker.py": "bd9af23a72d899c16284b37bd92e5f62b90a1f0aaed568125c4076ce3c22afb9",
+    "hwbench/offline.py": "f9f46981117adce5a4840cb2a1ecb9dcf06ad79eae4bff9c0f96f67956a0889f",
+    "hwbench/reporting.py": "888af37105fe8b8cea4d571ae7dfc867ac62156916f627af4faebc1fc46e1099",
+    "hwbench/repository.py": "c89e71f7313fa37c632623b4ab5c5361037cf0b514f53e1ae9b3d6f027c17486",
+    "hwbench/upstream.py": "f185794053b380034b0624cde4bbadefe5982c2d2d15c6683aee8ef10225df7a"
+  },
+  "guide_browser": {
+    "status": "pass",
+    "calculatorCases": 8,
+    "brokenAnchors": [],
+    "scriptErrors": [],
+    "externalRequests": [],
+    "mobileOverflow": false,
+    "noJsReadable": true
+  },
+  "korean_proofreading": {
+    "run_id": "2026-11-07-001-9230",
+    "route": "light",
+    "input_paragraphs": 35,
+    "input_chars": 7308,
+    "change_rate": 0.0002,
+    "grade": "B",
+    "self_check": "6/6",
+    "gate": {
+      "verdict": "OK — 수렴",
+      "exit_code": 0
+    },
+    "role_execution": "sequential fallback under Worker no-spawn constraint"
+  },
+  "unverified": [
+    "Actual model endpoint/performance",
+    "Official CVDP Docker scoring and all Heavy tasks",
+    "HWE official evaluator",
+    "Vendor EDA commands/report parsing, real PPA and signoff",
+    "OS runtime package installation, Docker image load and license availability inside company"
+  ]
+}

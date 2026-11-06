@@ -1,0 +1,726 @@
+version: 2
+goal:
+  title: HWBench heavy evaluation and offline-ready EDA assessment
+  slug: hwbench-expansion
+  kind: existing_plan
+  tranche: Implement both agreed evaluation tracks and all safe outside-company verification, with commercial execution explicitly unverified.
+  status: done
+  oracle:
+    signal: Regression suite, real repository/RTL fixtures, pinned CVDP catalog audit, queue/cache/import fault tests, standalone report walkthrough
+    cadence: after each vertical slice and final integration
+    final_proof: Working CLI paths for base metrics, heavy repository evaluation, offline EDA job export/import and controlled wrapper execution; passing regression/integration and independent final audit
+  intake:
+    original_request: 한번에 goal로 구현/검증 진행해줘. 지금은 사외라서 EDA tool 사용 못하는거 감안해줘
+    interpreted_outcome: Operational benchmark expansion with honest evidence for real RTL/repository checks versus mocked commercial EDA contracts
+    input_shape: existing_plan
+    audience: SoC HW IP engineers evaluating models and agents in an air-gapped network
+    authority: requested
+    proof_type: test
+    completion_proof: All local implementation and validation complete; proprietary EDA execution marked unavailable rather than simulated as real measurements
+    likely_misfire: Claiming mock PPA or toy repository smoke validates official heavy scores or real proprietary tools
+    blind_spots_considered:
+      - Commercial binaries/licenses/PDK are unavailable
+      - CVDP heavy uses external git bundles and official Docker harness
+      - Long tool runs require queue budgets, provenance-aware cache, and distinct infrastructure failures
+      - No real model credentials supplied; validate adapters using controls without claiming model performance
+    existing_plan_facts:
+      - 'Track 1: no commercial EDA dependency; strengthen metrics and support heavy repository tasks'
+      - 'Track 2: functional-pass submissions get synthesis/RTL-estimate PPA with RTLA/PowerPro and separate lint/Xprop quality results'
+      - 'EDA costs: final submissions only, bounded concurrency, queue/execution time separation, deduplication, persistent evidence'
+      - Retain offline stdlib baseline; keep official CVDP and native/adapted results separate
+      - Preserve Korean single-HTML guide and user-requested humanize-korean proofreading
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  exact_human_approval_can_terminal_wait: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+visual_board:
+  selected: local
+  local:
+    status: live
+    url: http://goalbuddy.localhost:41737/hwbench-expansion/
+    command: node /home/neokein/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.3/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/hwbench-expansion
+active_task: null
+tasks:
+  - id: T001
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Validate agreed implementation plan and define bounded worker packages with honest proof boundaries
+    inputs:
+      - AGENTS.md
+      - hwbench/
+      - tests/
+      - README.md
+      - docs/goals/hwbench-expansion/goal.md
+    constraints:
+      - Read-only
+      - Commercial EDA unavailable; no fabricated product Tcl commands or actual PPA claims
+      - Select coherent sequential vertical slices
+    expected_output:
+      - Decision
+      - Exact first worker package
+      - Required remaining slices and evidence
+    receipt:
+      result: done
+      task_id: T001
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      decision: approved
+      full_outcome_complete: false
+      rationale: The two-track plan matches the agreed scope and can progress without proprietary tools. Native reporting currently lacks planned subgroup denominators, difficulty and repeat diagnostics, so T002 is a useful executable first slice. Heavy support must distinguish real repository fixture execution from official CVDP preparation and externally executed results. EDA completion can mean a validated operational integration contract, but cannot mean validated vendor commands, synthesis estimates or measured PPA. Keep the packages sequential because their code ownership overlaps.
+      evidence:
+        - path: docs/goals/hwbench-expansion/state.yaml
+          finding: T001 is active; all implementation tasks are queued with null receipts. The board explicitly prohibits completion from planning or mock evidence.
+        - path: docs/goals/hwbench-expansion/goal.md
+          finding: The charter requires working CLI paths, real RTL/git controls, pinned catalog checks, queue/cache/import fault tests and Korean guide updates.
+        - path: hwbench/reporting.py
+          finding: Global success uses planned_runs, but category success uses recorded rows. Reporting has no difficulty, planned task manifest or repeat consistency summaries. Native PASS evidence validation must be preserved.
+        - path: hwbench/execution.py
+          finding: run records planned_runs and repeats, but no complete task/repeat plan. Rows contain category, agent evidence and grading evidence.
+        - path: hwbench/grader.py
+          finding: Native grading produces independent compile/simulation evidence and snapshots; this evidence contract is not interchangeable with repository or imported upstream results.
+        - source: Parent environment receipt
+          finding: Existing 34 tests pass. Icarus, bubblewrap and open-source tools are available. Docker daemon and proprietary EDA are unavailable.
+        - source: Parent CVDP schema receipt
+          finding: Heavy context.commit identifies the sanitized runnable bundle baseline; origin.commit is different. Empty patch values are not reference solutions.
+      worker_package:
+        task_id: T002
+        objective: 'Deliver an end-to-end native metrics extension: persist a complete task/repeat plan before execution, propagate declared difficulty without inventing ratings, report planned-denominator category/difficulty results, task-level repeat consistency, failure phases, measured generation/grading timing and usage availability. Expose these in summary JSON, HTML/Markdown, CSV and comparison output while preserving legacy result compatibility and existing native PASS evidence checks.'
+        allowed_files:
+          - hwbench/common.py
+          - hwbench/execution.py
+          - hwbench/grader.py
+          - hwbench/reporting.py
+          - hwbench/cli.py
+          - tests/**
+        implementation_contract:
+          - Represent planned runs with unique task_id/repeat identities and task metadata; validate membership and consistency when the manifest exists. Persist the initial results before executing the first task.
+          - Use the manifest for subgroup denominators and missing-run accounting. Legacy results without a manifest must explicitly retain unknown subgroup coverage rather than infer missing task classifications.
+          - Treat absent difficulty as unknown. Keep category, difficulty and execution backend as separate concepts.
+          - Report per-task passed/planned repeats and all-pass/never-pass/mixed outcomes with explicit incomplete coverage. Do not name repeated success pass@k or treat simulator seeds as independent tasks.
+          - Derive failure phases from structured execution evidence. Preserve status and raw reason; unavailable evidence maps to unknown rather than a guessed phase.
+          - Separate agent and grading elapsed times. Do not multiply shared compile timing by the number of seeds. Missing token/cost observations remain missing.
+          - Maintain the current protocol/kind comparison boundary. Do not weaken native validation to accommodate future repository or EDA results.
+          - Tests must cover omitted planned runs, legacy reports, invalid/duplicate plan identities, unknown difficulty, mixed repeat outcomes, infrastructure failures and absent usage.
+        verify:
+          - python3 -m unittest discover -s tests -v
+          - python3 -m hwbench demo --help
+          - Run the documented native demo into a new artifacts directory and regenerate report/compare outputs from its preserved results.
+          - git diff --check
+        stop_if:
+          - Implementation requires changes outside allowed_files.
+          - A proposed metric would require unrecorded evidence or reinterpret existing PASS evidence.
+          - A failing existing test demonstrates a compatibility change that cannot be fixed within this package.
+          - Another writer is modifying the same files.
+      parallel_safety:
+        safe: false
+        reason: T002 through T005 overlap hwbench, tests and later integration files. Execute one write worker at a time; separate boards would not establish disjoint ownership.
+      missing_evidence:
+        - Implementation and current verification receipts for T002 through T005.
+        - Real repository baseline, passing repair and failing repair execution evidence.
+        - Official heavy bundle preparation/integrity evidence; full official evaluator execution is unavailable in the current environment.
+        - EDA queue lifecycle, timeout, cache invalidation, export/import integrity and forged-evidence rejection tests.
+        - Final integrated validation and independent full-outcome audit.
+      required_board_updates:
+        - task_id: T002
+          update: Use the worker package above. Record before/after user-visible reporting evidence, not only test counts.
+        - task_id: T003
+          update: Define a separate repository execution/evidence contract instead of relaxing the native flat-RTL grader. Pin catalog revision and file hashes; validate task IDs and no-commercial selection. Materialize local git bundles using context.repo/context.commit, never origin.commit. Preserve upstream provenance and distinguish empty patch entries from golden solutions.
+        - task_id: T003
+          update: Require an immutable baseline, explicit modification allowlist, rejection of path escapes/symlinks and hidden trusted checks outside the agent workspace. Verify a real git/worktree plus Icarus positive/negative fixture. Provide operational official-heavy preparation and external-runner/result-import paths with expected-task accounting. A catalog plus mock import alone is insufficient. Record official Docker evaluation as unexecuted.
+        - task_id: T004
+          update: Use a separate EDA result schema and commands. Gate jobs on validated functional PASS snapshots; preserve source identity and source hashes. Distinguish fixture/mock, externally reported and locally executed evidence. Keep lint/Xprop outcomes separate from PPA and keep RTL estimates separate from synthesis measurements.
+        - task_id: T004
+          update: Specify wrapper argv/input/output contracts without invented vendor CLI or parsers. Fingerprint tool/version, wrapper, library, constraints, analysis stage, workload/activity and source inputs. Reject nonfinite metrics, invalid units and incomplete provenance for comparable measurements. Preserve raw reports and explicitly mark imported results as externally claimed.
+        - task_id: T004
+          update: Implement persistent resumable jobs with exclusive ownership, bounded execution, timeout/process-group termination, queue wait versus execution timing and total budget accounting. Cache only valid matching completed evidence; exclude infrastructure failures and prevent mock cache entries from satisfying measured requests. Export/import must verify hashes, job identity and safe paths.
+        - task_id: T004
+          update: Report planned, eligible, attempted and valid measured counts separately. Compare PPA only for matching task/workload/tool conditions and disclose unmatched or failed measurements. Do not rank successful survivors as though all planned submissions were measured.
+        - task_id: T005
+          update: Update bundle contents and offline validation for the new execution paths. Expand the single HTML guide with formulas, denominators, examples, matching rules and explicit real-versus-fixture boundaries; apply the requested Korean proofreading skill. Preserve fresh validation artifacts without overwriting prior evidence.
+        - task_id: T999
+          update: Audit every original outcome against executable receipts. Missing proprietary binaries are an acknowledged execution boundary, not a reason to stop implementation; actual proprietary measurements and official heavy scores must remain explicitly unverified.
+  - id: T002
+    type: worker
+    assignee: Worker
+    status: done
+    objective: 'Deliver an end-to-end native metrics extension: persist a complete task/repeat plan before execution, propagate declared difficulty without inventing ratings, report planned-denominator category/difficulty results, task-level repeat consistency, failure phases, measured generation/grading timing and usage availability. Expose these in summary JSON, HTML/Markdown, CSV and comparison output while preserving legacy result compatibility and existing native PASS evidence checks.'
+    allowed_files:
+      - hwbench/common.py
+      - hwbench/execution.py
+      - hwbench/grader.py
+      - hwbench/reporting.py
+      - hwbench/cli.py
+      - tests/**
+    verify:
+      - python3 -m unittest discover -s tests -v
+      - python3 -m hwbench demo --help
+      - Run the documented native demo into a new artifacts directory and regenerate report/compare outputs from its preserved results.
+      - git diff --check
+    stop_if:
+      - Implementation requires changes outside allowed_files.
+      - A proposed metric would require unrecorded evidence or reinterpret existing PASS evidence.
+      - A failing existing test demonstrates a compatibility change that cannot be fixed within this package.
+      - Another writer is modifying the same files.
+    receipt:
+      result: done
+      task_id: T002
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      changed_files:
+        - hwbench/common.py
+        - hwbench/execution.py
+        - hwbench/grader.py
+        - hwbench/reporting.py
+        - tests/test_metrics.py
+      commands:
+        - cmd: python3 -m unittest discover -s tests -v
+          status: pass
+          evidence: 43 tests passed
+        - cmd: python3 -m hwbench demo --help
+          status: pass
+        - cmd: python3 -m hwbench demo --out artifacts/metrics-t002-20261107 --sandbox required
+          status: pass
+          evidence: References 6/6; starters 0/6; both mutant sets 0/6; no infrastructure errors
+        - cmd: python3 -m hwbench report artifacts/metrics-t002-20261107/reference --out artifacts/metrics-t002-20261107/regenerated
+          status: pass
+        - cmd: python3 -m hwbench compare artifacts/metrics-t002-20261107/reference artifacts/metrics-t002-20261107/starter --out artifacts/metrics-t002-20261107/recompared
+          status: pass
+        - cmd: git diff --check
+          status: pass
+      summary: Implemented pre-execution task plans, validated task/repeat membership, planned category/difficulty/backend denominators, explicit legacy unknown coverage, repeat consistency, failure phases, separate observed timing, deduplicated compile timing and unavailable usage/cost handling. HTML, Markdown, CSV and comparison JSON expose the metrics without weakening native PASS evidence. Added nine regression tests. Real RTL demo and regenerated reports passed. A derived incomplete-fixture comparison at artifacts/metrics-t002-20261107/coverage-comparison/comparison.html demonstrates planned versus legacy denominators. No runtime dependencies or network downloads were added. HWE null elapsed times remain compatible. Documentation integration remains assigned to T005.
+      verification_attempts: 2
+    implementation_contract:
+      - Represent planned runs with unique task_id/repeat identities and task metadata; validate membership and consistency when the manifest exists. Persist the initial results before executing the first task.
+      - Use the manifest for subgroup denominators and missing-run accounting. Legacy results without a manifest must explicitly retain unknown subgroup coverage rather than infer missing task classifications.
+      - Treat absent difficulty as unknown. Keep category, difficulty and execution backend as separate concepts.
+      - Report per-task passed/planned repeats and all-pass/never-pass/mixed outcomes with explicit incomplete coverage. Do not name repeated success pass@k or treat simulator seeds as independent tasks.
+      - Derive failure phases from structured execution evidence. Preserve status and raw reason; unavailable evidence maps to unknown rather than a guessed phase.
+      - Separate agent and grading elapsed times. Do not multiply shared compile timing by the number of seeds. Missing token/cost observations remain missing.
+      - Maintain the current protocol/kind comparison boundary. Do not weaken native validation to accommodate future repository or EDA results.
+      - Tests must cover omitted planned runs, legacy reports, invalid/duplicate plan identities, unknown difficulty, mixed repeat outcomes, infrastructure failures and absent usage.
+    constraints:
+      - Use the worker package above. Record before/after user-visible reporting evidence, not only test counts.
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+  - id: T003
+    type: worker
+    assignee: Worker
+    status: done
+    objective: Implement no-commercial CVDP catalog and heavy repository workspace/run/grade bridge with real positive/negative controls
+    allowed_files:
+      - hwbench/**
+      - tests/**
+      - benchmarks/repository/**
+      - configs/**
+      - scripts/**
+      - third_party/cvdp/**
+    verify:
+      - python3 -m unittest discover -s tests -v
+      - Run real local Git/Icarus repository positive and functional negative controls with required sandbox and preserve artifacts
+      - 'Audit pinned local public CVDP JSONL: 302 nonagentic + 92 agentic + 75 heavy no-commercial tasks, with hashes and difficulty counts'
+      - Run Heavy preparation and result-import controls with path tampering/missing-task rejection; explicitly no official Docker evaluation
+      - git diff --check
+    stop_if:
+      - Needs commercial EDA or private credentials
+      - Untrusted dataset code would execute on host
+    receipt:
+      result: done
+      task_id: T003
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      changed_files:
+        - hwbench/repository.py
+        - hwbench/cli.py
+        - hwbench/reporting.py
+        - benchmarks/repository/checks.json
+        - benchmarks/repository/checks/saturation.sv
+        - scripts/repository_controls.py
+        - scripts/repository_external_fixture.py
+        - tests/test_repository.py
+        - configs/repository-agent.example.json
+        - configs/repository-evaluator.example.json
+        - third_party/cvdp/catalog-lock.json
+        - third_party/cvdp/OFFLINE_BRIDGE.md
+      commands:
+        - cmd: python3 -m unittest discover -s tests -v
+          status: pass
+          evidence: 54 tests passed; artifacts/heavy-t003/unit-tests-final.log
+        - cmd: python3 scripts/repository_controls.py --out artifacts/heavy-t003/controls
+          status: pass
+          evidence: 'Real Git/Icarus required-sandbox controls: reference PASS, starter and mutant functional FAIL after successful compilation.'
+        - cmd: python3 -m hwbench cvdp-catalog --datasets artifacts/cvdp-survey --out artifacts/heavy-t003/catalog
+          status: pass
+          evidence: 'Pinned hashes verified: 302 nonagentic, 92 agentic, 75 Heavy; 469 unique IDs with difficulty counts.'
+        - cmd: python3 -m hwbench cvdp-prepare --dataset artifacts/cvdp-survey/cvdp_v1.1.0_agentic_heavy_code_generation_no_commercial.jsonl --bundles artifacts/cvdp-survey/bundles --tasks cvdp_agentic_heavy_rvx_0004 --out artifacts/heavy-t003/rvx-prepared
+          status: pass
+          evidence: 'Actual public sanitized RVX bundle: 300 baseline files and four separate hidden harness files; provenance saved.'
+        - cmd: python3 -m hwbench repo-export --prepared artifacts/heavy-t003/rvx-prepared --out artifacts/heavy-t003/rvx-export
+          status: pass
+        - cmd: bwrap --ro-bind / / --bind /home/neokein/work/50_RTL_benchmark/artifacts/heavy-t003 /home/neokein/work/50_RTL_benchmark/artifacts/heavy-t003 --tmpfs /tmp --proc /proc --dev /dev --unshare-net --die-with-parent --setenv PYTHONDONTWRITEBYTECODE 1 -- python3 -m hwbench cvdp-prepare --dataset artifacts/cvdp-survey/cvdp_v1.1.0_agentic_heavy_code_generation_no_commercial.jsonl --bundles artifacts/cvdp-survey/bundles --tasks cvdp_agentic_heavy_rvx_0004 --out artifacts/heavy-t003/rvx-offline-prepared
+          status: pass
+          evidence: Actual Heavy repository preparation succeeded with network disabled.
+        - cmd: python3 -m hwbench repo-submit --prepared artifacts/heavy-t003/controls/fixture/prepared --submissions artifacts/heavy-t003/controls/reference/work --out artifacts/heavy-t003/external-submission
+          status: pass
+        - cmd: python3 -m hwbench repo-evaluate --prepared artifacts/heavy-t003/controls/fixture/prepared --submission artifacts/heavy-t003/external-submission --config artifacts/heavy-t003/external-config.json --out artifacts/heavy-t003/external-run
+          status: pass
+          evidence: Normalized external-wrapper fixture imported as unresolved with explicit fixture provenance; no official evaluator executed.
+        - cmd: python3 -m hwbench cvdp-import --prepared artifacts/heavy-t003/controls/fixture/prepared --submission artifacts/heavy-t003/external-submission --response artifacts/heavy-t003/external-run/response.json --out artifacts/heavy-t003/external-reimport
+          status: pass
+        - cmd: python3 scripts/validate.py --out artifacts/heavy-t003/integration-final
+          status: pass
+          evidence: Unit tests, core controls/demo, adapted CVDP and network-denied smoke all passed.
+        - cmd: git diff --check
+          status: pass
+      summary: Implemented local-only pinned catalog, sanitized Heavy bundle preparation, clean-history export, allowlisted frozen submissions, command-agent execution, fixture repository grading, external evaluator wrapper and normalized result import. Preserved native PASS validation. Added integrity, missing-task, agent-failure, submodule and real RTL tests. Actual RVX preparation passed without network. Runtime downloads were not added. Official Docker evaluation and actual model scores remain unverified. Unresolved submodules fail explicitly; operator-managed evaluator isolation is a declared contract, not automatically enforced. Operational contracts and offline examples are documented for T005 integration.
+      verification_attempts: 1
+    constraints:
+      - Define a separate repository execution/evidence contract instead of relaxing the native flat-RTL grader. Pin catalog revision and file hashes; validate task IDs and no-commercial selection. Materialize local git bundles using context.repo/context.commit, never origin.commit. Preserve upstream provenance and distinguish empty patch entries from golden solutions.
+      - Require an immutable baseline, explicit modification allowlist, rejection of path escapes/symlinks and hidden trusted checks outside the agent workspace. Verify a real git/worktree plus Icarus positive/negative fixture. Provide operational official-heavy preparation and external-runner/result-import paths with expected-task accounting. A catalog plus mock import alone is insufficient. Record official Docker evaluation as unexecuted.
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+      - All CVDP commands consume local JSONL and local sanitized bundles only; no GitHub/HF fetch, git submodule fetch or Docker pull. Keep harness/golden assets outside exported agent workspace. A fresh Git worktree must not expose solution history or origin remotes.
+      - Provide explicit local dependency/readiness manifest for official-heavy handoff; missing bundles/images/evaluator dependencies must be identified before execution. A repository fixture is an infrastructure control, never official heavy model performance.
+  - id: T004
+    type: worker
+    assignee: Worker
+    status: done
+    objective: Implement EDA job planning/export/run/import, persistent bounded queue/cache/budgets and separate PPA/quality reporting
+    allowed_files:
+      - hwbench/**
+      - tests/**
+      - configs/**
+      - scripts/**
+      - benchmarks/eda_controls/**
+    verify:
+      - python3 -m unittest discover -s tests -v
+      - Run EDA mock plan/queue/export/import/report/comparison controls on real native functional PASS snapshots; preserve original results
+      - Demonstrate timeout/process group cleanup, interrupted recovery, budget limit, lock ownership, mismatched input/raw-report rejection and cache invalidation
+      - git diff --check
+    stop_if:
+      - Needs actual proprietary EDA verification
+      - Cannot separate mock from measured data
+    receipt:
+      result: done
+      task_id: T004
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      changed_files:
+        - hwbench/eda.py
+        - hwbench/eda_supervisor.py
+        - hwbench/cli.py
+        - tests/test_eda.py
+        - scripts/eda_mock_wrapper.py
+        - scripts/eda_controls.py
+        - scripts/EDA_CONTRACT.md
+        - configs/eda-mock.example.json
+        - benchmarks/eda_controls/library.txt
+        - benchmarks/eda_controls/constraints.txt
+        - benchmarks/eda_controls/workload.txt
+      commands:
+        - cmd: python3 -m unittest discover -s tests -v
+          status: pass
+          evidence: 67 tests passed; artifacts/eda-t004/unit-tests-final.log. Includes owner-death cleanup, timeout descendants, locks, retained budgets, cache invalidation, identity/unit/source/report rejection and mock isolation.
+        - cmd: python3 scripts/eda_controls.py --out artifacts/eda-t004/controls
+          status: pass
+          evidence: Real native PASS through mock queue, export, execution, import, cache, reporting and matched comparison.
+        - cmd: bwrap --ro-bind / / --bind /home/neokein/work/50_RTL_benchmark/artifacts/eda-t004 /home/neokein/work/50_RTL_benchmark/artifacts/eda-t004 --tmpfs /tmp --proc /proc --dev /dev --unshare-net --die-with-parent --setenv PYTHONDONTWRITEBYTECODE 1 -- python3 scripts/eda_controls.py --out artifacts/eda-t004/offline
+          status: pass
+          evidence: Complete EDA control workflow passed with network disabled.
+        - cmd: python3 -m hwbench eda-plan artifacts/eda-t004/controls/functional --config configs/eda-mock.example.json --out artifacts/eda-t004/cli-queue --timeout 5 --budget 20
+          status: pass
+        - cmd: python3 -m hwbench eda-run artifacts/eda-t004/cli-queue --cache artifacts/eda-t004/cli-cache
+          status: pass
+        - cmd: python3 -m hwbench eda-export artifacts/eda-t004/cli-queue --out artifacts/eda-t004/cli-transfer
+          status: pass
+        - cmd: python3 -m hwbench eda-report artifacts/eda-t004/controls/queue --out artifacts/eda-t004/cli-report
+          status: pass
+        - cmd: python3 -m hwbench eda-compare artifacts/eda-t004/controls/queue artifacts/eda-t004/controls/cached --out artifacts/eda-t004/cli-comparison
+          status: pass
+        - cmd: python3 -m hwbench eda-verify-transfer artifacts/eda-t004/controls/returned
+          status: pass
+        - cmd: python3 scripts/validate.py --out artifacts/eda-t004/integration
+          status: pass
+          evidence: Unit tests, core controls/demo, adapted CVDP and network-denied smoke passed.
+        - cmd: git diff --check
+          status: pass
+      summary: Implemented separate offline EDA planning, serial locked queue, persistent budgets, crash watchdog/recovery, validated caching, transfer/import, reports and matched comparison. Native functional PASS snapshots are verified; upstream/repository claims are rejected. Mock and measured modes remain separate. Conditions include functional protocol, wrapper argv/assets, tool components, library, constraints and workload; candidate activity provenance is required. Quality outcomes remain separate from PPA. Added operational Korean contract and executable controls. Actual commercial EDA remains unexecuted; wrappers, license routing and vendor semantics require company validation. Comparison currently requires identical functional kind and protocol. External imports are explicitly claimed evidence.
+      verification_attempts: 1
+    constraints:
+      - Use a separate EDA result schema and commands. Gate jobs on validated functional PASS snapshots; preserve source identity and source hashes. Distinguish fixture/mock, externally reported and locally executed evidence. Keep lint/Xprop outcomes separate from PPA and keep RTL estimates separate from synthesis measurements.
+      - Specify wrapper argv/input/output contracts without invented vendor CLI or parsers. Fingerprint tool/version, wrapper, library, constraints, analysis stage, workload/activity and source inputs. Reject nonfinite metrics, invalid units and incomplete provenance for comparable measurements. Preserve raw reports and explicitly mark imported results as externally claimed.
+      - Implement persistent resumable jobs with exclusive ownership, bounded execution, timeout/process-group termination, queue wait versus execution timing and total budget accounting. Cache only valid matching completed evidence; exclude infrastructure failures and prevent mock cache entries from satisfying measured requests. Export/import must verify hashes, job identity and safe paths.
+      - Report planned, eligible, attempted and valid measured counts separately. Compare PPA only for matching task/workload/tool conditions and disclose unmatched or failed measurements. Do not rank successful survivors as though all planned submissions were measured.
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+      - EDA worker executes only a user-configured local wrapper. No assumed commercial binaries or network installer. Internal license server connectivity is distinct from Internet connectivity. Artifact import/export must work by filesystem transfer without service dependencies.
+      - Conservative default concurrency=1 and final functional-PASS submissions only. Persist queue state, bounded wall-clock and explicit recovery after interruption; report unknown license wait as unavailable rather than 0.
+      - Preserve functional planned count, PPA requested scope, functional eligible, attempted, valid measurement and constraint-satisfied counts distinctly; disclose not_requested/skipped failures. PPA normalized ratios use intersection by task and comparable condition with unmatched counts, never silent survivor ranking.
+      - 'Require complete provenance for synthesis comparisons: source snapshot hashes, top/parameters, tool+version, library/corner, constraints, wrapper/script hashes, stage, effort, workload/activity window and timing units. Candidate activity content can differ but workload identity must match; baseline activity is not blindly reused.'
+      - Timeout, output limit, invalid data, license/tool failure and interrupted recovery remain terminal/queued states with evidence; unknown license wait remains null. Cache must recheck raw reports/source integrity and exclude fixture values from measured requests.
+      - The existing planned/requested/eligible/attempted/valid/constraint-satisfied denominator separation and matched-task PPA comparison requirements are sufficient. Final audit must check their actual output and missing/failing measurement tests. Distinguish whole functional task identity from source snapshot identity; never infer a repository submission's complete source set solely from the native grader's selected RTL hashes.
+  - id: T005
+    type: worker
+    assignee: Worker
+    status: done
+    objective: Integrate offline resource packaging/readiness and relocated network-denied verification; repair repository file-mode integrity and failed-agent planned accounting
+    allowed_files:
+      - hwbench/**
+      - tests/**
+      - scripts/**
+      - configs/**
+      - benchmarks/eda_controls/**
+      - third_party/cvdp/OFFLINE_BRIDGE.md
+    verify:
+      - python3 scripts/validate.py
+      - git diff --check
+    stop_if:
+      - Verification failure outside goal scope
+    receipt:
+      result: done
+      task_id: T005
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      changed_files:
+        - hwbench/cli.py
+        - hwbench/offline.py
+        - hwbench/repository.py
+        - hwbench/eda.py
+        - scripts/offline_controls.py
+        - scripts/validate.py
+        - scripts/OFFLINE_CONTRACT.md
+        - scripts/EDA_CONTRACT.md
+        - configs/offline-resources.example.json
+        - tests/test_offline.py
+        - tests/test_repository.py
+        - tests/test_eda.py
+        - third_party/cvdp/OFFLINE_BRIDGE.md
+      commands:
+        - cmd: python3 scripts/validate.py
+          status: pass
+          evidence: '76 tests and all integration stages passed. Final evidence: artifacts/validation-20261106T174734Z/validation.json. Includes relocated native, repository, EDA mock and complete repository transfer controls with original checkout inaccessible and networking disabled.'
+        - cmd: python3 scripts/offline_controls.py --out artifacts/offline-t005/cvdp-final --cvdp-dir artifacts/cvdp-survey
+          status: pass
+          evidence: 'Moved source/resource kit verified 469 pinned catalog tasks and actual RVX preparation/export without access to original checkout or external networking. Source bundle includes AGENTS.md. Evidence: artifacts/offline-t005/cvdp-final/results/validation.json.'
+        - cmd: python3 -m hwbench offline-verify artifacts/offline-t005/cvdp/moved/kit --profile cvdp_prepare
+          status: pass
+        - cmd: python3 -m hwbench repo-verify-transfer artifacts/offline-t005/cvdp/results/reproduction-moved
+          status: pass
+        - cmd: git diff --check
+          status: pass
+      summary: Implemented offline inventories with streaming hashes, relative destinations, permission checks and required resource profiles. Real Heavy/measurement wrappers require verified kits; installed runtime remains explicitly unchecked. Source bundles include AGENTS.md. Repository attempts retain all planned failures and unresolved successes in standard reports; frozen permissions are validated. Complete repository reproduction transfers work after relocation. EDA imports now prevalidate all jobs, stage immutable evidence and support interrupted-commit retries; recursive transfer paths are rejected. Added isolated relocated validation and operational contracts. Actual CVDP preparation passed, but official evaluation, vendor EDA and model performance remain unexecuted.
+      verification_attempts: 2
+    constraints:
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+      - Deliver offline intake packaging/inventory and verification for source plus local datasets, git bundles, evaluator, image archives and runtime packages. Stream hashes for large resources; do not require these assets to be committed. Document external preparation and internal execution separately.
+      - Run network-denied integration for native grading/reporting, local heavy repository controls, local catalog/preparation and EDA mock queue/export/import; assert no implicit fetch/pull/install. Internal HTTP model endpoint tests are separate from Internet-free compute paths.
+      - Document offline Python, simulator, bwrap and Git installation; Docker image save/load and preinstalled wheels for official heavy harness; EDA binaries/libraries/license and wrappers supplied inside company. Source bundle alone must not be described as complete runtime.
+      - Implement the planned offline resource inventory/verification, with relative destinations and streaming hashes for datasets, sanitized bundles, evaluator source, Docker image archives and runtime packages. Distinguish present-and-hash-verified resources from actually installed/loaded tools. Include AGENTS.md in the source transfer. Missing required resources must fail readiness before wrapper launch; never fetch or pull automatically.
+      - Verify frozen repository submission modes against baseline/default modes, or include modes in the submission identity and validate them. Current content hashes allow a changed executable bit to alter external harness behavior without invalidating submission identity. Add a focused chmod-tamper regression.
+      - Connect repository-agent failures to standard planned-run reporting. Preserve every planned task, mark agent failures explicitly, and permit successful tasks to proceed when feasible. At minimum, failed attempts must have an importable/reportable result so users cannot compare only runs for which submission creation succeeded.
+      - 'Document and verify the full repository result transfer unit: prepared baseline/harness manifest, frozen submission, external response, raw reports and wrapper execution evidence. Imported results currently retain source hashes but not source snapshots, so transferring only the imported report directory is insufficient for reproducibility.'
+      - Run transferred native, repository and EDA fixture paths with networking disabled and without access to original artifact locations. Separately document that offline=true and operator_managed_container are wrapper declarations, not enforced network isolation. Company policy must restrict wrappers to pre-staged resources and explicitly configured internal model/license endpoints.
+      - T007 owns README.md, AGENTS.md, docs/guide and published validation documentation; provide exact commands/schema/verification receipts for that subsequent documentation package.
+      - 'Independent EDA review reproduced partial multi-job import: valid first response is copied before invalid later units are rejected, leaving pending queue with colliding evidence paths and preventing corrected retry. Fix all-job prevalidation plus atomic/retry-safe staged import, preserve existing evidence and add focused two-job regression.'
+      - Make multi-job EDA import transactional or safely resumable. Validate all incoming job responses and destination conflicts before mutation; stage installation and commit coherent queue/evidence state. Add a regression where job 2 is invalid, then the corrected transfer is imported successfully without deleting evidence manually. Also consider interrupted installation rather than only validation failure.
+      - Reject export destinations inside the source queue before creating directories. Reject self-import and source/destination containment combinations that can recursively copy imported transfers. Add focused tests asserting no directory mutation on rejected containment.
+  - id: T006
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Read-only supporting review of offline integration contracts during T004
+    constraints:
+      - No writes; EDA worker remains sole writer
+    receipt:
+      result: done
+      task_id: T004
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      decision: approved
+      full_outcome_complete: false
+      rationale: The planned EDA denominator and provenance boundaries are sufficient as implementation requirements. T003 provides useful real repository execution and offline preparation evidence while correctly separating normalized external claims from official scores. T005 still needs operational transfer verification, repository submission mode integrity, and accounting for failed repository-agent runs. This is a supporting contract review, not verification of the EDA implementation currently being written.
+      evidence:
+        - path: docs/goals/hwbench-expansion/state.yaml
+          finding: T003 records 54 passing tests, real repository RTL controls, actual sanitized RVX preparation and network-disabled preparation. Official Docker execution remains unavailable.
+        - path: hwbench/repository.py:160
+          finding: Prepared manifests explicitly say repository_prepared_only; evaluator/images not verified. Requirements are currently descriptive strings, not an executable dependency inventory.
+        - path: hwbench/repository.py:99
+          finding: Git operations restrict transport to local files and disable global configuration/hooks. Preparation does not fetch missing submodules.
+        - path: hwbench/repository.py:241
+          finding: Snapshot creation checks all file-content differences against the allowlist and restores baseline file modes. load_submission verifies content hashes but does not verify frozen submission file modes.
+        - path: hwbench/repository.py:337
+          finding: External import verifies prepared/submission identities, exact task membership, source hashes and raw-report hashes. Protocol includes externally_reported and source_kind; metadata explicitly identifies a normalized contract rather than an official raw-report parser.
+        - path: hwbench/reporting.py:261
+          finding: Fixture imports and externally reported evaluator results have appropriately qualified report notices.
+        - path: hwbench/repository.py:389
+          finding: Repository-agent failures preserve planned_ids and logs but produce no submission and no standard results.json. One failed agent task also prevents snapshot creation for all otherwise successful tasks.
+        - path: hwbench/cli.py:72
+          finding: Current bundle is source-only, omits AGENTS.md and external artifacts, and uses whole-file reads for archive hashing. It cannot yet demonstrate complete offline runtime transfer.
+      parallel_safety:
+        safe: true
+        reason: This review is read-only. eda_worker remains the sole writer.
+      missing_evidence:
+        - Current EDA implementation receipt and fault-test results; its files were not yet present when inspected.
+        - A relocation test proving the documented transferred resource set is sufficient without the original checkout, artifact directories or Internet.
+        - A standard report or aggregation path that includes failed repository-agent attempts in planned-run accounting.
+      required_board_updates:
+        - task_id: T005
+          priority: must_fix
+          update: Implement the planned offline resource inventory/verification, with relative destinations and streaming hashes for datasets, sanitized bundles, evaluator source, Docker image archives and runtime packages. Distinguish present-and-hash-verified resources from actually installed/loaded tools. Include AGENTS.md in the source transfer. Missing required resources must fail readiness before wrapper launch; never fetch or pull automatically.
+        - task_id: T005
+          priority: must_fix
+          update: Verify frozen repository submission modes against baseline/default modes, or include modes in the submission identity and validate them. Current content hashes allow a changed executable bit to alter external harness behavior without invalidating submission identity. Add a focused chmod-tamper regression.
+        - task_id: T005
+          priority: must_fix
+          update: Connect repository-agent failures to standard planned-run reporting. Preserve every planned task, mark agent failures explicitly, and permit successful tasks to proceed when feasible. At minimum, failed attempts must have an importable/reportable result so users cannot compare only runs for which submission creation succeeded.
+        - task_id: T005
+          priority: must_fix
+          update: 'Document and verify the full repository result transfer unit: prepared baseline/harness manifest, frozen submission, external response, raw reports and wrapper execution evidence. Imported results currently retain source hashes but not source snapshots, so transferring only the imported report directory is insufficient for reproducibility.'
+        - task_id: T005
+          priority: verification_requirement
+          update: Run transferred native, repository and EDA fixture paths with networking disabled and without access to original artifact locations. Separately document that offline=true and operator_managed_container are wrapper declarations, not enforced network isolation. Company policy must restrict wrappers to pre-staged resources and explicitly configured internal model/license endpoints.
+        - task_id: T004
+          priority: accepted_contract
+          update: The existing planned/requested/eligible/attempted/valid/constraint-satisfied denominator separation and matched-task PPA comparison requirements are sufficient. Final audit must check their actual output and missing/failing measurement tests. Distinguish whole functional task identity from source snapshot identity; never infer a repository submission's complete source set solely from the native grader's selected RTL hashes.
+        - task_id: T999
+          priority: honest_execution_limit
+          update: 'Retain explicit limits: official CVDP Docker execution, vendor EDA commands/report parsing, real PPA and real model performance are unverified. A validated normalized import establishes evidence handling, not official evaluator execution or an authenticated official score. These unavailable executions do not block completion of the agreed local integration work.'
+  - id: T007
+    type: worker
+    assignee: Worker
+    status: done
+    objective: Update Korean single-HTML guide and operational documentation with implemented metrics, Heavy/PPA/offline commands, comparison examples, exact limits and fresh verification receipts; apply requested humanize-korean skill
+    allowed_files:
+      - README.md
+      - AGENTS.md
+      - docs/guide/**
+      - docs/VALIDATION.md
+      - docs/validation/**
+    inputs:
+      - All implementation task receipts
+      - hwbench/ CLI and current schemas
+      - artifacts/humanize-tool/codex/skills/humanize-korean/SKILL.md
+    constraints:
+      - Preserve standalone no-CDN HTML, calculator, responsive/print readability and accurate formulas. Read source and tested CLI; never describe mock PPA or normalized external claims as verified official scores.
+      - Document connected preparation separately from offline execution, complete transfer inventory versus installed runtime, internal endpoint/license configuration, long EDA default serial queues/caches/budgets, partial denominators and matched PPA comparisons.
+      - Include concrete copyable commands for fresh directories, missing dependencies diagnosis, raw evidence transfer and native/repository/EDA fixtures. Record actual local tests and unavailable official Docker/vendor/model execution.
+      - Apply humanize-korean skill from existing pinned local copy to Korean prose; preserve code and numeric facts. Intermediate proof artifacts can be generated under ignored artifacts/.
+      - Other workers and PM edits exist; preserve them. Do not change code or tests. If documentation exposes behavior bugs return evidence for a bounded follow-up repair.
+    verify:
+      - Check documented command examples against actual CLI/help and preserved smoke evidence
+      - Run standalone guide browser validation for desktop/mobile/no-JS/print/calculator, anchors and no external requests
+      - Run Korean proofreading gates and inspect final HTML
+      - git diff --check
+    stop_if:
+      - Need product code changes beyond allowed files
+      - Documentation claim cannot be substantiated by code/current evidence
+    receipt:
+      result: done
+      task_id: T007
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      changed_files:
+        - README.md
+        - AGENTS.md
+        - docs/guide/index.html
+        - docs/VALIDATION.md
+        - docs/validation/validated-expansion-20261107.json
+      commands:
+        - cmd: python3 -m hwbench repo-evaluate --help
+          status: pass
+          evidence: artifacts/docs-t007/command-check.json
+        - cmd: python3 -m hwbench eda-run --help
+          status: pass
+          evidence: artifacts/docs-t007/command-check.json
+        - cmd: python3 -m hwbench offline-pack --help
+          status: pass
+          evidence: artifacts/docs-t007/command-check.json
+        - cmd: node artifacts/docs-t007/browser/check.cjs
+          status: pass
+          evidence: artifacts/docs-t007/browser/result.json
+        - cmd: python3 artifacts/humanize-tool/codex/skills/humanize-korean/scripts/verify_gates.py --before artifacts/docs-t007/_workspace/2026-11-07-001-9230/01_input.txt --after artifacts/docs-t007/_workspace/2026-11-07-001-9230/final.md --genre report --json
+          status: pass
+          evidence: artifacts/docs-t007/_workspace/2026-11-07-001-9230/10_final_gates.json
+        - cmd: git diff --check
+          status: pass
+      summary: 'Updated the standalone Korean guide, README, maintenance instructions and validation evidence. Explained planned denominators, repeated trials, missing measurements, Heavy preparation boundaries, matched PPA comparisons, serial execution budgets and complete offline transfers. Clearly separated resource verification from installed runtime readiness. Audited 18 CLI help interfaces. Browser checks passed eight calculator cases, anchors, desktop/mobile rendering, print, no-JavaScript readability and zero external requests. Korean proofreading used the approved sequential light route: 35 paragraphs, 0.02% edits, grade B, self-check 6/6 and passing gates. Preserved commercial EDA, actual model and official evaluator limitations.'
+      verification_attempts: 1
+  - id: T008
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Independent read-only EDA transfer, queue and comparison review supporting T005
+    constraints:
+      - Read-only; offline_worker owns repairs
+    receipt:
+      result: done
+      task_id: T005
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      decision: not_complete
+      full_outcome_complete: false
+      rationale: The EDA implementation has strong input identity, provenance, budget and watchdog boundaries, but a reproduced partial-import failure leaves the destination unable to accept a corrected transfer. Export also needs containment checks before creating its destination. These are operational correctness issues for offline transfers, independent of unavailable commercial tools. No repository fixes were duplicated and no files were edited.
+      evidence:
+        - path: docs/goals/hwbench-expansion/state.yaml
+          finding: T004 records 67 passing tests, watchdog recovery, network-disabled EDA controls and full validation. Those tests do not cover failure in the second job of a multi-job import.
+        - path: hwbench/eda.py:331
+          finding: import_results installs each completed result before validating later jobs, but only saves queue.json after the entire loop.
+        - source: Temporary-directory reproduction using preserved native PASS evidence and two planned repeats
+          finding: A valid first job followed by an invalid-units second job raised the expected validation error, but left one destination response directory while both persisted job statuses remained pending. Retrying the corrected valid transfer then failed with 'Refusing to overwrite EDA evidence'.
+        - path: hwbench/eda.py:305
+          finding: export creates out before iterating root children. If out is inside queue, the new directory is included and recursively copied into itself. There is no source/destination containment guard.
+        - path: hwbench/eda.py:148
+          finding: Loading verifies immutable plan identity, asset hashes, source hashes and nonnegative persistent budget. Completed responses are revalidated when summarized or exported.
+        - path: hwbench/eda.py:389
+          finding: Comparison uses task/repeat/condition matches, reports unmatched valid results and both full count sets, preserves evidence levels, separates mode/stage/functional kind and returns null ratios for zero baselines.
+        - path: hwbench/eda_supervisor.py:20
+          finding: The watchdog records owner identity, checks elapsed time/output limits, and kills the tool process group on termination. T004 includes owner-death and descendant-timeout evidence.
+        - path: scripts/EDA_CONTRACT.md
+          finding: The contract explicitly limits environment variables to routing/authentication, requires behavior-changing options in hashed inputs, and distinguishes local wrapper execution from vendor semantic validation.
+      parallel_safety:
+        safe: true
+        reason: Review was read-only except disposable temporary reproduction artifacts. offline_worker remains the sole writer; repairs need explicit ownership.
+      missing_evidence:
+        - Successful corrected re-import after a later-job validation failure, without orphaned destination evidence.
+        - Nested export/import destination rejection before destination mutation.
+        - Final relocated offline verification and completed documentation receipts.
+      required_board_updates:
+        - task_id: T005
+          priority: must_fix
+          update: Make multi-job EDA import transactional or safely resumable. Validate all incoming job responses and destination conflicts before mutation; stage installation and commit coherent queue/evidence state. Add a regression where job 2 is invalid, then the corrected transfer is imported successfully without deleting evidence manually. Also consider interrupted installation rather than only validation failure.
+        - task_id: T005
+          priority: must_fix
+          update: Reject export destinations inside the source queue before creating directories. Reject self-import and source/destination containment combinations that can recursively copy imported transfers. Add focused tests asserting no directory mutation on rejected containment.
+        - task_id: T999
+          priority: accepted_boundary
+          update: The planned PPA denominator/provenance boundary is implemented coherently in summary/compare. Continue to describe imported measurements as externally reported claims and local_wrapper as contract execution, not independently verified vendor semantics.
+        - task_id: T999
+          priority: honest_execution_limit
+          update: 'Unresolved Heavy submodules may remain an explicitly unsupported preparation case: no automatic fetch, no claim of all 75 tasks being runnable, and supported prepared subsets reported exactly. Distinguish catalog coverage for ordinary/nonagentic tracks from Heavy repository preparation and external evaluator integration. Implementing generic submodule materialization is not required to repair the concrete offline EDA issues found here.'
+  - id: T009
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Independent technical audit before final documentation completion
+    constraints:
+      - Read-only; final approval pending T007
+    receipt:
+      result: done
+      task_id: T007
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      decision: approved
+      full_outcome_complete: false
+      rationale: The implemented technical boundaries satisfy the agreed local integration scope. Previously identified transfer defects are repaired, and targeted independent verification passed. Current implementation hashes match the latest full-validation evidence. Offline relocation evidence distinguishes verified resources from installed tools and preserves the unavailable commercial/official execution boundaries. No additional must-fix technical defect was found in this review. Full completion remains pending T007 documentation, Korean proofreading, browser verification and the final integrated audit.
+      evidence:
+        - path: artifacts/validation-20261106T174734Z/validation.json
+          finding: Records 76 passing tests and all integration stages. Every recorded hwbench source SHA256 matches the current implementation.
+        - command: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_eda.py' -v
+          finding: Independent rerun passed all 15 tests, including later-job import rejection, corrected retry, interrupted commit recovery, containment rejection, watchdog cleanup, budgets and cache isolation.
+        - command: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_repository.py' -v
+          finding: Independent rerun passed all 14 tests, including frozen permission tampering, failed-agent accounting, unresolved successful agent exits, complete relocated transfers and real RTL controls.
+        - command: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_offline.py' -v
+          finding: Independent rerun passed all four tests, including resource relocation, content/mode validation, containment and missing-resource rejection before external execution.
+        - path: hwbench/eda.py
+          finding: Import validates every completed response before mutation, stages a complete immutable transfer directory and permits retry after queue-commit interruption. Export/import containment checks precede destination creation.
+        - path: hwbench/repository.py
+          finding: Frozen submissions revalidate the full file allowlist, source hashes and baseline/default permission modes. Repository agent attempts retain planned identities and report successful commands as unresolved until functional evaluation.
+        - path: hwbench/reporting.py
+          finding: Planned subgroup denominators, unknown legacy coverage, repeat consistency and observed-only timing/usage coexist with the existing native PASS evidence requirements.
+        - path: artifacts/offline-t005/cvdp-final/results/validation.json
+          finding: Records relocated native/repository/EDA controls and complete repository transfer verification with the original checkout inaccessible and networking disabled; additionally verifies 469 pinned catalog entries and actual RVX preparation.
+        - path: scripts/OFFLINE_CONTRACT.md
+          finding: Clearly distinguishes resources_verified from installed/loaded runtime readiness, documents the complete reproduction unit and states that arbitrary wrapper isolation is an operator responsibility.
+      parallel_safety:
+        safe: true
+        reason: This audit made no product or board edits. Tests used disposable temporary artifacts while docs_worker remained the sole product writer.
+      missing_evidence:
+        - Completed T007 documentation receipt.
+        - Current Korean proofreading gates and standalone guide browser evidence.
+        - Final integrated audit after documentation completion.
+      required_board_updates:
+        - task_id: T999
+          update: 'Retain explicit limits in the final outcome: ordinary/nonagentic CVDP support is catalog validation; Heavy preparation covers supported local bundles and does not establish all 75 tasks runnable. Official Docker execution, actual model performance and commercial EDA measurements remain unexecuted.'
+        - task_id: T999
+          update: Verify the final guide describes native-only EDA eligibility, matching functional kind/protocol/PPA conditions, imported measurements as externally reported claims, and resources_verified as distinct from installed runtime readiness.
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    objective: Audit full user outcome and proof across both tracks; reject mock-vs-real ambiguity
+    inputs:
+      - All task receipts
+      - Current diff
+      - Final validation artifacts
+    constraints:
+      - Read-only
+      - No completion while required work remains
+      - Audit every original outcome against executable receipts. Missing proprietary binaries are an acknowledged execution boundary, not a reason to stop implementation; actual proprietary measurements and official heavy scores must remain explicitly unverified.
+      - 'Mandatory: company execution has no external connectivity. All datasets, sanitized git bundles, evaluator sources, Docker images, Python/runtime and tool dependencies must be pre-staged and hash verified. Runtime commands never fetch, pull, install or fall back to external APIs. Internal model endpoints/license servers may be configured explicitly. Verify offline behavior and document connected preparation separately.'
+      - 'Retain explicit limits: official CVDP Docker execution, vendor EDA commands/report parsing, real PPA and real model performance are unverified. A validated normalized import establishes evidence handling, not official evaluator execution or an authenticated official score. These unavailable executions do not block completion of the agreed local integration work.'
+      - The planned PPA denominator/provenance boundary is implemented coherently in summary/compare. Continue to describe imported measurements as externally reported claims and local_wrapper as contract execution, not independently verified vendor semantics.
+      - 'Unresolved Heavy submodules may remain an explicitly unsupported preparation case: no automatic fetch, no claim of all 75 tasks being runnable, and supported prepared subsets reported exactly. Distinguish catalog coverage for ordinary/nonagentic tracks from Heavy repository preparation and external evaluator integration. Implementing generic submodule materialization is not required to repair the concrete offline EDA issues found here.'
+      - 'Retain explicit limits in the final outcome: ordinary/nonagentic CVDP support is catalog validation; Heavy preparation covers supported local bundles and does not establish all 75 tasks runnable. Official Docker execution, actual model performance and commercial EDA measurements remain unexecuted.'
+      - Verify the final guide describes native-only EDA eligibility, matching functional kind/protocol/PPA conditions, imported measurements as externally reported claims, and resources_verified as distinct from installed runtime readiness.
+    expected_output:
+      - complete or not_complete
+      - full_outcome_complete
+      - Missing evidence
+    receipt:
+      result: done
+      task_id: T999
+      board_path: docs/goals/hwbench-expansion/state.yaml
+      decision: complete
+      full_outcome_complete: true
+      rationale: 'The original locally achievable outcome is implemented and verified: stronger evaluation metrics, Heavy repository preparation/evaluation integration, controlled PPA wrapper execution and transfers, and offline resource preparation. Current implementation hashes match passing integration evidence. Previously identified transfer defects are repaired and independently retested. Final Korean documentation explains denominators, comparison restrictions, offline operation and evidence limits accurately. No required implementation or documentation fix remains. Actual commercial EDA measurements, official Docker scoring and model performance remain explicitly unverified deployment boundaries.'
+      evidence:
+        - source: T002 receipt and hwbench/reporting.py
+          finding: Planned subgroup denominators, missing-run accounting, repeat consistency, legacy unknown coverage and observed-only timing/usage are implemented without weakening native PASS requirements.
+        - source: T003 receipt and hwbench/repository.py
+          finding: Heavy workflows preserve sanitized baselines, modification allowlists, frozen source/mode integrity and planned failed-agent accounting. Real Git and RTL positive/negative controls validate executable behavior.
+        - source: T004/T005 receipts and hwbench/eda.py
+          finding: Native functional PASS gating, provenance-aware comparison, serial execution, persistent budgets, watchdog cleanup, cache isolation and complete export/import workflows are implemented. Imports prevalidate all responses and support retry after interrupted commits.
+        - source: Independent targeted verification recorded in T009
+          finding: All 15 EDA tests, 14 repository tests and four offline tests passed, including repaired multi-job imports, containment rejection, frozen permissions, failed-agent accounting and relocated transfers.
+        - path: artifacts/validation-20261106T174734Z/validation.json
+          finding: 76 tests and all integration stages passed, including real fixture controls and network-disabled execution. Recorded implementation hashes match current hwbench sources.
+        - path: artifacts/offline-t005/cvdp-final/results/validation.json
+          finding: Relocated native, repository, EDA and transfer controls passed with the original checkout inaccessible and external networking disabled. Evidence includes 469 pinned catalog entries and actual RVX preparation, without claiming official scoring.
+        - source: T007 receipt; README.md; AGENTS.md; docs/guide/index.html; docs/VALIDATION.md
+          finding: Final documentation explains metric meanings and formulas, native-only EDA eligibility, matched functional kind/protocol/PPA conditions, externally reported claims, complete transfer units, secret handling and no external fallback. Catalog coverage is separated from evaluated scores, and resources_verified is separated from installed runtime readiness.
+        - path: artifacts/docs-t007/browser/result.json
+          finding: Eight calculator cases passed; no broken anchors, script errors, external requests or mobile overflow were reported. No-JavaScript readability passed; T007 also records desktop/mobile/print checks.
+        - path: artifacts/docs-t007/command-check.json
+          finding: Documentation commands were checked against 18 CLI interfaces.
+        - path: artifacts/docs-t007/_workspace/2026-11-07-001-9230/10_final_gates.json
+          finding: 'Requested Korean proofreading completed through the documented light route: 35 paragraphs, 7,308 characters, 0.02% changes, grade B, self-check 6/6 and passing gates.'
+        - path: docs/validation/validated-expansion-20261107.json
+          finding: Compact validation evidence accurately records current results and unverified boundaries. Referenced validation artifact hashes match; git diff --check passed.
+      parallel_safety:
+        safe: true
+        reason: The audit made no product or board edits. Independent tests used disposable artifacts; documentation remained under the sole documentation writer.
+      required_board_updates:
+        - task_id: T999
+          update: Record this final audit and completion of the agreed local implementation/verification scope.
+        - task_id: T999
+          update: 'Preserve deployment boundaries in the final report: vendor commands/report parsing, real PPA, official CVDP/HWE evaluator execution, all Heavy tasks and actual model performance remain unverified. Company runtime installation, image loading, licenses and network isolation still require validation in the company environment.'
+checks:
+  dirty_fingerprint: unknown
+  last_verification:
+    result: pass
+    task: T999
+    commands:
+      - Independent final full-outcome audit complete
+      - Current source and validation artifact hashes match
+      - 76-test integration plus independent EDA/repository/offline regression passed
+      - Final guide browser and Korean proofreading gates passed
+      - git diff --check passed

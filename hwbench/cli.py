@@ -74,14 +74,15 @@ def bundle(out):
     if out.exists():
         raise ValueError("Bundle already exists")
     include = ["hwbench", "benchmarks", "tests", "scripts", "configs", "third_party", "docs",
-               "README.md", "pyproject.toml", ".gitignore"]
+               "README.md", "AGENTS.md", "pyproject.toml", ".gitignore"]
     files = []
     for name in include:
         p = ROOT / name
         if p.is_file(): files.append(p)
         elif p.is_dir(): files.extend(f for f in p.rglob("*") if f.is_file() and not f.is_symlink()
                                     and "__pycache__" not in f.parts and ".goalbuddy-board" not in f.parts)
-    hashes = {str(p.relative_to(ROOT)): digest(p.read_bytes()) for p in sorted(files)}
+    from .repository import file_hash
+    hashes = {str(p.relative_to(ROOT)): file_hash(p) for p in sorted(files)}
     out.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(out, "w:gz") as tar:
         for p in sorted(files):
@@ -89,7 +90,7 @@ def bundle(out):
         raw = (json.dumps(hashes, indent=2) + "\n").encode()
         info = tarfile.TarInfo("BUNDLE_SHA256.json"); info.size = len(raw)
         tar.addfile(info, io.BytesIO(raw))
-    print(f"{out}\nsha256={digest(out.read_bytes())}\nSource bundle only; simulator binaries and commercial EDA are not included.")
+    print(f"{out}\nsha256={file_hash(out)}\nSource bundle only; simulator binaries and commercial EDA are not included.")
 
 
 def verify_bundle(path):
@@ -105,7 +106,8 @@ def verify_bundle(path):
         if set(hashes) != set(names) - {"BUNDLE_SHA256.json"}:
             raise ValueError("Bundle membership mismatch")
         for name, expected in hashes.items():
-            if digest(tar.extractfile(name).read()) != expected:
+            from .offline import stream_hash
+            if stream_hash(tar.extractfile(name)) != expected:
                 raise ValueError(f"Bundle hash mismatch: {name}")
     print(f"Bundle verified: {len(hashes)} files")
 
@@ -139,8 +141,75 @@ def main(argv=None):
     p.add_argument("--expected-ids", help="JSON list of IDs from the pinned dataset")
     p = sub.add_parser("bundle");p.add_argument("--out", required=True)
     p = sub.add_parser("verify-bundle");p.add_argument("archive")
+    p = sub.add_parser("cvdp-catalog"); p.add_argument("--datasets", required=True); p.add_argument("--out", required=True)
+    p = sub.add_parser("cvdp-prepare"); p.add_argument("--dataset", required=True); p.add_argument("--bundles", required=True)
+    p.add_argument("--tasks"); p.add_argument("--out", required=True)
+    for name in ("repo-export", "repo-submit", "repo-grade", "repo-run", "repo-evaluate", "cvdp-import"):
+        p = sub.add_parser(name); p.add_argument("--prepared", required=True); p.add_argument("--out", required=True)
+        if name in ("repo-submit", "repo-grade"): p.add_argument("--submissions", required=True)
+        if name == "repo-grade":
+            p.add_argument("--checks", required=True); p.add_argument("--sandbox", choices=("required", "auto", "off"), default="required")
+        if name == "repo-evaluate":
+            p.add_argument("--kit"); p.add_argument("--profile", default="heavy")
+        if name in ("repo-run", "repo-evaluate"):
+            p.add_argument("--config", required=True); p.add_argument("--timeout", type=float, default=300 if name == "repo-run" else 3600)
+        if name in ("repo-evaluate", "cvdp-import"): p.add_argument("--submission", required=True)
+        if name == "cvdp-import": p.add_argument("--response", required=True)
+    p = sub.add_parser("eda-plan"); p.add_argument("results"); p.add_argument("--config", required=True); p.add_argument("--out", required=True)
+    p.add_argument("--timeout", type=float, default=3600); p.add_argument("--budget", type=float, default=14400)
+    p = sub.add_parser("eda-run"); p.add_argument("queue"); p.add_argument("--cache"); p.add_argument("--max-jobs", type=int); p.add_argument("--kit"); p.add_argument("--profile", default="eda")
+    p = sub.add_parser("eda-recover"); p.add_argument("queue"); p.add_argument("--retry", action="store_true")
+    for name in ("eda-export", "eda-report"):
+        p = sub.add_parser(name); p.add_argument("queue"); p.add_argument("--out", required=True)
+    p = sub.add_parser("eda-verify-transfer"); p.add_argument("transfer")
+    p = sub.add_parser("eda-import"); p.add_argument("queue"); p.add_argument("transfer")
+    p = sub.add_parser("eda-compare"); p.add_argument("baseline"); p.add_argument("candidate"); p.add_argument("--out", required=True)
+    p = sub.add_parser("offline-pack"); p.add_argument("--spec", required=True); p.add_argument("--out", required=True)
+    p = sub.add_parser("offline-verify"); p.add_argument("kit"); p.add_argument("--profile")
+    for name in ("repo-transfer", "repo-verify-transfer"):
+        p = sub.add_parser(name)
+        if name == "repo-transfer":
+            p.add_argument("--prepared", required=True); p.add_argument("--submission", required=True)
+            p.add_argument("--evaluation", required=True); p.add_argument("--out", required=True)
+        else: p.add_argument("transfer")
     args = parser.parse_args(argv)
     try:
+        if args.cmd.startswith("offline-"):
+            from . import offline
+            value = offline.pack(args.spec, args.out) if args.cmd == "offline-pack" else offline.verify(args.kit, args.profile)
+            print(json.dumps(value if args.cmd == "offline-verify" else {"fingerprint": value["fingerprint"]}, indent=2)); return 0
+        if args.cmd in ("repo-transfer", "repo-verify-transfer"):
+            from . import repository
+            value = repository.transfer(args.prepared, args.submission, args.evaluation, args.out) if args.cmd == "repo-transfer" else repository.verify_transfer(args.transfer)
+            print(json.dumps(value, indent=2)); return 0
+        if args.cmd.startswith("eda-"):
+            from . import eda
+            if args.cmd == "eda-plan": eda.plan(args.results, args.config, args.out, args.timeout, args.budget)
+            elif args.cmd == "eda-run":
+                q = eda.run(args.queue, args.cache, args.max_jobs, args.kit, args.profile)
+                return 1 if any(j["status"] in eda.TERMINAL - {"complete"} for j in q["jobs"]) else 0
+            elif args.cmd == "eda-recover": eda.recover(args.queue, args.retry)
+            elif args.cmd == "eda-export": eda.export(args.queue, args.out)
+            elif args.cmd == "eda-verify-transfer": eda.verify_transfer(args.transfer)
+            elif args.cmd == "eda-import": eda.import_results(args.queue, args.transfer)
+            elif args.cmd == "eda-report": eda.report(args.queue, args.out)
+            else: eda.compare(args.baseline, args.candidate, args.out)
+            return 0
+        if args.cmd in {"cvdp-catalog", "cvdp-prepare", "repo-export", "repo-submit", "repo-grade", "repo-run", "repo-evaluate", "cvdp-import"}:
+            from . import repository
+            if args.cmd == "cvdp-catalog": repository.catalog(args.datasets, args.out)
+            elif args.cmd == "cvdp-prepare": repository.prepare(args.dataset, args.bundles, args.out, args.tasks.split(",") if args.tasks else None)
+            elif args.cmd == "repo-export": repository.export(args.prepared, args.out)
+            elif args.cmd == "repo-submit": repository.snapshot(args.prepared, args.submissions, args.out)
+            elif args.cmd == "repo-grade":
+                result = repository.grade_control(args.prepared, args.submissions, args.checks, args.out, args.sandbox)
+                return 0 if all(t["status"] == "pass" for t in result["tasks"]) else 1
+            elif args.cmd == "repo-run":
+                records = repository.run_agent(args.prepared, args.config, args.out, args.timeout)
+                return 0 if all(r["returncode"] == 0 and not r["timeout"] and not r["output_limit"] and not r.get("error") for r in records) else 1
+            elif args.cmd == "repo-evaluate": repository.evaluate_external(args.prepared, args.submission, args.config, args.out, args.timeout, args.kit, args.profile)
+            else: repository.import_evaluation(args.prepared, args.submission, args.response, args.out)
+            print(Path(args.out).resolve()); return 0
         if args.cmd == "doctor":
             tools = {x: tool_version(x) for x in ("iverilog", "vvp", "verilator", "yosys")}
             print(json.dumps({"python": sys.version, "tools": tools, "grading_sandbox_available": sandbox_available(),

@@ -32,7 +32,8 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
     out = Path(out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     result = {"task_id": task["id"], "title": task["title"], "category": task["category"],
-              "status": "fail", "reason": "", "checks": [], "source_hashes": {},
+              "difficulty": task.get("difficulty", "unknown"), "backend": "native",
+              "failure_phase": "submission", "status": "fail", "reason": "", "checks": [], "source_hashes": {},
               "required_checks": len(task["checks"]) * len(seeds), "seeds": seeds}
     texts = {}
     try:
@@ -54,7 +55,7 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
         write_json(out / "task.json", result)
         return result
     if not shutil.which("iverilog") or not shutil.which("vvp"):
-        result.update(status="infra_error", reason="iverilog/vvp missing")
+        result.update(status="infra_error", failure_phase="setup", reason="iverilog/vvp missing")
         result["seconds"] = round(time.monotonic() - start, 6)
         write_json(out / "task.json", result)
         return result
@@ -63,7 +64,7 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
         for name in ("iverilog", "vvp"):
             executable = Path(shutil.which(name)).resolve()
             if not any(executable.is_relative_to(p) for p in (Path('/usr'), Path('/bin'), Path('/lib'), Path('/lib64'))):
-                result.update(status="infra_error", reason=f"Sandbox cannot access simulator: {name}")
+                result.update(status="infra_error", failure_phase="setup", reason=f"Sandbox cannot access simulator: {name}")
                 result["seconds"] = round(time.monotonic() - start, 6)
                 write_json(out / "task.json", result)
                 return result
@@ -93,7 +94,8 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
             compiled = execute(compile_cmd, work, out / f"{check['id']}.compile.log", timeout, env)
             for seed in seeds:
                 item = {"id": check["id"], "description": check.get("description", ""),
-                        "seed": seed, "compile": compiled, "status": "fail", "completion_verified": False}
+                        "seed": seed, "compile": compiled, "status": "fail", "completion_verified": False,
+                        "failure_phase": "compile"}
                 if compiled.get("error"):
                     item.update(status="infra_error", reason=compiled["error"])
                 elif compiled["returncode"] != 0 or compiled["timeout"] or compiled["output_limit"]:
@@ -106,13 +108,14 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
                     sim = execute(prefix + [shutil.which("vvp"), "sim.vvp", f"+SEED={seed}"], work,
                                   out / f"{check['id']}.seed{seed}.log", timeout, env)
                     item["simulation"] = sim
+                    item["failure_phase"] = "simulation"
                     lines = Path(sim["log"]).read_text(errors="replace").splitlines()
                     count = sum(line.strip() == marker for line in lines)
                     item["completion_verified"] = count == 1
                     if sim.get("error"):
                         item.update(status="infra_error", reason=sim["error"])
                     elif sim["returncode"] == 0 and not sim["timeout"] and not sim["output_limit"] and count == 1:
-                        item.update(status="pass", reason="all assertions and completion marker passed")
+                        item.update(status="pass", failure_phase="none", reason="all assertions and completion marker passed")
                     else:
                         item["reason"] = ("simulation_timeout" if sim["timeout"] else
                                           "output_limit" if sim["output_limit"] else
@@ -125,9 +128,18 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
         result.update(status="infra_error", reason="Infrastructure failure; score incomplete")
     else:
         result.update(status="fail", reason="One or more required checks failed")
+    phases = {c["failure_phase"] for c in result["checks"] if c["status"] != "pass"}
+    result["failure_phase"] = "none" if not phases else next(iter(phases)) if len(phases) == 1 else "multiple"
     result["seconds"] = round(time.monotonic() - start, 6)
     write_json(out / "task.json", result)
     return result
+
+
+def task_plan(suite, repeats=1):
+    """Plan identities are independent of checker seeds and survive interrupted runs."""
+    return [{"task_id": t["id"], "repeat": repeat, "category": t.get("category", "unknown"),
+             "difficulty": t.get("difficulty", "unknown"), "backend": "native"}
+            for repeat in range(1, repeats + 1) for t in suite["tasks"]]
 
 
 def new_result(suite, label, kind, seeds, timeout, sandbox, metadata=None):
@@ -164,6 +176,8 @@ def grade(suite, submissions, out, label="submission", kind="submission", seeds=
     r["planned_runs"] = len(suite["tasks"])
     r["task_count"] = len(suite["tasks"])
     r["repeats"] = 1
+    r["task_plan"] = task_plan(suite)
+    write_json(out / "results.json", r)
     for t in suite["tasks"]:
         row = grade_task(suite, t, Path(submissions) / t["id"], out / "tasks" / t["id"],
                          seeds, timeout, available)

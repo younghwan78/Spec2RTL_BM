@@ -1,0 +1,1 @@
+MOCK clock period 10 ns. This is not a vendor SDC file.

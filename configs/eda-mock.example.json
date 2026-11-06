@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "mode": "mock",
+  "stage": "synthesis",
+  "tool": {
+    "name": "synthetic-contract-fixture",
+    "version": "1",
+    "components": {
+      "area_delay": {
+        "name": "synthetic-contract-fixture",
+        "version": "1"
+      },
+      "power": {
+        "name": "synthetic-contract-fixture",
+        "version": "1"
+      }
+    }
+  },
+  "library": {
+    "name": "mock-library",
+    "corner": "mock-corner"
+  },
+  "effort": "mock",
+  "workload": {
+    "id": "counter-control-v1",
+    "clock_period_ns": 10,
+    "window": "100 cycles after reset"
+  },
+  "assets": {
+    "wrapper": "../scripts/eda_mock_wrapper.py",
+    "library": "../benchmarks/eda_controls/library.txt",
+    "constraints": "../benchmarks/eda_controls/constraints.txt",
+    "workload": "../benchmarks/eda_controls/workload.txt"
+  },
+  "argv": [
+    "python3",
+    "{asset:wrapper}",
+    "{request}",
+    "{response}"
+  ],
+  "env_names": [],
+  "tasks": {
+    "counter": {
+      "top": "counter",
+      "parameters": {},
+      "limits": {
+        "area_um2": 120,
+        "delay_ns": 3,
+        "power_mw": 4
+      }
+    }
+  }
+}

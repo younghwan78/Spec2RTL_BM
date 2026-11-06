@@ -11,7 +11,7 @@ import urllib.error
 import urllib.request
 
 from .common import canonical, digest, execute, portable_logs, sandbox_available, task_base, within, write_json
-from .grader import grade_task, new_result
+from .grader import grade_task, new_result, task_plan
 
 
 def export_task(suite, task, dest):
@@ -157,6 +157,8 @@ def run(suite, config, out, repeats=1, seeds=None, check_timeout=10, agent_timeo
                               generation_settings={k: config.get(k, "unspecified") for k in ("temperature", "max_tokens", "seed")})
     result["protocol_fingerprint"] = digest(canonical(result["protocol"]))
     result.update(planned_runs=len(suite["tasks"]) * repeats, task_count=len(suite["tasks"]), repeats=repeats)
+    result["task_plan"] = task_plan(suite, repeats)
+    write_json(out / "results.json", result)
     for repeat in range(1, repeats + 1):
         for task in suite["tasks"]:
             key = f"{task['id']}-r{repeat}"
@@ -192,8 +194,9 @@ def run(suite, config, out, repeats=1, seeds=None, check_timeout=10, agent_timeo
                 row = grade_task(suite, task, work, logs, seeds, check_timeout, isolated)
             else:
                 row = {"task_id": task["id"], "title": task["title"], "category": task["category"],
-                       "status": agent["status"], "reason": agent.get("reason", ""), "checks": [],
-                       "source_hashes": {}, "required_checks": len(task["checks"]) * len(seeds), "seconds": 0}
+                       "difficulty": task.get("difficulty", "unknown"), "backend": "native",
+                       "failure_phase": "agent", "status": agent["status"], "reason": agent.get("reason", ""), "checks": [],
+                       "source_hashes": {}, "required_checks": len(task["checks"]) * len(seeds), "seconds": None}
             row.update(repeat=repeat, agent=agent)
             portable_logs(row, out)
             result["tasks"].append(row)

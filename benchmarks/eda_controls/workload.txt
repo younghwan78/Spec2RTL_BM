@@ -1,0 +1,1 @@
+MOCK counter workload, 100 cycles after reset. No measured activity.

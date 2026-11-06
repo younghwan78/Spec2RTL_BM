@@ -22,7 +22,7 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <aside class="sidebar" aria-label="문서 탐색">
 <div class="brand">HWBench</div><small>평가를 이해하고 비교하는 방법</small>
 <nav aria-label="목차">
-<a href="#start">먼저 읽기</a><a href="#purpose">01 무엇을 평가하나요</a><a href="#scope">02 현재 평가 범위</a><a href="#units">03 실행 단위와 PASS</a><a href="#metrics">04 지표 읽는 법</a><a href="#calculator">05 성공률 계산 예시</a><a href="#comparison">06 지표를 함께 비교하기</a><a href="#fairness">07 공정한 실험 설계</a><a href="#reports">08 보고서와 원자료</a><a href="#run">09 첫 평가 실행</a><a href="#offline">10 폐쇄망 분리 운영</a><a href="#diagnosis">11 실패 원인 찾기</a><a href="#decision">12 결과 정리와 점검</a><a href="#faq">자주 묻는 질문</a><a href="#basis">구현 근거와 용어</a>
+<a href="#start">먼저 읽기</a><a href="#purpose">01 무엇을 평가하나요</a><a href="#scope">02 현재 평가 범위</a><a href="#units">03 실행 단위와 PASS</a><a href="#metrics">04 지표 읽는 법</a><a href="#calculator">05 성공률 계산 예시</a><a href="#comparison">06 지표를 함께 비교하기</a><a href="#fairness">07 공정한 실험 설계</a><a href="#reports">08 보고서와 원자료</a><a href="#run">09 첫 평가 실행</a><a href="#offline">10 폐쇄망 분리 운영</a><a href="#diagnosis">11 실패 원인 찾기</a><a href="#decision">12 결과 정리와 점검</a><a href="#heavy">13 CVDP Heavy 연결</a><a href="#ppa">14 PPA 지표와 비교</a><a href="#transfer">15 폐쇄망 반입 검증</a><a href="#faq">자주 묻는 질문</a><a href="#basis">구현 근거와 용어</a>
 </nav>
 <p class="aside-note">외부 글꼴·이미지·라이브러리 없이 열리는 단일 HTML입니다. 계산기 입력은 브라우저 안에서만 처리하며 저장하거나 전송하지 않습니다.</p>
 </aside>
@@ -31,8 +31,8 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <div class="eyebrow">SPEC → RTL · 평가 가이드</div>
 <h1>RTL을 얼마나 잘 만드는지,<br>어떤 조건에서 비교해야 하는지</h1>
 <p class="lead">HWBench는 하드웨어 명세를 받은 에이전트와 모델이 올바른 RTL을 얼마나 자주 완성하는지 평가합니다. 이 문서는 점수의 계산 방식부터 실패 원인, 실행 시간, 공정한 비교 방법까지 설명합니다.</p>
-<div class="meta"><span class="tag">처음 접하는 개발자·검증 담당자·평가 담당자</span><span class="tag">HWBench 0.1.0 구현 기준</span><span class="tag">폐쇄망에서 열람 가능</span></div>
-<div class="toolbar"><button type="button" id="print-button" hidden>인쇄 / PDF 저장</button><span>처음에는 01~06장, 직접 실행할 때는 07~12장을 읽으세요.</span></div>
+<div class="meta"><span class="tag">처음 접하는 개발자·검증 담당자·평가 담당자</span><span class="tag">2026-11-07 평가 확장 구현 기준</span><span class="tag">폐쇄망에서 열람 가능</span></div>
+<div class="toolbar"><button type="button" id="print-button" hidden>인쇄 / PDF 저장</button><span>처음에는 01~06장, 직접 실행할 때는 07~12장, Heavy·PPA·반입에는 13~15장을 읽으세요.</span></div>
 </header>
 <div class="cards">
 <article class="card"><h3>대표 지표는 기능 성공률</h3><p>계획한 과제 실행 중 모든 필수 검사를 통과한 비율입니다. 검사 몇 개를 통과했는지와 구분합니다.</p></article>
@@ -71,8 +71,8 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <tr><td><code>stream_pipeline</code></td><td>다중 파일 수정 · repository</td><td>받는 쪽이 멈췄을 때 데이터 유지, 전달·교체, reset</td></tr>
 <tr><td><code>round_robin</code></td><td>다중 파일 수정 · repository</td><td>요청 선택, 수락 시 우선순위 갱신, 공정한 순환 처리</td></tr>
 </tbody></table></div>
-<p><code>repository</code>는 현재 작은 다중 파일 과제를 뜻합니다. 대규모 사내 IP 저장소를 탐색하고 수정하는 능력을 대표하지 않습니다. 생성 과제에도 시작 파일이 주어지므로 완전한 백지 설계와 구분해서 읽어야 합니다.</p>
-<div class="cards two"><article class="card"><h3>현재 확인하는 것</h3><p>명세에 따른 기능, 경계 조건, 상태 변화, 제출 형식, 제한시간 내 완료 여부입니다. 일부 조합 회로는 모든 입력을 검사하고 순차 회로는 경계 입력과 seed를 사용한 시뮬레이션으로 검사합니다.</p></article><article class="card"><h3>별도 검증이 필요한 것</h3><p>합성 가능성의 엄밀한 확인, PPA, lint, formal, UVM, CDC/RDC, 모든 parameter 조합, 실리콘 signoff입니다. 코드·기능 coverage 수치도 현재 측정하지 않습니다.</p></article></div>
+<p>기본 suite의 업무명 <code>repository</code>는 작은 다중 파일 과제를 뜻합니다. 별도 Heavy 저장소 실행 경로는 13장에서 설명합니다. 대규모 사내 IP 저장소를 탐색하고 수정하는 능력을 대표하지 않습니다. 생성 과제에도 시작 파일이 주어지므로 완전한 백지 설계와 구분해서 읽어야 합니다.</p>
+<div class="cards two"><article class="card"><h3>현재 확인하는 것</h3><p>명세에 따른 기능, 경계 조건, 상태 변화, 제출 형식, 제한시간 내 완료 여부입니다. 일부 조합 회로는 모든 입력을 검사하고 순차 회로는 경계 입력과 seed를 사용한 시뮬레이션으로 검사합니다.</p></article><article class="card"><h3>별도 검증이 필요한 것</h3><p>실제 상용 도구로 확인하는 PPA·lint·Xprop, formal, UVM, CDC/RDC, 모든 parameter 조합, 실리콘 signoff입니다. PPA 작업 관리와 모의 결과 반입은 구현했으며 실제 vendor 실행은 별도입니다. 코드·기능 coverage 수치도 현재 측정하지 않습니다.</p></article></div>
 <h3>정답 RTL로 먼저 채점기를 확인합니다</h3>
 <p><code>reference</code>는 알려진 정답 구현이고 <code>mutant</code>는 일부러 오류를 넣은 구현입니다. 정답이 통과하고 오류 구현이 의도한 검사에서 실패해야 채점기를 사용할 근거가 생깁니다. 오류 구현의 컴파일이 깨졌다는 이유만으로 기능 오류를 찾아냈다고 판단하지 않습니다.</p>
 <div class="warning"><p><strong>정답 구현 100%와 오류 구현 0%는 채점기 검증 결과입니다.</strong> 특정 모델이 100%를 달성했다는 뜻이 아닙니다. 보고서의 <code>kind</code>가 <code>fixture_</code>로 시작하는지 먼저 확인하세요.</p></div>
@@ -106,10 +106,13 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <tr><td><span class="metric-type">기본 집계</span>성공 수 / 계획 수<br><code>passed</code><br><code>planned_runs</code></td><td><code>run</code>은 과제 수 × 반복 수. <code>grade</code>는 과제 수, 반복 1회</td><td>같은 80%라도 4/5와 80/100은 관찰 범위가 다름. 비율만 보고하지 않음</td></tr>
 <tr><td><span class="metric-type">기본 집계</span>인프라 오류<br><code>infra_errors</code></td><td>과제 상태가 <code>infra_error</code>인 실행 수</td><td>도구·통신 등 실행 환경의 문제. 분모에 남고 평가 미완료로 표시</td></tr>
 <tr><td><span class="metric-type">기본 집계</span>미기록<br><code>missing_runs</code></td><td>계획 실행 수 − 기록된 과제 실행 수</td><td>중단 등으로 결과 행 자체가 없는 수. 제출 파일 누락과 다름</td></tr>
-<tr><td><span class="metric-type">기본 집계</span>업무별 성공률</td><td>해당 분류의 PASS 수 ÷ 해당 분류의 <strong>기록된 실행 수</strong></td><td>전체 성공률과 분모가 다름. 미기록의 분류를 알 수 없어 제외됨</td></tr>
+<tr><td><span class="metric-type">기본 집계</span>업무별 성공률</td><td>해당 분류의 PASS 수 ÷ 해당 분류의 <strong>계획 실행 수</strong></td><td>task_plan이 있으면 미기록도 분류별 분모에 유지. 예전 결과에 계획 목록이 없으면 해당 분모·성공률은 null</td></tr>
 <tr><td><span class="metric-type">원자료</span>검사 수<br><code>checks</code><br><code>required_checks</code></td><td><code>tasks.csv</code>에서 checks는 기록된 검사 행 수, required_checks는 필요한 check × seed 수</td><td>checks는 통과 개수가 아님. 생성에 실패하면 0이어도 필수 검사 수는 남음</td></tr>
 </tbody></table></div>
-<p>업무별 비율을 단순 평균해서 전체 성공률을 만들지 마세요. 분류마다 과제 수가 다르면 가중치가 달라지고 미기록이 있으면 분모 기준까지 달라집니다. 전체 성공률은 항상 계획 실행 수에서 다시 계산합니다.</p>
+<p>업무별 비율을 단순 평균해서 전체 성공률을 만들지 마세요. 분류마다 과제 수가 다르면 가중치가 달라집니다. task_plan 없는 예전 결과는 분류별 계획 수를 알 수 없으므로 recorded_pass_rate와 전체 성공률을 혼동하지 마세요. 전체 성공률은 항상 계획 실행 수에서 다시 계산합니다.</p>
+<h3>난이도·반복·실패 단계도 함께 읽습니다</h3>
+<p>실행 전에 <code>task_plan</code>에 task_id/repeat와 category/difficulty/backend를 저장합니다. 중단돼 결과 행이 없어도 어느 분류에서 몇 회를 계획했는지 알 수 있습니다. 예를 들어 생성 과제 2회를 계획하고 1회만 PASS로 기록했다면 해당 분류 성공률은 1/2 = 50%입니다. 기록된 1회만 분모로 삼은 100%와 구분합니다.</p>
+<p><code>repeat_consistency</code>는 과제별 성공/계획 반복 수와 all_pass, never_pass, mixed를 표시합니다. 결과 행이 부족하면 incomplete, 계획 목록이 없는 예전 결과는 unknown으로 남깁니다. 3회 중 2회 성공한 mixed 결과는 반복 성공률 2/3이며 pass@3가 아닙니다. <code>failure_phases</code>는 submission, setup, agent, compile, simulation 등의 단계별 실패 수입니다. 여러 단계의 실패는 multiple, 근거가 없으면 unknown입니다. 원래 status와 reason도 함께 확인하세요.</p>
 <h3>상태값은 실패 원인을 구분하는 단서입니다</h3>
 <div class="table-wrap"><table><thead><tr><th scope="col">상태</th><th scope="col">일반적인 의미</th><th scope="col">다음 확인</th></tr></thead><tbody>
 <tr><td><code>pass</code></td><td>Native 채점에서 모든 필수 check·seed 통과. HWE는 원본 resolved_ids를 이 상태로 가져옴</td><td>실행 조건과 결과 종류</td></tr>
@@ -118,6 +121,7 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <tr><td><code>agent_error</code></td><td>Command wrapper 비정상 종료 또는 출력 제한 초과</td><td>agent 로그와 종료 코드</td></tr>
 <tr><td><code>timeout</code></td><td>에이전트 또는 HTTP 생성 단계의 제한시간 초과</td><td>생성 예산과 agent 로그</td></tr>
 <tr><td><code>infra_error</code></td><td>실행 도구 누락, 통신 장애, 실행 환경 문제 등</td><td>환경을 복구하고 새 실행으로 기록</td></tr>
+<tr><td><code>unresolved</code></td><td>저장소 agent가 종료했지만 기능 평가 전이거나 외부 evaluator가 판정하지 못한 상태</td><td>agent 종료와 기능 PASS를 구분</td></tr>
 <tr><td><code>empty_patch</code></td><td>HWE에서 가져온 빈 수정 결과</td><td>원본 evaluator의 기록</td></tr>
 </tbody></table></div>
 <p class="caption">시뮬레이션 시간 초과는 보통 과제 <code>fail</code>과 원인 <code>simulation_timeout</code>으로 기록합니다. <code>timeout</code> 상태는 생성 단계의 시간 초과입니다. Native runner는 미기록을 <code>missing</code> 행으로 만들지 않고 계획 수와 결과 행 수의 차이로 계산합니다.</p>
@@ -130,9 +134,11 @@ section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27p
 <tr><td><span class="metric-type">별도 실측</span>처음부터 끝까지 걸린 시간</td><td>준비·export·생성·채점·보고서 작성까지 포함한 전체 경과 시간</td><td>실행 시작·종료를 별도 측정. 위 필드의 합과 정확히 같지 않음</td></tr>
 </tbody></table></div>
 <div class="warning"><p><strong>컴파일 시간을 중복해서 더하지 마세요.</strong> Checker 하나는 한 번 컴파일한 뒤 여러 seed로 실행합니다. <code>checks.csv</code>에는 같은 컴파일 시간이 각 seed 행에 반복됩니다. 합산할 때는 <code>(task_id, repeat, check)</code>마다 한 번만 셉니다. 채점 <code>seconds</code>에 compile·simulation 시간을 다시 더하는 것도 중복입니다.</p></div>
+<p><code>summary.json</code>의 timing은 agent·grading·compile·simulation을 따로 집계하며 observed_runs, total, mean을 표시합니다. Compile 합계는 과제/반복/check마다 한 번만 셉니다. 관측한 값만 합산하므로 관측 수가 다른 평균을 같은 범위의 결과로 읽지 마세요. <code>tasks.csv</code>의 compile_seconds_unique도 중복을 제거한 값입니다.</p>
 <p><code>--agent-timeout</code>은 과제 생성 1회에 적용합니다. <code>--check-timeout</code>은 개별 컴파일과 개별 seed 시뮬레이션에 각각 적용합니다. 예를 들어 check-timeout 10초를 지정해도 한 과제의 총 채점 시간에는 10초 제한이 적용되지 않습니다.</p>
 <h3>Token 사용량과 비용</h3>
 <p><code>usage</code>는 HTTP 서버가 돌려준 사용량을 그대로 저장한 값입니다. 서버가 제공하면 입력·출력 token 등을 확인할 수 있지만 필드와 계산 범위는 서비스마다 다를 수 있습니다. Command adapter는 이 값을 자동으로 수집하지 않습니다. 빈 <code>{}</code>는 미측정이며 0 token이나 무료라는 뜻이 아닙니다.</p>
+<p>usage 집계도 관측 수와 합계·평균을 나누고 관측값이 없으면 null로 남깁니다. 비용은 통화·산정 계약이 없으므로 자동 합산하지 않습니다.</p>
 <p>Token 수가 적다는 이유만으로 더 저렴하다고 판단할 수는 없습니다. 모델마다 tokenizer가 다를 수 있고 사내 서버의 GPU·운영 비용도 별도입니다. 비용을 비교하려면 같은 비용 산정 범위를 정하고 실패한 실행의 비용까지 포함하세요.</p>
 <div class="note"><p><b>별도 분석:</b> 검사 통과율, 컴파일 성공률, 시간의 중앙값·상위 지연, 성공 1건당 비용, 신뢰구간, pass@k는 현재 기본 보고서가 자동 계산하지 않습니다. 필요하면 원자료로 계산하되 대상 실행, 분모, 미측정 처리 방법을 함께 적으세요.</p></div>
 </section>
@@ -332,7 +338,132 @@ python3 -m hwbench verify-bundle artifacts/hwbench-offline.tar.gz</code></pre>
 <li>실제로 채점한 RTL, 로그, config 식별값, hash를 다시 확인할 수 있나요?</li>
 <li>이번 결과로 판단할 수 있는 IP 범위와 추가 검증이 필요한 부분을 적었나요?</li>
 </ul>
-<p>합성·PPA를 추가한다면 기능 검증을 통과한 RTL을 대상으로 동일한 tool, library, clock·timing constraint를 적용하세요. 전력·성능·면적은 기능 성공률과 별도 축으로 보고해야 합니다. 현재 HWBench 기능 점수만으로 이 값을 추정할 수는 없습니다.</p>
+<p>PPA는 기능 검증을 통과한 native RTL 사본을 대상으로 별도 실행합니다. 14장의 요청·측정 분모와 조건 일치 규칙을 적용하세요. 기능 점수만으로 전력·성능·면적을 추정하지 않습니다.</p>
+</section>
+
+<section id="heavy">
+<h2><span class="num">13 / Heavy</span>과제 수와 실제 평가 범위를 구분합니다</h2>
+<p>CVDP는 RTL 생성뿐 아니라 수정·재사용·디버깅 등 여러 업무를 포함합니다. 현재 카탈로그는 공개 revision <code>5b807d945f6a99aa645f7e43a64a2115e281b4bf</code>의 no-commercial 코드 생성 파일 세 개를 고정합니다. 여기서 no-commercial은 상용 EDA가 필요 없는 분류입니다. Simulator와 컨테이너 같은 실행 도구까지 필요 없다는 뜻은 아닙니다.</p>
+<div class="table-wrap"><table><caption>고정한 공개 카탈로그: 중복 없는 469개 ID</caption><thead><tr><th>트랙</th><th>과제 수</th><th>easy / medium / hard</th><th>이번 구현에서 확인한 범위</th></tr></thead><tbody>
+<tr><td>nonagentic</td><td>302</td><td>162 / 140 / 0</td><td>로컬 JSONL의 해시·ID·분류 검사</td></tr>
+<tr><td>agentic</td><td>92</td><td>17 / 55 / 20</td><td>로컬 JSONL의 해시·ID·분류 검사</td></tr>
+<tr><td>agentic Heavy</td><td>75</td><td>0 / 0 / 75</td><td>로컬 저장소 준비, agent 작업공간, 제출·외부 evaluator 연결</td></tr>
+</tbody></table></div>
+<p>난이도는 upstream이 선언한 label입니다. 이 도구가 코드 길이나 gate 수로 난이도를 다시 산정하지 않습니다. Native suite에 난이도가 없으면 <code>unknown</code>으로 집계합니다. 업무(category), 난이도(difficulty), 실행 경로(backend)는 서로 다른 분류입니다. 예를 들어 native의 업무명이 <code>repository</code>여도 공식 Heavy 실행을 의미하지 않습니다.</p>
+<div class="warning"><p><strong>카탈로그 469개 확인은 469개 평가 완료가 아닙니다.</strong> 실제 공개 RVX 한 과제의 준비·export를 확인했습니다. 공식 Docker evaluator, 전체 Heavy 75개, 실제 모델 점수는 실행 검증하지 않았습니다. 해결되지 않은 Git submodule이 있는 저장소는 준비를 거부하므로 모든 Heavy 과제가 실행 가능하다고 보아서는 안 됩니다.</p></div>
+<h3>저장소에서 무엇을 agent에게 주나요</h3>
+<p>Heavy는 원래 개발 저장소의 <code>origin.commit</code> 대신 평가용으로 정리된 <code>context.commit</code>을 사용합니다. 반입한 Git bundle에서 해당 commit을 추출하고 공개 prompt와 baseline만 export합니다. Export의 Git 이력은 baseline 한 개이며 remote는 없습니다. Hidden harness는 채점 측에 남깁니다. <code>patch</code> 값이 비어 있어도 정답으로 해석하지 않고 key만 수정 허용 경로로 씁니다.</p>
+<pre><code># 아래 /data/cvdp에는 미리 반입한 JSONL과 bundles가 있어야 합니다.
+python3 -m hwbench cvdp-catalog --datasets /data/cvdp --out artifacts/catalog-r1
+python3 -m hwbench cvdp-prepare \
+  --dataset /data/cvdp/cvdp_v1.1.0_agentic_heavy_code_generation_no_commercial.jsonl \
+  --bundles /data/cvdp/bundles --tasks cvdp_agentic_heavy_rvx_0004 \
+  --out artifacts/rvx-prepared-r1
+python3 -m hwbench repo-export --prepared artifacts/rvx-prepared-r1 \
+  --out artifacts/rvx-work-r1
+# 별도 격리 환경에서 agent가 허용 파일을 수정한 뒤
+python3 -m hwbench repo-submit --prepared artifacts/rvx-prepared-r1 \
+  --submissions artifacts/rvx-work-r1 --out artifacts/rvx-submission-r1</code></pre>
+<p><code>repo-submit</code>은 허용 범위 밖의 내용 변경·추가·삭제와 symlink를 거부하고 채점할 사본을 고정합니다. 파일 내용과 권한을 다시 검사하므로 반입 후 실행 권한만 바꾼 경우도 검출합니다. <code>repo-run</code>으로 wrapper를 실행하면 모든 계획 과제의 로그와 표준 보고서를 남깁니다. 정상 종료는 기능 판정 전의 <code>unresolved</code>이며 실패·timeout도 계획 분모에 남습니다. 하나라도 agent 실행에 실패하면 자동 submission을 만들지 않습니다.</p>
+<h3>외부 evaluator 결과는 어떤 증거인가요</h3>
+<pre><code>python3 -m hwbench repo-evaluate --prepared artifacts/rvx-prepared-r1 \
+  --submission artifacts/rvx-submission-r1 --config /data/evaluator.json \
+  --kit /data/kit --profile heavy --timeout 3600 --out artifacts/rvx-evaluation-r1</code></pre>
+<p>운영자가 만든 로컬 wrapper가 사전 준비한 컨테이너에서 공식 evaluator를 실행하고 개별 과제 판정을 공통 JSON 형식으로 반환합니다. HWBench는 계획 ID, 제출 해시, evaluator revision, 이미지 식별값, 원본 보고서 해시를 검사합니다. 이 경로는 공식 raw report parser가 아니며 집계 비율이나 passing_tests 수만으로 개별 PASS를 추정하지 않습니다. 미실행 과제도 <code>missing</code>, <code>unresolved</code>, <code>infra_error</code>, <code>timeout</code>으로 명시해야 합니다.</p>
+<p>반입 결과의 <code>externally_reported</code>는 외부에서 보고한 판정입니다. 파일 무결성 확인이 원본 실행의 진위를 인증하지는 않습니다. <code>repo-grade</code>와 작은 Git/RTL control은 연결·채점 경로의 검증용이며 공식 Heavy 점수로 사용하지 않습니다.</p>
+</section>
+
+<section id="ppa">
+<h2><span class="num">14 / PPA</span>기능이 맞는 RTL의 면적·지연·전력을 비교합니다</h2>
+<p>PPA는 전력(Power), 성능(Performance), 면적(Area)입니다. 이 구현에서는 성능을 회로 경로의 지연으로 표시합니다. 기능 성공률과 별도로 읽어야 합니다. 빨리 실행되는 agent와 지연이 짧은 회로도 서로 다른 성과입니다.</p>
+<p>현재 EDA 입력은 native 기능 채점에서 PASS한 최종 RTL 사본입니다. 제출 해시가 맞아야 작업을 만들며 작업 중인 agent 디렉터리를 직접 합성하지 않습니다. Repository backend와 외부에서 가져온 PASS는 이 경로의 입력으로 받지 않습니다. 실제 RTLA·PowerPro·lint·Xprop 명령과 parser는 사내 설치 버전에 맞는 wrapper로 연결해야 합니다. 현재 사외 검증은 모의 wrapper 계약까지입니다.</p>
+<div class="table-wrap"><table><caption>정규화된 PPA 값의 의미</caption><thead><tr><th>필드 / 단위</th><th>정의</th><th>함께 고정할 조건</th></tr></thead><tbody>
+<tr><td><code>area_um2</code> · μm²</td><td>합성 결과의 cell area 합계. Die/core 면적과 구분</td><td>Library, corner, top, parameters, 합성 effort</td></tr>
+<tr><td><code>delay_ns</code> · ns</td><td>고정한 제약에서 가장 느린 분석 경로의 data path delay. Slack이나 주파수가 아님</td><td>Clock·입출력 제약과 분석 대상 경로</td></tr>
+<tr><td><code>power_mw</code> · mW</td><td>지정 workload·구간에서 dynamic와 leakage를 합친 평균 전력</td><td>Library/PVT, clock, workload, activity, 측정 구간</td></tr>
+</tbody></table></div>
+<p><code>synthesis</code>와 <code>rtl_estimate</code>는 다른 분석 단계입니다. RTLA라는 이름만 보고 합성 기준 측정으로 분류하지 말고 실제 수행한 flow를 기록하세요. 이 값들만으로 배치배선 이후 timing closure나 signoff를 선언하지 않습니다. Lint와 Xprop은 각각 pass/fail/not_requested/infra_error를 별도 품질 필드로 남기며 PPA 값이나 기능 PASS에 합산하지 않습니다.</p>
+<h3>기능 통과 수와 측정 완료 수를 함께 봅니다</h3>
+<div class="table-wrap"><table><thead><tr><th>집계</th><th>무엇을 세나요</th></tr></thead><tbody>
+<tr><td><code>functional_planned</code></td><td>원래 기능 평가의 계획 실행 수</td></tr>
+<tr><td><code>requested</code></td><td>EDA 설정에서 요청한 과제·반복 수. 기능 실패도 포함</td></tr>
+<tr><td><code>eligible</code></td><td>요청 범위 중 기능 PASS와 사본 검사를 통과해 EDA 작업을 만든 수</td></tr>
+<tr><td><code>attempted</code></td><td>도구 실행을 시도한 작업 수. 캐시만 사용한 작업은 새 시도로 세지 않음</td></tr>
+<tr><td><code>valid_measured</code> / <code>valid_mock</code></td><td>계약 검사를 통과한 실측 모드 결과 / 모의 결과 수. Mode는 도구 의미를 독립 인증하는 표식이 아님</td></tr>
+<tr><td><code>constraint_requested</code></td><td>PPA 상한을 지정한 계획 실행 수. 미실행·기능 실패·측정 실패도 포함</td></tr>
+<tr><td><code>constraints_satisfied</code></td><td>기능 PASS이고 유효 PPA 값이 지정한 상한을 모두 만족한 수</td></tr>
+</tbody></table></div>
+<div class="formula">기능·PPA 목표 동시 만족률 = constraints_satisfied ÷ constraint_requested<small>필드: function_and_ppa_rate_constrained_scope · 목표 상한을 지정한 범위의 지표입니다.</small></div>
+<div class="example"><p>설명용으로 기능 평가 10회 중 6회가 PASS했다고 합시다. EDA는 8회를 요청했고 그중 5회가 기능을 통과했습니다. 5회 실행 중 4회만 유효하게 측정됐고 3회가 목표를 만족했다면, 모든 8회에 상한을 지정한 경우 동시 만족률은 <strong>3/8 = 37.5%</strong>입니다. 성공한 측정만 골라 3/4 = 75%라고 보고하면 기능 실패와 측정 누락을 가립니다. 상한이 없는 측정의 만족 여부와 분모가 없는 비율은 <code>null</code>입니다.</p></div>
+<h3>같은 과제의 같은 조건에서 후보/기준 비율을 계산합니다</h3>
+<div class="formula">면적 비율 = 후보 면적 ÷ 기준 면적<small>지연·전력도 같은 방식입니다. 1 미만이면 해당 지표가 작고, 기준값이 0이면 비율은 null입니다.</small></div>
+<div class="example"><p>같은 조건의 기준이 면적 100 μm², 지연 2 ns, 전력 3 mW이고 후보가 90 μm², 2.2 ns, 2.4 mW라면 비율은 0.90, 1.10, 0.80입니다. 후보는 면적 10%와 전력 20%를 줄였지만 지연은 10% 늘었습니다. 어떤 설계가 적합한지는 정해 둔 목표 상한으로 판단합니다.</p><p>A의 유효 측정이 8개, B가 5개여도 공통 과제가 4개라면 비율 비교 대상은 그 4개입니다. 양쪽의 전체 계획·누락 수와 공통 집합을 함께 표시합니다. 4개의 좋은 비율만으로 전체 벤치마크 우승을 선언하지 않습니다.</p></div>
+<p><code>eda-compare</code>는 mode, stage, 기능 결과 kind가 같고 task_id/repeat/조건 fingerprint가 일치하는 유효 결과를 짝짓습니다. 조건에는 기능 protocol, wrapper·실행 인자·자산 해시, 도구별 버전, library/corner, 제약, top/parameters, effort, workload와 구간이 포함됩니다. 조건이 다른 결과를 강제로 합치는 override는 없습니다. 정답 fixture와 model_run처럼 kind가 다르면 자동 비교하지 않습니다.</p>
+<p>전력 activity는 같은 workload를 사용하되 후보 RTL마다 새로 생성합니다. 기준 설계의 SAIF를 후보에 그대로 적용하지 않습니다. Wrapper는 후보 소스와 workload의 식별값, activity 원본 보고서를 남겨야 합니다. 면적·지연 도구와 전력 도구의 버전을 각각 기록하고 lint/Xprop 결과를 보고하면 해당 도구 버전도 기록합니다. 버전을 모르면 실측 비교 설정을 완료할 수 없습니다.</p>
+<h3>오래 걸리는 도구는 최종 제출물에만 실행합니다</h3>
+<p>EDA는 agent가 파일을 고칠 때마다 자동 호출되지 않습니다. 기능 채점이 끝난 최종 사본으로 별도 큐를 만듭니다. 기본 동시 실행 수는 1이며 한 로컬 호스트의 파일 잠금으로 중복 worker를 막습니다. 여러 호스트가 함께 쓰는 분산 스케줄러는 아닙니다.</p>
+<pre><code># 상용 EDA 없이 실행 관리 경로를 확인하는 독립 예제
+python3 scripts/eda_controls.py --out artifacts/eda-control-r1
+# native 기능 결과를 실제 평가 설정으로 계획
+python3 -m hwbench eda-plan artifacts/native-result-r1 \
+  --config /data/company-eda.json --out artifacts/eda-queue-r1 \
+  --timeout 3600 --budget 14400
+python3 -m hwbench eda-run artifacts/eda-queue-r1 \
+  --kit /data/kit --profile eda --cache /data/eda-cache --max-jobs 1
+python3 -m hwbench eda-report artifacts/eda-queue-r1 --out artifacts/eda-report-r1
+python3 -m hwbench eda-compare artifacts/baseline-queue artifacts/eda-queue-r1 \
+  --out artifacts/ppa-comparison-r1</code></pre>
+<p>위 실측 명령의 입력 디렉터리와 회사 설정은 운영자가 준비해야 합니다. 실행 가능한 모의 예제는 첫 명령이며 <code>configs/eda-mock.example.json</code>을 사용합니다. 모의 값은 실측 요청이나 실측 캐시에 사용할 수 없습니다.</p>
+<p>큐 대기 시간, wrapper 실행 시간, 라이선스 대기는 구분합니다. 라이선스 대기를 측정하지 않았다면 <code>null</code>로 남깁니다. 실행 전 허용 시간을 총예산에서 예약하고 정상 종료하면 실제 시간으로 정산합니다. Worker가 중단되면 예약액을 유지합니다. Watchdog이 도구와 자식 프로세스를 정리하며 아직 정리 중인 경우 재시도를 거부합니다.</p>
+<pre><code>python3 -m hwbench eda-recover artifacts/eda-queue-r1
+# 원인을 확인한 뒤 재시도가 필요한 경우에만
+python3 -m hwbench eda-recover artifacts/eda-queue-r1 --retry</code></pre>
+<p>총예산은 큐 대기 시간을 제외한 실행 예산이며 감시 polling 간격만큼 경과 시간이 늘 수 있습니다. 실패한 시도와 재시도도 예산과 로그에 남습니다. 캐시는 입력과 조건이 같은 성공한 로컬 wrapper 결과만 재사용하고 원본 보고서 해시를 다시 검사합니다. 외부 반입 결과는 캐시에 넣지 않습니다. <code>local_wrapper</code>는 wrapper 실행을 확인한 상태, <code>externally_reported</code>는 반입된 주장입니다. 두 상태 모두 vendor 보고서 의미를 독립 검증했다는 뜻은 아닙니다.</p>
+</section>
+
+<section id="transfer">
+<h2><span class="num">15 / 반입</span>외부 준비와 사내 실행을 나눕니다</h2>
+<p>사내에서는 외부 접속이 불가능하다는 조건으로 운영합니다. HWBench 실행 중 데이터셋·Git 저장소·이미지·패키지를 내려받지 않습니다. 파일이 없으면 준비를 중단하므로 필요한 자료를 외부 준비 단계에서 고정하고 승인된 방법으로 반입해야 합니다.</p>
+<div class="table-wrap"><table><thead><tr><th>반입 대상</th><th>외부 준비에서 고정할 것</th><th>사내에서 따로 확인할 것</th></tr></thead><tbody>
+<tr><td>HWBench 소스</td><td>AGENTS.md 포함 source bundle과 파일별 해시</td><td>bundle 검증 후 새 경로에서 실행</td></tr>
+<tr><td>데이터셋·저장소</td><td>JSONL revision/SHA256, sanitized bundle, 라이선스·NOTICE</td><td>catalog 해시, context.commit과 필요한 저장소 파일</td></tr>
+<tr><td>공식 evaluator·이미지</td><td>고정 소스 revision, 의존성을 설치한 이미지와 docker save archive</td><td>Docker daemon과 docker load 결과, 실제 이미지 digest</td></tr>
+<tr><td>런타임</td><td>사내 OS/CPU/Python에 맞는 Python·Git·Icarus·vvp·bubblewrap 패키지와 필요한 wheel</td><td>승인된 오프라인 설치, doctor 및 control 실행</td></tr>
+<tr><td>상용 EDA</td><td>사내 설치 목록, toolchain 버전, library/PDK·제약·wrapper 설정</td><td>실제 설치·라이선스 checkout, 기준 설계 원본 보고서와 parser 값 대조</td></tr>
+</tbody></table></div>
+<p>컨테이너와 Python 의존성은 가능하면 외부에서 이미지에 미리 설치합니다. 사내 설치가 필요하면 반입한 archive의 <code>docker load -i</code> 또는 로컬 wheel의 <code>pip install --no-index --find-links</code>처럼 외부 저장소를 사용하지 않는 절차를 정합니다. HWBench가 설치 명령을 자동 실행하지는 않습니다. 사내 라이브러리와 라이선스 정보는 회사 반입·보관 정책에 따라 관리합니다.</p>
+<pre><code>python3 -m hwbench bundle --out /transfer/hwbench-source.tar.gz
+python3 -m hwbench verify-bundle /transfer/hwbench-source.tar.gz
+# 예제의 placeholder를 실제 로컬 경로와 revision으로 교체합니다.
+# 필요한 profile과 resource만 남긴 별도 설정을 작성합니다.
+python3 -m hwbench offline-pack --spec /transfer/offline-resources.json --out /transfer/kit
+# kit를 반입한 뒤: 실행 출력은 kit 밖에 둡니다.
+python3 -m hwbench offline-verify /data/kit --profile heavy
+python3 -m hwbench doctor</code></pre>
+<p><code>configs/offline-resources.example.json</code>에 resource 목록과 profile 예제가 있습니다. 각 resource는 ID, 역할, 로컬 경로와 kit 안의 상대 목적지를 갖습니다. Profile은 해당 실행에 필요한 ID 목록입니다. <code>offline-verify</code>는 파일 집합·SHA256·크기·권한을 검사합니다. 큰 파일도 스트림으로 처리합니다. Kit 전체의 무결성을 확인하므로 실행 결과를 kit 안에 쓰면 검증이 실패합니다.</p>
+<div class="warning"><p><strong>resources_verified는 파일 확인이며 runtime_status는 not_checked입니다.</strong> 이미지 archive가 있어도 Docker에 load되지 않았을 수 있고 설치 목록이 있어도 EDA 실행과 라이선스가 정상이라는 보장은 없습니다. 도구 설치·동작 확인을 별도로 기록하세요. 해시는 전자서명이 아니므로 반입 목록 자체도 신뢰할 수 있는 경로로 전달해야 합니다.</p></div>
+<p>실제 Heavy wrapper는 <code>heavy</code> profile의 evaluator·image_archive 역할을, 실측 EDA는 <code>eda</code> profile의 tool_installation·configuration 역할을 실행 전에 확인합니다. <code>offline: true</code>와 <code>operator_managed_container</code>는 운영자의 선언입니다. 임의 wrapper의 네트워크까지 자동 격리하지 않으므로 회사 정책에서 외부 접속을 차단하고 명시한 사내 모델 endpoint와 라이선스 서버만 허용해야 합니다.</p>
+<h3>결과를 옮길 때는 다시 검증할 자료도 함께 옮깁니다</h3>
+<p>Native 결과는 results.json, 채점 RTL 사본과 로그를 포함한 실행 디렉터리 전체를 보존합니다. Heavy는 prepared baseline·hidden harness, frozen submission, 외부 응답·원본 보고서·wrapper 기록이 모두 필요합니다. 채점 운영자용 반입 묶음은 blind 평가 agent에게 주지 않습니다.</p>
+<pre><code>python3 -m hwbench repo-transfer --prepared artifacts/rvx-prepared-r1 \
+  --submission artifacts/rvx-submission-r1 --evaluation artifacts/rvx-evaluation-r1 \
+  --out artifacts/rvx-reproduction-r1
+python3 -m hwbench repo-verify-transfer /data/rvx-reproduction-r1
+python3 -m hwbench cvdp-import --prepared /data/rvx-reproduction-r1/prepared \
+  --submission /data/rvx-reproduction-r1/submission \
+  --response /data/rvx-reproduction-r1/evaluation/response.json --out artifacts/rvx-import-r1
+
+# EDA 큐와 결과는 각각 export 후 파일로 이동합니다.
+python3 -m hwbench eda-export artifacts/eda-queue-r1 --out /transfer/eda-r1
+python3 -m hwbench eda-verify-transfer /data/eda-r1
+python3 -m hwbench eda-import artifacts/original-eda-queue-r1 /data/eda-r1</code></pre>
+<p>EDA 반입은 모든 작업을 먼저 검사하고 전체 증거를 설치한 뒤 큐 상태를 교체합니다. 잘못된 뒤쪽 결과 때문에 앞쪽 결과만 남아 재반입을 막지 않도록 검증합니다. Export/import 원본과 대상은 서로를 포함할 수 없습니다. 과거 로그의 절대 경로는 당시 실행 증거이며 새 환경의 재실행 명령으로 그대로 사용하지 않습니다.</p>
+<h3>폐쇄망 이식 여부를 직접 검증합니다</h3>
+<pre><code>python3 scripts/validate.py
+python3 scripts/offline_controls.py --out artifacts/offline-check-r1
+# 실제 공개 JSONL과 RVX bundle을 반입한 경우에만
+python3 scripts/offline_controls.py --out artifacts/offline-cvdp-r1 --cvdp-dir /data/cvdp</code></pre>
+<p>현재 검증에서는 회귀 테스트 76개와 통합 단계가 통과했습니다. 옮긴 소스·자료만 마운트하고 원래 checkout과 네트워크를 차단한 환경에서 native·저장소·EDA mock·결과 반입을 확인했습니다. 반입한 실제 CVDP 자료로 469개 카탈로그와 RVX 한 과제의 준비·export도 통과했습니다. 설치된 시스템 도구는 읽기 전용으로 사용했으므로 OS 패키지 설치까지 검증한 결과는 아닙니다. 공식 Docker evaluator, 실제 상용 PPA, 실제 모델 성능은 사내에서 확인할 항목입니다.</p>
 </section>
 
 <section id="faq">
@@ -356,6 +487,9 @@ python3 -m hwbench verify-bundle artifacts/hwbench-offline.tar.gz</code></pre>
 <tr><td>Suite hash, 경로, 실행 제한과 sandbox</td><td><code>hwbench/common.py</code>의 load_suite, execute, sandbox_prefix</td></tr>
 <tr><td>명령, 부분집합, fixture 검증, bundle</td><td><code>hwbench/cli.py</code>, <code>scripts/validate.py</code></td></tr>
 <tr><td>현재 과제와 검사 구성</td><td><code>benchmarks/core/suite.json</code>, <code>benchmarks/cvdp_adapted/suite.json</code></td></tr>
+<tr><td>Heavy 준비·제출·외부 판정 반입</td><td><code>hwbench/repository.py</code>, <code>third_party/cvdp/catalog-lock.json</code></td></tr>
+<tr><td>PPA 큐·캐시·반입·비교·watchdog</td><td><code>hwbench/eda.py</code>, <code>hwbench/eda_supervisor.py</code></td></tr>
+<tr><td>반입 목록·이식 검증</td><td><code>hwbench/offline.py</code>, <code>scripts/offline_controls.py</code></td></tr>
 <tr><td>HWE 결과 매핑과 가져오기 한계</td><td><code>hwbench/upstream.py</code></td></tr>
 </tbody></table></div>
 <dl><dt><b>Protocol</b></dt><dd>문제와 실행·채점 조건을 묶어 정한 평가 규약입니다. 같은 protocol로 평가했는지 확인한 뒤 결과를 비교합니다.</dd><dt><b>Token / tokenizer</b></dt><dd>Token은 모델이 텍스트를 처리할 때 나누는 단위이고, tokenizer는 텍스트를 그 단위로 나누는 도구입니다. 같은 문장도 tokenizer에 따라 token 수가 달라질 수 있습니다.</dd><dt><b>Temperature / max_tokens</b></dt><dd>각각 모델 생성의 무작위성을 조절하는 설정과 최대 출력 token 예산입니다. 같은 값을 사용해도 서버가 지원하고 적용하는 방식은 확인해야 합니다.</dd><dt><b>Revision</b></dt><dd>같은 모델 이름 안에서도 실제 평가한 가중치나 구현 버전을 구분하는 값입니다.</dd><dt><b>양자화</b></dt><dd>모델을 실행할 때 수치 표현 정밀도를 줄이는 방식입니다. 같은 모델 이름이라도 설정이 다르면 결과가 달라질 수 있어 기록합니다.</dd><dt><b>Fingerprint / hash</b></dt><dd>내용이나 설정을 해시 함수로 계산한 식별값입니다. 조건 변경을 찾는 데 사용하며 점수 자체가 아닙니다.</dd><dt><b>Backpressure</b></dt><dd>받는 쪽이 준비되지 않아 보내는 쪽의 전송을 멈추게 하는 흐름 제어입니다.</dd><dt><b>Formal / PPA / CDC·RDC</b></dt><dd>각각 형식 검증, 전력·성능·면적, 클록·리셋 도메인 간 신호 처리 검증을 뜻합니다. 현재 기능 점수에 포함되지 않습니다.</dd><dt><b>%p</b></dt><dd>백분율끼리 뺀 차이입니다. 80%와 60%의 차이는 20%p이며 60%를 기준으로 한 상대 증가율과 구분합니다.</dd></dl>

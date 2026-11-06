@@ -17,7 +17,10 @@
 - 기본 suite는 `benchmarks/core/suite.json`이다. 생성 2과제(`saturating_add`, `priority_encoder`), 수정 2과제(`counter`, `fifo`), 작은 다중 파일 수정 2과제(`stream_pipeline`, `round_robin`)가 있다.
 - `benchmarks/cvdp_adapted`에는 공개 CVDP LFSR 예제 1과제를 native Icarus checker로 변형한 suite가 있다. 공식 CVDP evaluator 점수와 동일하지 않다.
 - HWE는 공식 `final_report.json`의 결과 가져오기를 지원한다. 공식 evaluator와 Ibex 이미지 실행은 구현 검증 범위에 포함되지 않는다.
-- 현재는 작은 고정 폭 RTL의 순차 실행 벤치마크이다. UVM, CDC/RDC, 전체 parameter 조합, formal, 합성/PPA, 상용 EDA signoff를 검증했다고 간주하지 않는다.
+- Native 채점은 작은 고정 폭 RTL의 순차 평가이다. `task_plan`으로 계획 분모를 보존하며 난이도·반복·실패 단계와 관측 시간·usage를 집계한다.
+- CVDP no-commercial 469개는 pinned 카탈로그 검증 범위이다. Heavy는 sanitized Git bundle의 context commit 준비·작업공간 export·제출·외부 evaluator 반입을 지원한다. 실제 RVX 준비를 검증했으며 전체 75개 실행을 주장하지 않는다. 해결되지 않은 submodule은 명시적으로 거부한다.
+- EDA는 native 기능 PASS 사본의 별도 큐·캐시·반입·비교를 지원한다. `mock`과 `measured`, `synthesis`와 `rtl_estimate`, lint/Xprop 품질 상태를 구분한다. 실제 RTLA/PowerPro 명령·parser·실측 PPA는 사내 wrapper 연결 검증이 필요하다.
+- `offline-pack/verify`는 반입 자원 목록·내용·권한을 검사한다. 파일 확인은 도구 설치·이미지 load·라이선스 확인이 아니다. UVM, CDC/RDC, 전체 parameter 조합, formal, 상용 EDA signoff를 검증했다고 간주하지 않는다.
 
 ## 코드 위치와 실행 흐름
 
@@ -29,6 +32,9 @@
 | `hwbench/http_worker.py` | HTTP 호출을 별도 프로세스로 실행하여 전체 제한시간 적용 |
 | `hwbench/grader.py` | 제출 RTL 검사·사본 보존, 독립 compile/simulation, check·seed 판정 |
 | `hwbench/reporting.py` | 결과 증거 검증, 집계, HTML/Markdown/JSON/CSV, 비교 그룹 |
+| `hwbench/repository.py` | Heavy 준비·allowlist 제출·agent 기록·외부 판정과 전체 증거 반입 |
+| `hwbench/eda.py`, `hwbench/eda_supervisor.py` | native PASS 기반 EDA 큐·예산·캐시·비교·중단 정리 |
+| `hwbench/offline.py`, `scripts/offline_controls.py` | 자원 목록·해시·권한 검사와 원본 checkout 없는 이식 검증 |
 | `hwbench/upstream.py` | HWE 결과 가져오기와 task ID 검증 |
 | `benchmarks/*/suite.json` | 과제 목록, 허용 RTL 파일, checker, 오류 구현의 예상 실패 |
 | `benchmarks/*/tasks/` | `prompt.md`, `starter/`, `reference/`, `checks/`, `mutants/` |
@@ -49,7 +55,7 @@
 4. **실행 protocol을 구분한다.** `type: openai`는 Chat Completions 단발 응답이며 도구 호출 agent가 아니다. `type: command`는 외부 headless agent wrapper 실행이다. 다른 protocol을 하나의 순위로 합치지 않는다.
 5. **설정과 증거를 보존한다.** 지원 필드인 `model`, `model_revision`, `quantization`, `harness`, `harness_version`, `temperature`, `max_tokens`, `seed`, `notes`에 실제 값을 기록한다. 추가 도구 권한·context/token 예산·재시도 정책 등은 `notes`나 별도 실험 기록으로 남긴다. 미지원 항목이 자동 수집된다고 가정하지 않는다.
 6. **자동 그룹화의 범위를 안다.** 현재 `compare`는 동일 `protocol_fingerprint`와 `kind`끼리 묶는다. Wrapper 내부의 도구·재시도·예산 정책까지 검사하지 않으므로 같은 그룹이라는 사실만으로 모든 조건이 같다고 판단하지 않는다.
-7. **모든 계획 실행을 집계한다.** 실패를 제거하거나 성공한 반복만 선택하지 않는다. 현재 성공률은 PASS 실행 수 / 계획 과제 실행 수이며, seed별 check를 독립 과제로 세지 않는다. `--repeats`는 생성 반복, `--seeds`는 RTL 검증 입력 seed이며 모델 생성 `seed`와 다르다. 반복 성공률을 자동으로 pass@k라고 부르지 않는다.
+7. **모든 계획 실행을 집계한다.** 실패를 제거하거나 성공한 반복만 선택하지 않는다. 성공률은 PASS 실행 수 / 계획 과제 실행 수이며, task_plan이 있으면 category/difficulty/backend별 분모에도 미기록을 유지한다. 예전 결과에 계획 목록이 없으면 분류별 계획 수를 추정하지 않고 null로 남긴다. 난이도 미선언은 unknown이다. 또한 seed별 check를 독립 과제로 세지 않는다. `--repeats`는 생성 반복, `--seeds`는 RTL 검증 입력 seed이며 모델 생성 `seed`와 다르다. 반복 성공률을 자동으로 pass@k라고 부르지 않는다.
 8. **실패와 미측정을 구분한다.** 잘못된 RTL·빈 제출·제한시간 초과는 성공이 아니다. 도구 누락·통신 장애는 인프라 오류로 별도 기록하고 분모를 유지한다. Command adapter의 token/API 비용, 사내 GPU 비용 등 미측정 값은 0으로 만들거나 추정하지 않는다.
 9. **주장을 증거 수준에 맞춘다.** 정답·오류 fixture 결과는 채점기 검증이며 model 성능이 아니다. 소수 과제의 결과를 전체 SoC IP 설계 능력으로 일반화하지 않는다. 속도·usage는 기능 성공률과 함께 해석하고, 반복 수와 평가 범위를 명시한다.
 
@@ -57,7 +63,7 @@
 
 - 명세에는 포트와 폭, signedness, clock/reset 극성·동기 여부·우선순위, latency/throughput, handshake, stall/hold, overflow, 경계·동시 동작, 정의되지 않은 값과 지원 parameter 범위를 명시한다. 해당하지 않는 항목은 억지로 추가하지 않는다.
 - Checker는 공개 명세로부터 기대 동작을 도출해야 한다. 기준 RTL의 내부 구현이나 명세에 없는 동작을 정답 조건으로 강요하지 않는다. 명세가 모호하면 평가 전에 명확히 하고 변경된 조건으로 다시 실행한다.
-- 제출물은 허용된 `.v`/`.sv` 파일만 사용하고 포트 계약을 유지한다. 테스트벤치 제어, 완료 표식 위조, 파일 접근 등으로 판정을 우회하지 않는다.
+- Native 제출물은 허용된 `.v`/`.sv` 파일만 사용하고 포트 계약을 유지한다. Heavy 저장소 제출은 dataset patch key의 allowlist를 따르며 `.md` 등도 포함될 수 있다. 테스트벤치 제어, 완료 표식 위조, 파일 접근 등으로 판정을 우회하지 않는다.
 - 과제에는 `prompt.md`, 허용 파일에 대응하는 `starter/`와 `reference/`, 독립 `checks/`, 의도적인 오류 `mutants/` 및 suite 항목을 갖춘다. 현재 `demo`는 과제마다 최소 2개 mutant와 기능적으로 실패하는 starter를 요구한다.
 - 정답 구현은 모든 필수 check × seed를 통과해야 한다. Mutant는 정상 컴파일된 뒤 선언한 `expected_fail_checks`에서 기능 오류로 검출되어야 한다. 컴파일 오류나 인프라 장애만으로 검출 성공이라 하지 않는다.
 - 각 checker 소스에는 `HWBENCH_PASS` 완료 표식이 정확히 한 번 있어야 한다. 채점기는 이를 실행별 표식으로 치환한다. PASS에는 정상 compile/simulation 종료와 정확히 한 번의 완료 표식이 필요하다.
@@ -73,7 +79,17 @@
 - Command adapter는 host 프로세스이다. Workspace 변경만으로 agent가 격리되지 않는다. Bubblewrap은 생성된 RTL의 compile/simulation 격리이며 agent 격리를 대체하지 않는다. HDL 필터 역시 적대적 제출물에 대한 완전한 보안 보장이 아니다.
 - 격리가 필수인 채점에는 `--sandbox required`를 사용한다. 사용할 수 없으면 원인을 기록하고 필수 조건을 조용히 `off`로 낮추지 않는다.
 - `third_party/` 원본, 출처·revision·SHA256, 라이선스와 NOTICE를 보존한다. 변형 결과는 공식 upstream 점수와 구분한다.
-- Bundle에는 runtime/EDA 바이너리와 `artifacts/` 결과가 포함되지 않는다. `configs/`는 포함되므로 내부 설정의 포함 여부를 확인한다. 현재 `hwbench/cli.py`의 bundle 목록에는 루트 `AGENTS.md`가 없으므로 이 지침이 필요한 반입에서는 별도로 함께 전달한다.
+- Bundle에는 runtime/EDA 바이너리와 `artifacts/` 결과가 포함되지 않는다. `configs/`는 포함되므로 내부 설정의 포함 여부를 확인한다. 루트 `AGENTS.md`도 source bundle에 포함된다. 외부 자원은 별도 kit로 반입한다. `resources_verified`를 설치 완료로 표현하지 않는다.
+
+## Heavy·EDA 확장 유지보수 규칙
+
+- Heavy는 `origin.commit` 대신 sanitized `context.commit`을 쓴다. 원본 bundle의 이력·remote·hidden harness·golden 자료를 agent export에 노출하지 않는다. 빈 patch 값은 정답이 아니다.
+- Repository agent 정상 종료는 기능 미판정인 `unresolved`다. 실패와 timeout을 포함한 모든 계획 실행을 보고한다. 외부 normalized 결과는 `externally_reported`이며 공식 raw report의 집계 비율로 개별 PASS를 만들지 않는다.
+- Frozen source는 내용과 권한을 검증한다. 결과 재현 반입에는 prepared baseline/harness, frozen submission, response/raw reports, wrapper 실행 기록을 모두 포함한다. 이 묶음은 채점 운영자용이다.
+- EDA 입력은 현재 native PASS 사본으로 제한한다. 기능 checks에 PPA를 섞지 않는다. 계획·요청·eligible·attempted·유효 측정·목표 만족 분모를 보존하고 조건이 일치하는 task/repeat 쌍만 비교한다.
+- EDA 조건에는 도구별 버전, library/PVT, top/parameters, constraint/workload/window, wrapper/argv/assets를 고정한다. 후보별 activity를 생성하고 기준 SAIF를 재사용하지 않는다. 미측정·license 대기는 null로 남긴다.
+- 큐는 단일 호스트 직렬 실행이다. 타임아웃·worker 종료 때 자식 프로세스를 정리하고, 중단 예약 예산과 과거 증거를 유지한다. 다중 결과 반입은 전체 사전 검사와 재시도 가능한 증거 설치를 유지한다. 원본/대상의 포함 관계를 거부한다.
+- 실제 Heavy·실측 EDA wrapper는 필요한 kit profile을 확인한 뒤 실행한다. 이 확인은 임의 wrapper의 네트워크 격리를 대신하지 않는다. 외부 접속을 금지하고 명시된 사내 endpoint·라이선스만 사용한다.
 
 ## 작업과 검증
 
@@ -105,4 +121,4 @@ python3 scripts/validate.py
 
 ## 확장 방향
 
-추가 개발은 실제 SoC IP 명세를 반영한 과제 확대, 사내 agent/model 연결, 반복 실험과 비교 근거 개선을 중심으로 진행한다. Lint·합성·PPA·formal·상용 EDA를 도입할 때는 기능 점수와 별도 지표로 정의하고, 동일한 tool/version/constraint/library 조건 및 미실행 상태를 기록한다. 기능적 정확성이 확인된 RTL을 대상으로 PPA를 비교한다. 이 항목들은 향후 방향이며 현재 구현된 기능 목록이 아니다.
+추가 개발은 실제 SoC IP 명세를 반영한 과제 확대, 사내 agent/model 연결, 반복 실험과 비교 근거 개선을 중심으로 진행한다. Lint·합성·PPA·formal·상용 EDA를 도입할 때는 기능 점수와 별도 지표로 정의하고, 동일한 tool/version/constraint/library 조건 및 미실행 상태를 기록한다. 기능적 정확성이 확인된 RTL을 대상으로 PPA를 비교한다. 현재 구현한 연결·실행 관리와 실제 vendor 도구 검증을 구분한다. 새로운 과제나 도구 flow는 기준·오류 구현과 원본 보고서 대조 증거를 추가한 뒤 평가에 사용한다.

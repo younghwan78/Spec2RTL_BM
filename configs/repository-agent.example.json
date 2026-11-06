@@ -1,0 +1,7 @@
+{
+  "model": "internal-model-revision",
+  "harness": "internal-agent",
+  "harness_version": "replace-with-version",
+  "argv": ["/opt/company/bin/agent-wrapper", "--workspace", "{workspace}", "--prompt", "{prompt}"],
+  "notes": "Operator must isolate the agent from trusted harnesses, benchmark checkout and external networks. No automatic fallback endpoint."
+}

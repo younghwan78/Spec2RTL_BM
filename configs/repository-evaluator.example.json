@@ -1,0 +1,6 @@
+{
+  "isolation": "operator_managed_container",
+  "offline": true,
+  "argv": ["/opt/company/bin/cvdp-offline-wrapper", "--request", "{request}", "--response", "{response}"],
+  "notes": "Operator-owned wrapper contract, not a shipped CVDP runner. Preload images and evaluator; prohibit pull/build downloads and network. Wrapper maps explicit per-task verdicts, never aggregate percentages. Runtime does not verify the isolation declaration."
+}

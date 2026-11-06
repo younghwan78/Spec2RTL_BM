@@ -1,0 +1,1 @@
+MOCK library identity only. No cell library, technology or PPA model.

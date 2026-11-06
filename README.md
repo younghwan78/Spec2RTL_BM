@@ -2,7 +2,9 @@
 
 Python 표준 라이브러리와 Icarus Verilog로 실행하는 작은 HW 설계 평가기입니다. 설치형 Python 패키지 의존성이 없으며 **이 저장소 루트에서 명령을 실행**하면 됩니다. 모델/harness는 연결 설정으로 교체하고, 최종 RTL은 별도 작업 공간에서 공통 채점합니다.
 
-**현재 범위:** 자체 RTL 6과제 + NVIDIA CVDP 공개 LFSR 예제의 native 변형 1과제, 정답·오류 기준 검증, command/OpenAI-compatible 연결, HWE 공식 결과 가져오기, HTML/Markdown/JSON/CSV 보고서. 앞서 제안한 공개 24과제 전체와 상용 EDA 연결을 완료한 패키지는 아닙니다. 작은 규모에서 실행과 판정의 신뢰성을 먼저 검증하도록 구성했습니다.
+**현재 범위:** 자체 RTL 6과제와 CVDP LFSR 변형 1과제의 native 채점, 계획 분모·난이도·반복·실패 단계 집계, command/HTTP 연결, HWE 결과 반입을 지원합니다. CVDP no-commercial 469개 카탈로그 검사와 Heavy 저장소 준비·외부 evaluator 연결, 기능 PASS 후 별도 EDA 큐·캐시·결과 반입, 폐쇄망 자원 목록 검증도 제공합니다. 실제 상용 EDA·공식 CVDP 전체 평가·실제 모델 성능은 아직 검증하지 않았습니다.
+
+처음 읽는 분은 [평가 목적·지표·비교·운영 가이드](docs/guide/index.html)를 여십시오. 외부 자원 없이 열리는 단일 HTML이며 계산 예시, Heavy/PPA 해석과 반입 절차를 설명합니다.
 
 ## 1. 가장 빠른 실행
 
@@ -13,7 +15,7 @@ python3 -m hwbench doctor
 python3 scripts/validate.py
 ```
 
-마지막에 출력되는 `artifacts/validation-<UTC시간>/index.html`을 브라우저로 여십시오. 네트워크 없이 열립니다. 자동 테스트, 정답/오류 RTL 실제 시뮬레이션, CVDP 변형 예제, 가능한 환경에서는 전체 프로세스의 인터넷 차단 검증까지 실행합니다. 최초 실행에도 패키지 다운로드가 필요 없습니다.
+마지막에 출력되는 `artifacts/validation-<UTC시간>/index.html`을 브라우저로 여십시오. 네트워크 없이 열립니다. 자동 테스트, 정답/오류 RTL 실제 시뮬레이션, CVDP 변형 예제, 가능한 환경에서는 전체 프로세스의 인터넷 차단 검증까지 실행합니다. 필수 런타임을 사전에 설치했다면 최초 실행에도 패키지 다운로드가 필요 없습니다. Git과 bubblewrap이 있는 환경에서는 원래 checkout을 마운트하지 않은 새 경로에서 native·저장소·EDA mock·반입을 검증합니다.
 
 정답 100%와 오류 구현 0%는 **채점기 검증**입니다. 모델 성능 점수가 아닙니다. 모든 결과의 종류를 보고서에 표시합니다.
 
@@ -111,7 +113,7 @@ python3 -m hwbench report artifacts/my-model-r1
 python3 -m hwbench list
 ```
 
-새 모델/harness 비교에서는 같은 suite·체커 hash, seed, 제한시간, simulator, 실행 모드를 유지하십시오. 현재 순차 실행이며 GPU/EDA 병렬 queue의 영향은 측정하지 않습니다. API usage는 서비스 반환값이고 실행 시간은 측정된 경과 시간입니다. tokenizer 간 직접 비용 등가나 사내 GPU 비용을 임의 계산하지 않습니다.
+새 모델/harness 비교에서는 같은 suite·체커 hash, seed, 제한시간, simulator, 실행 모드를 유지하십시오. 생성 평가는 순차 실행이며 GPU 병렬 부하의 영향은 자동 측정하지 않습니다. EDA는 별도 직렬 큐에서 관리합니다. API usage는 서비스 반환값이고 실행 시간은 측정된 경과 시간입니다. tokenizer 간 직접 비용 등가나 사내 GPU 비용을 임의 계산하지 않습니다.
 
 ## 7. CVDP·HWE 연결 범위
 
@@ -142,4 +144,59 @@ python3 -m hwbench verify-bundle artifacts/hwbench-offline.tar.gz
 
 소스, 과제, 테스트, 문서, 예제 설정과 파일별 해시를 묶습니다. 바이너리·Python runtime·상용 EDA·실제 실행 결과/모델 키는 포함하지 않습니다. 사내 OS에 맞는 Python/Icarus/bubblewrap 패키지는 별도 준비합니다. 기존 결과를 전달할 때는 해당 실행 디렉터리 전체를 복사하십시오. `configs/`에 사내 설정을 추가한 뒤 bundle하면 그 설정도 포함되므로 반입 전에 내용을 확인하십시오.
 
-사내에서는 먼저 `doctor`, `scripts/validate.py`로 동일 기준 판정을 확인한 뒤 모델을 연결합니다. lint/RTLA/PowerPro는 다음 단계의 별도 평가 항목이며 현재 기능 점수에서 실행했다고 간주하지 않습니다.
+사내에서는 먼저 `doctor`, `scripts/validate.py`로 동일 기준 판정을 확인한 뒤 모델을 연결합니다. `bundle`에는 루트 AGENTS.md도 포함되지만 바이너리와 외부 데이터셋은 포함되지 않습니다.
+
+## 9. 보강한 지표
+
+`run`과 `grade`는 첫 실행 전에 `task_plan`을 저장합니다. 전체 성공률뿐 아니라 category/difficulty/backend별 성공률도 계획 실행 수를 분모로 사용합니다. 예전 결과에 계획 목록이 없으면 분류별 계획 수·비율은 `null`이며, 기록된 결과의 비율은 `recorded_pass_rate`로 구분합니다. 난이도가 선언되지 않은 과제는 `unknown`입니다.
+
+`summary.json`에는 과제별 반복 일관성, 실패 단계, 생성·채점 시간의 관측 수/합계/평균, token 관측량도 있습니다. Compile 시간은 task/repeat/check마다 한 번만 셉니다. 반복 일관성은 pass@k가 아니며 미측정 usage·비용을 0으로 만들지 않습니다. 비교 결과는 `comparison.html`과 `comparison.json`에 남습니다.
+
+## 10. CVDP Heavy 저장소 연결
+
+고정 공개 revision의 no-commercial 카탈로그는 nonagentic 302개, agentic 92개, Heavy 75개입니다. 앞의 두 트랙은 카탈로그 검증 범위이고 Heavy는 로컬 sanitized bundle을 통한 준비·제출·외부 evaluator 연결 범위입니다. 카탈로그 수를 평가 완료 수로 읽지 마십시오. 실제 RVX 한 과제의 준비/export와 로컬 Git/RTL control을 검증했습니다. 해결되지 않은 submodule이 있는 저장소는 준비를 거부합니다.
+
+```bash
+python3 scripts/repository_controls.py --out artifacts/repository-controls-r1
+python3 -m hwbench cvdp-catalog --datasets /data/cvdp --out artifacts/catalog-r1
+python3 -m hwbench cvdp-prepare \
+  --dataset /data/cvdp/cvdp_v1.1.0_agentic_heavy_code_generation_no_commercial.jsonl \
+  --bundles /data/cvdp/bundles --tasks cvdp_agentic_heavy_rvx_0004 \
+  --out artifacts/rvx-prepared-r1
+python3 -m hwbench repo-export --prepared artifacts/rvx-prepared-r1 --out artifacts/rvx-work-r1
+```
+
+Agent에게는 새 baseline 이력과 공개 prompt만 줍니다. Hidden harness는 채점 측에 보존합니다. `repo-run`은 agent 실패·timeout·기능 미판정도 표준 보고서에 남기며 정상 종료를 PASS로 만들지 않습니다. `repo-submit`, `repo-evaluate`, `cvdp-import`의 실행 계약과 완전한 결과 반입은 [Heavy 운영 계약](third_party/cvdp/OFFLINE_BRIDGE.md)에 설명했습니다. 외부 응답은 원본 보고서·제출 해시를 대조한 주장으로 표시하며 공식 raw report parser나 실행 인증 기능으로 간주하지 않습니다.
+
+## 11. 기능 검증 후 별도 PPA 평가
+
+PPA 입력은 native 기능 PASS의 채점 사본입니다. Repository/upstream PASS는 현재 EDA 입력으로 받지 않습니다. 예제는 **모의 값**을 생성하므로 상용 도구 없이 실행 관리 기능을 확인할 수 있습니다.
+
+```bash
+python3 scripts/eda_controls.py --out artifacts/eda-control-r1
+python3 -m hwbench eda-plan artifacts/native-result-r1 \
+  --config /data/company-eda.json --out artifacts/eda-queue-r1 --timeout 3600 --budget 14400
+python3 -m hwbench eda-run artifacts/eda-queue-r1 \
+  --kit /data/kit --profile eda --cache /data/eda-cache --max-jobs 1
+python3 -m hwbench eda-report artifacts/eda-queue-r1 --out artifacts/eda-report-r1
+```
+
+첫 명령만 독립 실행 예제입니다. 나머지 native 결과·회사 설정·kit는 사내에서 준비합니다. 실제 RTLA/PowerPro/lint/Xprop 명령과 원본 보고서 parser는 설치 버전에 맞는 wrapper가 필요합니다. [EDA 계약](scripts/EDA_CONTRACT.md)에 필수 도구별 버전, library/PVT, constraints, activity, 단위, 입력·응답 JSON과 큐 복구 절차를 적었습니다.
+
+기본 동시 실행 수는 1입니다. 최종 제출물만 실행하고 timeout·총예산·잠금·중단 후 정리·캐시를 적용합니다. `eda-compare`는 같은 kind/protocol과 PPA 조건의 task/repeat 쌍만 비교하며 누락 수를 공개합니다. 기능 계획·EDA 요청·기능 통과·실행 시도·유효 측정을 구분하고 lint/Xprop은 별도 품질 결과로 남깁니다.
+
+## 12. 완전한 폐쇄망 반입
+
+[반입 계약](scripts/OFFLINE_CONTRACT.md)과 `configs/offline-resources.example.json`을 참고해 외부 준비와 사내 실행을 분리합니다. 데이터셋, Git bundle, evaluator, 의존성을 설치한 이미지 archive, OS/Python 런타임과 NOTICE를 미리 확보합니다. 회사 EDA 설치·설정은 승인된 사내 경로에서 준비합니다. 실행 중 fetch/pull/install 또는 외부 API fallback은 하지 않습니다.
+
+```bash
+python3 -m hwbench offline-pack --spec /transfer/offline-resources.json --out /transfer/kit
+python3 -m hwbench offline-verify /data/kit --profile heavy
+python3 scripts/offline_controls.py --out artifacts/offline-check-r1
+# 실제 공개 JSONL 및 RVX bundle이 준비된 경우
+python3 scripts/validate.py --cvdp-dir /data/cvdp
+```
+
+`offline-verify`의 `resources_verified`는 파일 집합·해시·권한을 확인했다는 뜻입니다. 런타임 설치·이미지 load·라이선스 동작은 `not_checked`로 남으므로 사내에서 별도 확인합니다. Wrapper의 `offline` 선언은 네트워크 격리 자체가 아닙니다. 외부 접속을 막고 지정된 내부 모델 endpoint와 라이선스 서버만 허용하는 운영 정책이 필요합니다.
+
+저장소 증거는 `repo-transfer`/`repo-verify-transfer`, EDA 큐는 `eda-export`/`eda-verify-transfer`/`eda-import`로 전달합니다. 출력 디렉터리는 원본과 분리하고 새 경로를 사용합니다. [최신 검증 기록](docs/VALIDATION.md)에 실제로 확인한 범위와 미실행 항목을 구분했습니다.

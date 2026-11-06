@@ -1,0 +1,24 @@
+{
+  "revision": "5b807d945f6a99aa645f7e43a64a2115e281b4bf",
+  "source": "https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset",
+  "files": [
+    {
+      "file": "cvdp_v1.1.0_nonagentic_code_generation_no_commercial.jsonl",
+      "track": "nonagentic",
+      "count": 302,
+      "sha256": "cbcd81295561ebb16e4d857e096f4d9908d042c33aff3b58abf236e868411857"
+    },
+    {
+      "file": "cvdp_v1.1.0_agentic_code_generation_no_commercial.jsonl",
+      "track": "agentic",
+      "count": 92,
+      "sha256": "2007f4311ed731a985a4ed9187479ad2cfc2462bc4013eba0d72a9f35642fdcf"
+    },
+    {
+      "file": "cvdp_v1.1.0_agentic_heavy_code_generation_no_commercial.jsonl",
+      "track": "heavy",
+      "count": 75,
+      "sha256": "809916fa3248a4b2597b2a2ac364d3450d24936cad0e25bbe1bf0f1243ad1ea7"
+    }
+  ]
+}

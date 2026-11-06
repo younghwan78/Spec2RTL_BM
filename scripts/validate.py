@@ -15,7 +15,7 @@ from hwbench.common import digest, execute, sandbox_available, write_json
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--out');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--out');p.add_argument('--cvdp-dir', help='Optional pre-staged CVDP directory for relocated official-data preparation');args=p.parse_args()
     stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     out=Path(args.out or ROOT/'artifacts'/('validation-'+stamp)).resolve()
     if out.exists() and any(out.iterdir()):p.error('Output must be empty')
@@ -38,6 +38,13 @@ def main():
         print(result['name'],'PASS' if result['returncode']==0 else 'FAIL',flush=True)
     else:
         steps.append({'name':'network-denied-smoke','returncode':None,'skipped':True,'reason':'bubblewrap unavailable'})
+    if sandbox_available():
+        command=[sys.executable,'scripts/offline_controls.py','--out',str(out/'relocated')]
+        if args.cvdp_dir: command += ['--cvdp-dir', str(Path(args.cvdp_dir).resolve())]
+        result=execute(command,ROOT,out/'relocated.log',240);result['name']='relocated-offline-controls';steps.append(result)
+        print(result['name'],'PASS' if result['returncode']==0 and not result['timeout'] else 'FAIL',flush=True)
+    else:
+        steps.append({'name':'relocated-offline-controls','returncode':None,'skipped':True,'reason':'bubblewrap unavailable'})
     status=all(s.get('returncode')==0 and not s.get('timeout') and not s.get('output_limit') for s in steps if not s.get('skipped'))
     tests_log=(out/'unit-tests.log').read_text(errors='replace')
     m=re.search(r'Ran (\d+) tests',tests_log)
