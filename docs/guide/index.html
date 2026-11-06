@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HWBench의 평가 목적, 기능 성공률과 시간·usage의 의미, agent와 model을 공정하게 비교하는 방법을 설명하는 오프라인 가이드">
+<title>HWBench 이해와 평가 가이드</title>
+<style>
+:root{--ink:#172c3d;--muted:#526577;--paper:#fff;--bg:#f4f6f8;--line:#dbe3e9;--blue:#164fb0;--teal:#08766c;--amber:#875100;--red:#a33139;--nav:260px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.85 system-ui,-apple-system,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;word-break:keep-all;overflow-wrap:anywhere}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button,input{font:inherit}button{cursor:pointer;border:1px solid #c5d0dc;background:#fff;color:var(--ink);border-radius:8px;padding:8px 14px}button:hover{background:#eaf1fa}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #d27b00;outline-offset:4px}.skip{position:absolute;left:10px;top:-90px;background:white;padding:12px;z-index:20}.skip:focus{top:10px}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--nav);background:#102b40;color:#ecf4fa;padding:30px 24px;overflow:auto}.brand{font-weight:800;font-size:23px;letter-spacing:-.6px}.sidebar small{color:#adc1d1;display:block}.sidebar nav{margin-top:28px}.sidebar a{display:block;color:#d4e2ed;text-decoration:none;padding:6px 0;font-size:14px}.sidebar a:hover{color:white;text-decoration:underline}.sidebar .aside-note{border-top:1px solid #3a5162;padding-top:18px;margin-top:22px;font-size:12px;color:#b9cbd8}.page{margin-left:var(--nav);max-width:1370px;padding:48px 64px 90px}.hero{padding:8px 0 35px;border-bottom:2px solid var(--ink)}.eyebrow{color:var(--teal);font-size:13px;font-weight:750;letter-spacing:1.5px}.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.3;letter-spacing:-1.7px;margin:16px 0 20px}.lead{font-size:20px;max-width:850px;line-height:1.8}.meta{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.tag{font-size:12px;border:1px solid #c8d4de;padding:2px 9px;border-radius:20px;background:#fff}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.toolbar span{font-size:13px;color:var(--muted)}
+section{padding:40px 0 18px;border-bottom:1px solid var(--line)}h2{font-size:27px;line-height:1.45;letter-spacing:-.8px;margin:0 0 20px}h2 .num{color:var(--teal);font:600 15px/1 monospace;display:block;letter-spacing:1px;margin-bottom:10px}h3{font-size:20px;line-height:1.5;margin:28px 0 12px}p{margin:12px 0}strong{font-weight:750}.note,.warning,.example{border-left:4px solid var(--teal);background:#eaf5f3;padding:17px 22px;margin:22px 0}.warning{border-color:#b47712;background:#fff4df}.example{border-color:var(--blue);background:#edf3fc}.note p:first-child,.warning p:first-child,.example p:first-child{margin-top:0}.note p:last-child,.warning p:last-child,.example p:last-child{margin-bottom:0}.caption,.muted{color:var(--muted);font-size:14px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:22px 0}.card{background:white;border:1px solid var(--line);padding:20px;border-radius:10px}.card h3{margin:0 0 10px;font-size:18px}.card p{margin:0;font-size:15px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.table-wrap{overflow:auto;margin:18px 0;border:1px solid var(--line);border-radius:8px}table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}caption{text-align:left;padding:12px 16px;font-weight:700;background:#eaf0f5}th,td{text-align:left;vertical-align:top;padding:13px 15px;border-bottom:1px solid var(--line)}th{background:#edf2f7;font-weight:750}tr:last-child td{border-bottom:0}td:first-child{min-width:110px}code{font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;background:#e8eef4;padding:2px 5px;border-radius:4px;word-break:break-word}pre{background:#142c40;color:#edf5fb;padding:20px 24px;overflow:auto;border-radius:8px;font:13px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;word-break:normal;white-space:pre-wrap}pre code{color:inherit;background:none;padding:0;font:inherit}ul,ol{padding-left:24px}li{margin:8px 0}li::marker{color:var(--teal);font-weight:700}.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0;padding:0;list-style:none}.flow li{border-top:4px solid var(--teal);background:white;padding:16px;border-radius:4px}.flow b{display:block;font-size:16px}.flow span{font-size:14px;color:var(--muted)}.formula{background:#102b40;color:#fff;padding:20px 24px;margin:18px 0;font-size:19px;border-radius:8px;line-height:1.8}.formula small{display:block;font-size:14px;color:#c0d5e5}.good{color:var(--teal);font-weight:750}.bad{color:var(--red);font-weight:750}.metric-type{font-size:12px;color:#38566d;display:block;margin-bottom:4px}.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:520px}.check-grid span{text-align:center;font-size:14px;background:#dff0e9;padding:7px}.check-grid .failed{background:#f9e2e3;color:var(--red)}details{padding:14px 18px;background:white;border:1px solid var(--line);border-radius:8px;margin:12px 0}summary{font-weight:700;cursor:pointer}details p{font-size:15px}.calculator{border:1px solid #c8d8e7;background:white;border-radius:10px;padding:24px;margin:22px 0}.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:20px 0}.fields label{font-size:14px}.fields input{display:block;width:100%;padding:9px 12px;margin-top:5px;border:1px solid #aabfce;border-radius:5px;color:var(--ink);background:#fff}.calc-result{padding:16px 20px;background:#eef3f9;border-radius:8px}.calc-number{font-size:32px;font-weight:800;line-height:1.4}.bar{height:22px;display:flex;margin:15px 0;border-radius:4px;overflow:hidden;background:#eee}.bar span{height:100%;min-width:0}.bar .pass{background:#08766c}.bar .fail{background:#ae4650}.bar .infra{background:#b37a1d}.bar .missing{background:#8a9baa}.legend{font-size:13px;display:flex;gap:15px;flex-wrap:wrap}.legend i{display:inline-block;width:10px;height:10px;margin-right:5px}.print-only{display:none}footer{margin-top:36px;font-size:13px;color:var(--muted)}blockquote{margin:18px 0;padding:18px 24px;background:white;border-left:4px solid #6a859c}hr{border:0;border-top:1px solid var(--line);margin:25px 0}
+@media(min-width:1700px){.page{margin-right:auto;margin-left:calc(var(--nav) + (100vw - 1630px)/2)}}
+@media(max-width:1100px){:root{--nav:220px}.page{padding:34px 30px}.sidebar{padding:25px 18px}.cards,.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.sidebar{position:static;width:auto;padding:20px}.sidebar nav{display:flex;gap:5px 18px;flex-wrap:wrap;margin-top:15px}.sidebar a{font-size:13px}.sidebar .aside-note{display:none}.page{margin:0;padding:28px 20px 60px}.hero h1{letter-spacing:-1px}.lead{font-size:18px}.cards,.two{grid-template-columns:1fr}.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.flow{grid-template-columns:1fr 1fr}h2{font-size:24px}th,td{padding:10px}pre{padding:15px;font-size:12px}.calculator{padding:18px}.formula{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{background:white;font-size:10pt;line-height:1.6;color:#000}.sidebar,.toolbar,.skip,.no-print{display:none}.page{margin:0;max-width:none;padding:0}.hero{padding-top:0}h1{font-size:27pt!important}h2{font-size:18pt}h3{font-size:13pt}section{padding:20px 0 8px}h2,h3{break-after:avoid}.card,.note,.warning,.example,blockquote{break-inside:avoid}.table-wrap{overflow:visible}table{font-size:9pt}thead{display:table-header-group}tr{break-inside:avoid}pre{white-space:pre-wrap;color:#000;background:#f1f3f5;font-size:9pt}code{font-size:9pt}.formula{color:#000;background:#eee}.formula small{color:#333}.print-only{display:block}.calculator{break-inside:avoid}a{color:inherit;text-decoration:none}.tag{border-color:#aaa}details{break-inside:avoid}details>*{display:block!important}details::details-content{display:block!important;content-visibility:visible!important}footer{font-size:9pt}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 이동</a>
+<aside class="sidebar" aria-label="문서 탐색">
+<div class="brand">HWBench</div><small>평가를 이해하고 비교하는 방법</small>
+<nav aria-label="목차">
+<a href="#start">먼저 읽기</a><a href="#purpose">01 무엇을 평가하나요</a><a href="#scope">02 현재 평가 범위</a><a href="#units">03 실행 단위와 PASS</a><a href="#metrics">04 지표 읽는 법</a><a href="#calculator">05 성공률 계산 예시</a><a href="#comparison">06 지표를 함께 비교하기</a><a href="#fairness">07 공정한 실험 설계</a><a href="#reports">08 보고서와 원자료</a><a href="#run">09 첫 평가 실행</a><a href="#offline">10 폐쇄망 분리 운영</a><a href="#diagnosis">11 실패 원인 찾기</a><a href="#decision">12 결과 정리와 점검</a><a href="#faq">자주 묻는 질문</a><a href="#basis">구현 근거와 용어</a>
+</nav>
+<p class="aside-note">외부 글꼴·이미지·라이브러리 없이 열리는 단일 HTML입니다. 계산기 입력은 브라우저 안에서만 처리하며 저장하거나 전송하지 않습니다.</p>
+</aside>
+<main id="main" class="page">
+<header class="hero" id="start">
+<div class="eyebrow">SPEC → RTL · 평가 가이드</div>
+<h1>RTL을 얼마나 잘 만드는지,<br>어떤 조건에서 비교해야 하는지</h1>
+<p class="lead">HWBench는 하드웨어 명세를 받은 에이전트와 모델이 올바른 RTL을 얼마나 자주 완성하는지 평가합니다. 이 문서는 점수의 계산 방식부터 실패 원인, 실행 시간, 공정한 비교 방법까지 설명합니다.</p>
+<div class="meta"><span class="tag">처음 접하는 개발자·검증 담당자·평가 담당자</span><span class="tag">HWBench 0.1.0 구현 기준</span><span class="tag">폐쇄망에서 열람 가능</span></div>
+<div class="toolbar"><button type="button" id="print-button" hidden>인쇄 / PDF 저장</button><span>처음에는 01~06장, 직접 실행할 때는 07~12장을 읽으세요.</span></div>
+</header>
+<div class="cards">
+<article class="card"><h3>대표 지표는 기능 성공률</h3><p>계획한 과제 실행 중 모든 필수 검사를 통과한 비율입니다. 검사 몇 개를 통과했는지와 구분합니다.</p></article>
+<article class="card"><h3>점수에는 조건이 붙습니다</h3><p>같은 문제, 검사, 예산, 도구 조건에서 비교해야 모델이나 에이전트의 차이를 해석할 수 있습니다.</p></article>
+<article class="card"><h3>속도는 정답과 함께 봅니다</h3><p>빨리 끝났어도 RTL이 틀릴 수 있습니다. 기능 결과를 확인한 뒤 같은 과제의 시간과 사용량을 비교합니다.</p></article>
+</div>
+<p class="caption">이 문서의 A·B 구성과 계산 예시는 설명을 위해 만든 가상 수치입니다. 실제 모델 평가 결과가 아닙니다.</p>
+
+<section id="purpose">
+<h2><span class="num">01 / 목적</span>무엇을 평가하나요</h2>
+<p>SoC는 여러 하드웨어 기능을 하나의 칩에 담은 시스템입니다. 그 안의 FIFO, 카운터, 중재기 같은 설계 블록을 HW IP라고 부릅니다. RTL은 이런 블록이 입력을 받아 어떤 출력을 내고 클록마다 상태를 어떻게 바꿀지 기술한 코드입니다.</p>
+<p>사람이 IP를 설계할 때는 명세를 읽고 RTL을 작성한 뒤 검증합니다. 이 벤치마크는 그 과정의 일부를 에이전트에 맡깁니다. 평가자는 같은 명세와 시작 코드를 제공하고 에이전트가 제출한 RTL을 공통 채점기로 검사합니다.</p>
+<div class="example"><p><strong>FIFO를 예로 들어 보겠습니다.</strong> 명세에 “먼저 들어온 데이터를 먼저 내보내고, 가득 차면 입력을 받지 않으며, reset 때 저장 상태를 비운다”고 적혀 있습니다. 제출 RTL이 평소에는 잘 동작해도, 가득 찬 상태에서 데이터를 덮어쓴다면 이 과제는 실패입니다.</p></div>
+<div class="table-wrap"><table><caption>평가에서 자주 쓰는 말</caption><thead><tr><th scope="col">용어</th><th scope="col">뜻</th><th scope="col">이번 평가에서 확인할 것</th></tr></thead><tbody>
+<tr><td>명세 · spec</td><td>회로가 지켜야 할 동작과 인터페이스를 적은 문서</td><td>포트, reset, 우선순위, 경계 동작이 충분히 설명되어 있는가</td></tr>
+<tr><td>모델 · model</td><td>명세와 코드 문맥을 읽고 답을 생성하는 언어 모델</td><td>모델 이름, revision, 양자화, 생성 설정</td></tr>
+<tr><td>에이전트 · agent</td><td>모델을 사용해 파일을 읽고 코드를 고치거나 도구를 실행하는 프로그램</td><td>사용 모델, 허용 도구, 수정·재시도 방식, 시간 예산</td></tr>
+<tr><td>하네스 · harness</td><td>평가 대상을 실행하고 입력·출력을 연결하는 실행 체계</td><td>하네스·wrapper 버전과 실제 실행 설정</td></tr>
+<tr><td>검사기 · checker</td><td>제출 RTL에 입력을 주고 결과를 확인하는 테스트벤치</td><td>공개 명세와 일치하는가, 알려진 오류를 찾아내는가</td></tr>
+<tr><td>과제 묶음 · suite</td><td>과제 목록과 허용 파일, 검사 조건을 고정한 평가 단위</td><td>같은 suite와 같은 과제 부분집합으로 비교했는가</td></tr>
+</tbody></table></div>
+<h3>모델과 에이전트는 구분해서 평가합니다</h3>
+<p>같은 모델이라도 에이전트가 컴파일 오류를 읽고 수정할 수 있으면 결과가 달라질 수 있습니다. 반대로 같은 에이전트를 써도 모델을 바꾸면 명세 해석이나 코드 작성 결과가 달라질 수 있습니다. 그래서 평가 대상은 <strong>모델 + 에이전트·하네스 + 실행 설정의 조합</strong>으로 기록합니다.</p>
+<ol class="flow" aria-label="평가 흐름"><li><b>1. 문제 제공</b><span>명세, 시작 RTL, 허용 파일 목록</span></li><li><b>2. 생성·수정</b><span>정해진 도구와 예산으로 RTL 제출</span></li><li><b>3. 독립 채점</b><span>제출 사본을 별도 공간에서 검사</span></li><li><b>4. 증거 보존</b><span>판정, 시간, 로그, 설정, 해시</span></li></ol>
+<p>최종 RTL의 기능 결과를 평가하므로 내부 추론의 품질이나 사람이 절약한 설계 시간을 직접 측정하지는 않습니다. 실제 개발 생산성을 판단하려면 통합·리뷰·추가 검증에 든 시간도 따로 조사해야 합니다.</p>
+</section>
+
+<section id="scope">
+<h2><span class="num">02 / 범위</span>현재 어떤 문제를 풀게 하나요</h2>
+<p>기본 suite는 작은 RTL 6과제로 구성되어 있습니다. CVDP에서 가져와 변형한 LFSR 1과제는 별도 suite입니다. 기본 실행은 7과제 전체를 포함하지 않습니다.</p>
+<div class="table-wrap"><table><caption>기본 suite: rtl-core-v1</caption><thead><tr><th scope="col">과제</th><th scope="col">분류</th><th scope="col">주로 확인하는 동작</th></tr></thead><tbody>
+<tr><td><code>saturating_add</code></td><td>생성 · generation</td><td>8비트 덧셈, 최댓값 포화, overflow. 65,536개 입력 조합 검사 포함</td></tr>
+<tr><td><code>priority_encoder</code></td><td>생성 · generation</td><td>여러 요청 중 낮은 번호 우선 선택, 요청 없음 처리, 모든 요청 mask</td></tr>
+<tr><td><code>counter</code></td><td>수정 · repair</td><td>증가·유지, 최댓값 이후 wrap, reset 우선순위</td></tr>
+<tr><td><code>fifo</code></td><td>수정 · repair</td><td>데이터 순서, full/empty, 동시 입출력, 데이터가 있는 상태의 reset</td></tr>
+<tr><td><code>stream_pipeline</code></td><td>다중 파일 수정 · repository</td><td>받는 쪽이 멈췄을 때 데이터 유지, 전달·교체, reset</td></tr>
+<tr><td><code>round_robin</code></td><td>다중 파일 수정 · repository</td><td>요청 선택, 수락 시 우선순위 갱신, 공정한 순환 처리</td></tr>
+</tbody></table></div>
+<p><code>repository</code>는 현재 작은 다중 파일 과제를 뜻합니다. 대규모 사내 IP 저장소를 탐색하고 수정하는 능력을 대표하지 않습니다. 생성 과제에도 시작 파일이 주어지므로 완전한 백지 설계와 구분해서 읽어야 합니다.</p>
+<div class="cards two"><article class="card"><h3>현재 확인하는 것</h3><p>명세에 따른 기능, 경계 조건, 상태 변화, 제출 형식, 제한시간 내 완료 여부입니다. 일부 조합 회로는 모든 입력을 검사하고 순차 회로는 경계 입력과 seed를 사용한 시뮬레이션으로 검사합니다.</p></article><article class="card"><h3>별도 검증이 필요한 것</h3><p>합성 가능성의 엄밀한 확인, PPA, lint, formal, UVM, CDC/RDC, 모든 parameter 조합, 실리콘 signoff입니다. 코드·기능 coverage 수치도 현재 측정하지 않습니다.</p></article></div>
+<h3>정답 RTL로 먼저 채점기를 확인합니다</h3>
+<p><code>reference</code>는 알려진 정답 구현이고 <code>mutant</code>는 일부러 오류를 넣은 구현입니다. 정답이 통과하고 오류 구현이 의도한 검사에서 실패해야 채점기를 사용할 근거가 생깁니다. 오류 구현의 컴파일이 깨졌다는 이유만으로 기능 오류를 찾아냈다고 판단하지 않습니다.</p>
+<div class="warning"><p><strong>정답 구현 100%와 오류 구현 0%는 채점기 검증 결과입니다.</strong> 특정 모델이 100%를 달성했다는 뜻이 아닙니다. 보고서의 <code>kind</code>가 <code>fixture_</code>로 시작하는지 먼저 확인하세요.</p></div>
+<p>CVDP LFSR 변형 결과는 공식 CVDP 점수와 구분합니다. HWE는 외부 공식 보고서를 가져오는 기능만 제공하며 이 저장소에서 공식 evaluator를 실행하거나 원본 실행을 인증한 결과가 아닙니다.</p>
+</section>
+
+<section id="units">
+<h2><span class="num">03 / 판정</span>한 번의 성공은 무엇을 뜻하나요</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">단위</th><th scope="col">뜻</th><th scope="col">예시</th></tr></thead><tbody>
+<tr><td>과제 · task</td><td>명세와 제출 파일이 정해진 하나의 문제</td><td>FIFO 과제 1개</td></tr>
+<tr><td>반복 · repeat</td><td>같은 과제를 다시 생성·수정하는 실행</td><td>FIFO를 3번 풀면 제출 기회 3회</td></tr>
+<tr><td>검사 · check</td><td>특정 동작을 확인하는 테스트벤치</td><td>경계, reset, seed 입력 검사</td></tr>
+<tr><td>검증 seed</td><td>시뮬레이션의 입력 수열을 정하는 값</td><td><code>--seeds 1,7,42</code></td></tr>
+<tr><td>생성 seed</td><td>모델 API에 전달하는 생성 설정</td><td>HTTP config의 <code>seed</code>. 검증 seed와 별개</td></tr>
+</tbody></table></div>
+<div class="formula">6과제 × 3반복 = 계획한 과제 실행 18회<small>각 실행에 3개 check × 3개 검증 seed = 필수 검사 9개</small></div>
+<p>모든 제출이 채점까지 진행되면 총 162개의 check·seed 판정이 생깁니다. 하지만 문제 종류는 6개이고 성공률의 분모는 18회입니다. 162개의 독립 문제를 풀었다고 계산하면 안 됩니다. 컴파일 실패 때는 해당 seed 판정이 실패로 기록되고 시뮬레이션은 실행되지 않을 수 있습니다.</p>
+<h3>필수 검사 9개 중 8개가 통과해도 과제는 실패입니다</h3>
+<div class="check-grid" aria-label="9개 필수 검사 중 8개 PASS, 1개 FAIL인 예시"><span>경계 · seed 1 ✓</span><span>경계 · seed 7 ✓</span><span>경계 · seed 42 ✓</span><span>reset · seed 1 ✓</span><span>reset · seed 7 ✓</span><span>reset · seed 42 ✓</span><span>랜덤 · seed 1 ✓</span><span>랜덤 · seed 7 ✓</span><span class="failed">랜덤 · seed 42 ✕</span></div>
+<p>이 실행의 과제 상태는 <span class="bad">FAIL</span>입니다. 검사 통과 비율 8/9는 어떤 부분이 고장 났는지 살펴보는 보조 정보입니다. 기능 점수에 8/9점의 부분 점수를 주지는 않습니다.</p>
+<p>이 저장소가 직접 실행하는 채점(native 채점)의 PASS에는 모든 필수 검사의 컴파일 성공, 시뮬레이터 정상 종료, 시간·출력 제한 준수, 정확히 한 번의 신뢰된 완료 표식이 필요합니다. 단순히 로그에 PASS라는 문자열이 있거나 에이전트 프로세스가 정상 종료했다는 이유로 성공 처리하지 않습니다.</p>
+<div class="note"><p><code>agent.status = ok</code>는 제출 처리 또는 에이전트 실행이 끝났다는 상태입니다. RTL이 정답인지는 뒤이은 채점에서 결정합니다. <code>--repeats</code>는 생성 seed를 자동으로 바꾸지 않으며 같은 설정의 반복이 독립적인 생성 표본을 보장하지도 않습니다.</p></div>
+</section>
+
+<section id="metrics">
+<h2><span class="num">04 / 지표</span>각 숫자는 무엇을 의미하나요</h2>
+<p>지표를 읽을 때는 단위, 분모, 측정 범위를 함께 확인하세요. 아래에서 <b>기본 집계</b>는 보고서가 계산하는 값, <b>원자료</b>는 실행별 기록, <b>별도 분석</b>은 평가자가 계산 기준을 정해야 하는 값입니다.</p>
+<h3>성공률과 평가 완료 여부</h3>
+<div class="table-wrap"><table><caption>summary.json과 보고서의 대표 값</caption><thead><tr><th scope="col">지표 / 필드</th><th scope="col">계산과 의미</th><th scope="col">해석할 때 주의할 점</th></tr></thead><tbody>
+<tr><td><span class="metric-type">기본 집계</span>기능 성공률<br><code>pass_rate</code></td><td>PASS 실행 수 ÷ 계획 실행 수. JSON에는 0~1, 보고서에는 %로 표시</td><td>높을수록 이 평가 조건에서 성공한 비율이 높음. 전체 RTL 정확성을 증명하지 않음</td></tr>
+<tr><td><span class="metric-type">기본 집계</span>성공 수 / 계획 수<br><code>passed</code><br><code>planned_runs</code></td><td><code>run</code>은 과제 수 × 반복 수. <code>grade</code>는 과제 수, 반복 1회</td><td>같은 80%라도 4/5와 80/100은 관찰 범위가 다름. 비율만 보고하지 않음</td></tr>
+<tr><td><span class="metric-type">기본 집계</span>인프라 오류<br><code>infra_errors</code></td><td>과제 상태가 <code>infra_error</code>인 실행 수</td><td>도구·통신 등 실행 환경의 문제. 분모에 남고 평가 미완료로 표시</td></tr>
+<tr><td><span class="metric-type">기본 집계</span>미기록<br><code>missing_runs</code></td><td>계획 실행 수 − 기록된 과제 실행 수</td><td>중단 등으로 결과 행 자체가 없는 수. 제출 파일 누락과 다름</td></tr>
+<tr><td><span class="metric-type">기본 집계</span>업무별 성공률</td><td>해당 분류의 PASS 수 ÷ 해당 분류의 <strong>기록된 실행 수</strong></td><td>전체 성공률과 분모가 다름. 미기록의 분류를 알 수 없어 제외됨</td></tr>
+<tr><td><span class="metric-type">원자료</span>검사 수<br><code>checks</code><br><code>required_checks</code></td><td><code>tasks.csv</code>에서 checks는 기록된 검사 행 수, required_checks는 필요한 check × seed 수</td><td>checks는 통과 개수가 아님. 생성에 실패하면 0이어도 필수 검사 수는 남음</td></tr>
+</tbody></table></div>
+<p>업무별 비율을 단순 평균해서 전체 성공률을 만들지 마세요. 분류마다 과제 수가 다르면 가중치가 달라지고 미기록이 있으면 분모 기준까지 달라집니다. 전체 성공률은 항상 계획 실행 수에서 다시 계산합니다.</p>
+<h3>상태값은 실패 원인을 구분하는 단서입니다</h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">상태</th><th scope="col">일반적인 의미</th><th scope="col">다음 확인</th></tr></thead><tbody>
+<tr><td><code>pass</code></td><td>Native 채점에서 모든 필수 check·seed 통과. HWE는 원본 resolved_ids를 이 상태로 가져옴</td><td>실행 조건과 결과 종류</td></tr>
+<tr><td><code>fail</code></td><td>컴파일 오류, 기능 불일치, 시뮬레이션 시간 초과, 완료 표식 실패 등</td><td>check의 reason과 compile/simulation 로그</td></tr>
+<tr><td><code>invalid_submission</code></td><td>허용 파일 누락, 경로·RTL 정책 위반, 잘못된 모델 응답 형식 등</td><td>제출 파일 목록과 응답 JSON</td></tr>
+<tr><td><code>agent_error</code></td><td>Command wrapper 비정상 종료 또는 출력 제한 초과</td><td>agent 로그와 종료 코드</td></tr>
+<tr><td><code>timeout</code></td><td>에이전트 또는 HTTP 생성 단계의 제한시간 초과</td><td>생성 예산과 agent 로그</td></tr>
+<tr><td><code>infra_error</code></td><td>실행 도구 누락, 통신 장애, 실행 환경 문제 등</td><td>환경을 복구하고 새 실행으로 기록</td></tr>
+<tr><td><code>empty_patch</code></td><td>HWE에서 가져온 빈 수정 결과</td><td>원본 evaluator의 기록</td></tr>
+</tbody></table></div>
+<p class="caption">시뮬레이션 시간 초과는 보통 과제 <code>fail</code>과 원인 <code>simulation_timeout</code>으로 기록합니다. <code>timeout</code> 상태는 생성 단계의 시간 초과입니다. Native runner는 미기록을 <code>missing</code> 행으로 만들지 않고 계획 수와 결과 행 수의 차이로 계산합니다.</p>
+<p>한 과제에 기능 실패와 인프라 오류가 함께 있으면 최종 상태가 <code>infra_error</code>일 수 있습니다. 상태 한 칸만으로 모든 원인을 설명하려 하지 말고 세부 검사를 확인하세요.</p>
+<h3>생성 시간, 채점 시간, 회로의 지연은 다릅니다</h3>
+<div class="table-wrap"><table><caption>시간은 모두 단위를 확인하세요</caption><thead><tr><th scope="col">값</th><th scope="col">측정 범위</th><th scope="col">비교 방법</th></tr></thead><tbody>
+<tr><td><span class="metric-type">원자료 · 초</span><code>agent_seconds</code></td><td>에이전트 wrapper 또는 HTTP worker의 경과 시간. 서버 응답 대기와 프로세스 비용 포함</td><td>같은 과제·도구·서버 조건에서 비교. 순수 GPU 추론 시간이 아님</td></tr>
+<tr><td><span class="metric-type">원자료 · 초</span><code>tasks.csv.seconds</code></td><td>제출 검사, 사본 보존, 컴파일·시뮬레이션 등 채점 경과 시간. 생성 시간 제외</td><td>같은 checker·seed·도구 조건에서 비교. 회로의 clock latency가 아님</td></tr>
+<tr><td><span class="metric-type">원자료 · 초</span><code>compile_seconds</code><br><code>simulation_seconds</code></td><td>개별 컴파일 및 시뮬레이션 프로세스의 경과 시간</td><td>느린 단계 진단. compile 기록은 seed별 행에서 중복될 수 있음</td></tr>
+<tr><td><span class="metric-type">별도 실측</span>처음부터 끝까지 걸린 시간</td><td>준비·export·생성·채점·보고서 작성까지 포함한 전체 경과 시간</td><td>실행 시작·종료를 별도 측정. 위 필드의 합과 정확히 같지 않음</td></tr>
+</tbody></table></div>
+<div class="warning"><p><strong>컴파일 시간을 중복해서 더하지 마세요.</strong> Checker 하나는 한 번 컴파일한 뒤 여러 seed로 실행합니다. <code>checks.csv</code>에는 같은 컴파일 시간이 각 seed 행에 반복됩니다. 합산할 때는 <code>(task_id, repeat, check)</code>마다 한 번만 셉니다. 채점 <code>seconds</code>에 compile·simulation 시간을 다시 더하는 것도 중복입니다.</p></div>
+<p><code>--agent-timeout</code>은 과제 생성 1회에 적용합니다. <code>--check-timeout</code>은 개별 컴파일과 개별 seed 시뮬레이션에 각각 적용합니다. 예를 들어 check-timeout 10초를 지정해도 한 과제의 총 채점 시간에는 10초 제한이 적용되지 않습니다.</p>
+<h3>Token 사용량과 비용</h3>
+<p><code>usage</code>는 HTTP 서버가 돌려준 사용량을 그대로 저장한 값입니다. 서버가 제공하면 입력·출력 token 등을 확인할 수 있지만 필드와 계산 범위는 서비스마다 다를 수 있습니다. Command adapter는 이 값을 자동으로 수집하지 않습니다. 빈 <code>{}</code>는 미측정이며 0 token이나 무료라는 뜻이 아닙니다.</p>
+<p>Token 수가 적다는 이유만으로 더 저렴하다고 판단할 수는 없습니다. 모델마다 tokenizer가 다를 수 있고 사내 서버의 GPU·운영 비용도 별도입니다. 비용을 비교하려면 같은 비용 산정 범위를 정하고 실패한 실행의 비용까지 포함하세요.</p>
+<div class="note"><p><b>별도 분석:</b> 검사 통과율, 컴파일 성공률, 시간의 중앙값·상위 지연, 성공 1건당 비용, 신뢰구간, pass@k는 현재 기본 보고서가 자동 계산하지 않습니다. 필요하면 원자료로 계산하되 대상 실행, 분모, 미측정 처리 방법을 함께 적으세요.</p></div>
+</section>
+
+<section id="calculator">
+<h2><span class="num">05 / 계산 예시</span>같은 결과도 분모를 바꾸면 다르게 보입니다</h2>
+<p>6과제를 3회씩 실행한다고 가정해 보겠습니다. 18회 중 성공 12회, 기능 실패 3회, 인프라 오류 2회, 미기록 1회라면 대표 성공률은 <strong>12/18 = 66.7%</strong>입니다. 인프라 오류와 미기록이 있으므로 평가 미완료로 읽습니다.</p>
+<p>인프라 오류와 미기록을 빼면 12/15 = 80%가 되지만 이는 다른 분모로 계산한 값입니다. 이를 원래 성공률 대신 제시하면 실행 환경의 문제를 가리게 됩니다.</p>
+<div class="calculator">
+<h3 style="margin-top:0">성공률 계산기 <span class="tag">설명용 · 실제 결과 불러오기 아님</span></h3>
+<p class="caption">숫자를 바꾸면 계획 수와 결과 합계를 검사합니다. 합계가 맞지 않으면 점수를 계산하지 않습니다.</p>
+<div class="fields" id="calc-fields">
+<label>과제 수<input id="n-tasks" type="number" min="1" max="100000" step="1" value="6"></label>
+<label>반복 횟수<input id="n-repeats" type="number" min="1" max="100000" step="1" value="3"></label>
+<label>성공 실행 수<input id="n-pass" type="number" min="0" max="10000000000" step="1" value="12"></label>
+<label>인프라 외 실패 수<input id="n-fail" type="number" min="0" max="10000000000" step="1" value="3"></label>
+<label>인프라 오류 수<input id="n-infra" type="number" min="0" max="10000000000" step="1" value="2"></label>
+<label>미기록 실행 수<input id="n-missing" type="number" min="0" max="10000000000" step="1" value="1"></label>
+</div>
+<p class="caption">인프라 외 실패에는 이 계산기의 편의상 fail, timeout, agent_error, invalid_submission 등을 합쳐 넣습니다.</p>
+<div class="no-print" id="calc-buttons" hidden><button type="button" data-preset="incomplete">미완료 예시</button> <button type="button" data-preset="complete">완료 예시</button> <button type="button" data-preset="perfect">전체 성공 예시</button></div>
+<div id="calc-output" class="calc-result" aria-live="polite" aria-atomic="true">
+<div class="calc-number" id="calc-score">66.7%</div><p id="calc-detail">성공 12 / 계획 18 · 기록 17 · 인프라 오류 2 · 미기록 1</p><p id="calc-state">평가 미완료. 인프라 오류와 미기록을 확인하세요.</p>
+</div>
+<div class="bar" aria-hidden="true"><span id="bar-pass" class="pass" style="width:66.6667%"></span><span id="bar-fail" class="fail" style="width:16.6667%"></span><span id="bar-infra" class="infra" style="width:11.1111%"></span><span id="bar-missing" class="missing" style="width:5.5556%"></span></div>
+<div class="legend"><span><i style="background:#08766c"></i>성공</span><span><i style="background:#ae4650"></i>인프라 외 실패</span><span><i style="background:#b37a1d"></i>인프라 오류</span><span><i style="background:#8a9baa"></i>미기록</span></div>
+<noscript><p>JavaScript가 꺼져 있어 계산기 값은 갱신되지 않습니다. 위의 12/18 계산 예시는 그대로 읽을 수 있습니다.</p></noscript>
+</div>
+<p>기본 suite에서 1회씩만 실행하면 한 과제의 성공 여부에 따라 전체 성공률이 약 16.7%p 움직입니다. 3회 반복에서는 실행 1건이 약 5.6%p에 해당합니다. 반복을 늘려도 문제 종류는 그대로 6개이므로 다양한 IP를 평가한 것과 같지는 않습니다.</p>
+</section>
+
+<section id="comparison">
+<h2><span class="num">06 / 해석</span>성공률·시간·사용량을 어떻게 함께 비교하나요</h2>
+<p>지표마다 답하는 질문이 다릅니다. 성공률은 요구 기능을 완성한 빈도, 시간은 작업을 마칠 때까지의 대기, usage는 서비스가 기록한 자원 사용량입니다. 단위가 다른 값을 임의로 더해 하나의 점수로 만들기보다 아래 순서로 읽는 편이 판단 근거를 남기기 쉽습니다.</p>
+<ol><li><b>비교 조건을 확인합니다.</b> 같은 suite·protocol·결과 종류인지 보고 반복 수와 wrapper 정책도 대조합니다.</li><li><b>평가가 완료되었는지 확인합니다.</b> 인프라 오류와 미기록이 남았으면 능력 비교 결론을 유보합니다.</li><li><b>기능 성공률과 실패 과제를 봅니다.</b> 전체 비율이 같아도 실패한 IP 기능은 다를 수 있습니다.</li><li><b>같은 과제에서 시간을 비교합니다.</b> 성공·실패를 구분하고 시간 초과 실행도 함께 표시합니다.</li><li><b>측정 가능한 자원을 비교합니다.</b> Usage와 비용의 수집 범위가 같은지 확인한 뒤 판단합니다.</li></ol>
+<div class="table-wrap"><table><caption>가상 예시: 동일한 6과제 × 3회, 인프라 오류·미기록 없음</caption><thead><tr><th scope="col">구성</th><th scope="col">성공 / 계획</th><th scope="col">성공률</th><th scope="col">생성 시간 중앙값* (A·B·C가 모두 성공한 동일 실행 쌍 기준)</th><th scope="col">해석</th></tr></thead><tbody>
+<tr><td>A</td><td>15/18</td><td>83.3%</td><td>60초</td><td>B보다 성공 횟수가 많음</td></tr>
+<tr><td>B</td><td>12/18</td><td>66.7%</td><td>30초</td><td>공통 성공 집합에서 빠르지만 전체 성공률은 낮음</td></tr>
+<tr><td>C</td><td>15/18</td><td>83.3%</td><td>45초</td><td>A와 성공 횟수가 같고 공통 성공 집합에서는 더 빠름</td></tr>
+</tbody></table></div>
+<p class="caption">* task_id·repeat를 맞춘 공통 성공 집합을 별도로 분석한 가상 값입니다. 현재 보고서의 자동 집계 항목이 아닙니다. 실제 분석에서는 공통 집합 크기, 나머지 실행의 시간·실패도 함께 공개하세요.</p>
+<p>A와 B의 성공률 차이는 <b>16.7%p</b>입니다. 상대 증가율로는 25%이지만 보고서에는 “15/18 대 12/18, 차이 3회”를 함께 적는 편이 오해를 줄입니다. C가 A보다 빨라도 실패한 과제, 사용량, 반복별 변동이 다르면 최종 선택이 달라질 수 있습니다.</p>
+<h3>평균 시간만 비교하면 생기는 문제</h3>
+<p>B가 어려운 과제에서 2초 만에 오류로 종료했다면 전체 평균 시간이 낮아질 수 있습니다. 이를 설계 속도가 빠르다고 해석하면 곤란합니다. 반대로 성공한 실행만 골라 비교하면 서로 다른 난도의 과제를 비교할 수 있습니다.</p>
+<p>전체 실행의 상태별 시간과 공통 성공 과제의 시간을 함께 제시하세요. 중앙값을 사용했다면 표본 수와 범위도 적습니다. 생성이 300초 제한에 걸렸다는 기록은 그 시간 안에 끝내지 못했다는 뜻입니다. 실제 완료 시간이 300초라는 의미는 아닙니다.</p>
+<h3>성공률이 같아도 같은 능력은 아닙니다</h3>
+<p>A는 조합 회로에서 강하고 B는 FIFO·파이프라인에서 강할 수 있습니다. 전체 성공률 다음에는 업무별 결과와 과제별 성공·실패 표를 보세요. 회사에서 필요한 기능을 기준으로 별도 가중 점수를 만들려면 가중치와 대상을 실행 전에 정하고 기본 성공률도 함께 공개합니다. 현재 도구는 그런 가중 점수를 계산하지 않습니다.</p>
+<div class="note"><p><strong>숫자가 작게 차이 나면 관찰한 차이로 보고하세요.</strong> 한 번의 순위만으로 우열을 확정하지 않습니다. 같은 과제의 반복 결과를 확인하고 문제 범위를 넓혀 재평가하세요. 이 도구는 통계적 유의성 검정이나 신뢰구간을 제공하지 않으며 검증 seed 수를 독립 표본 수로 사용할 수도 없습니다.</p></div>
+</section>
+
+<section id="fairness">
+<h2><span class="num">07 / 실험 설계</span>바꾸려는 요소 하나를 먼저 정하세요</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">알고 싶은 차이</th><th scope="col">바꿀 것</th><th scope="col">고정할 것</th><th scope="col">결과를 부르는 방법</th></tr></thead><tbody>
+<tr><td>모델 차이</td><td>모델 이름·revision 등 평가 대상</td><td>에이전트·하네스, 허용 도구, 명세, 생성 설정과 예산, 채점 조건</td><td>동일 하네스를 사용한 모델 비교</td></tr>
+<tr><td>에이전트 차이</td><td>에이전트·하네스</td><td>모델·revision·양자화, 문제·채점 조건, 비교하려는 도구 접근·예산 조건</td><td>동일 모델을 사용한 에이전트 비교</td></tr>
+<tr><td>실무에 쓸 구성 차이</td><td>모델과 에이전트 또는 예산을 함께 변경</td><td>문제와 채점 기준, 운영 요구사항</td><td>구성 조합 비교. 원인을 모델 하나로 돌리지 않음</td></tr>
+</tbody></table></div>
+<p>에이전트의 도구 사용 방식 자체를 비교하려면 허용할 도구 범위와 예산을 먼저 정하세요. 한쪽에만 추가 도구나 긴 시간을 주었다면 그 조건까지 포함한 조합 비교로 보고합니다.</p>
+<h3>실행 전에 남길 실험 기록</h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">영역</th><th scope="col">기록 항목</th></tr></thead><tbody>
+<tr><td>문제</td><td>suite ID·해시, 과제 목록, prompt·starter·checker, 분류별 구성</td></tr>
+<tr><td>모델</td><td>이름, revision, 양자화, temperature, max_tokens, 생성 seed, 서버 설정</td></tr>
+<tr><td>에이전트</td><td>하네스·wrapper 버전, 도구 권한, context·token·시간 예산, 재시도·수정 정책</td></tr>
+<tr><td>채점</td><td>검증 seed 목록, iverilog·vvp 버전, runner 버전, sandbox, 각 제한시간</td></tr>
+<tr><td>운영</td><td>반복 수, 실행 순서, 서버·GPU 자원, 동시 부하, 실행 일시, 출력 경로</td></tr>
+<tr><td>판단</td><td>주 지표, 보조 지표, 장애 시 재실행 규칙, 필요한 기능·시간 기준</td></tr>
+</tbody></table></div>
+<p>기본 <code>run</code>은 순차 실행합니다. A를 먼저, B를 나중에 실행하면 서버 부하가 달라질 수 있으므로 상태를 기록하세요. 반복 실험에서는 순서를 바꾸거나 교대로 실행하는 방법도 검토할 수 있지만 현재 CLI가 실험 순서를 자동 설계하지는 않습니다.</p>
+<h3>해시가 같으면 모든 조건이 같을까요</h3>
+<p><code>suite_fingerprint</code>는 manifest, 명세, 시작 RTL, checker 등의 내용으로 계산한 식별값입니다. 과제 부분집합 선택도 반영합니다. <code>protocol_fingerprint</code>에는 이 값과 검증 seed, 제한시간, runner 정보, simulator 정보, sandbox 등이 들어갑니다.</p>
+<div class="table-wrap"><table><caption>현재 native protocol의 포함 범위</caption><thead><tr><th scope="col">자동 비교 조건에 포함</th><th scope="col">별도로 확인할 조건</th></tr></thead><tbody>
+<tr><td>Suite hash, 검증 seed 목록, check timeout, runner 버전·Python 소스 hash, iverilog 정보(경로 포함), 실제 sandbox 사용 여부</td><td>반복 횟수, vvp 버전, host/GPU 상태, 서버 부하</td></tr>
+<tr><td><code>run</code>에서는 adapter 유형, agent timeout, temperature·max_tokens·생성 seed도 추가</td><td>모델·하네스 식별 정보, endpoint, wrapper 내부 설정·재시도, 실제 도구 권한</td></tr>
+</tbody></table></div>
+<p><code>compare</code>는 같은 <code>protocol_fingerprint</code>와 <code>kind</code>끼리 표를 만듭니다. 모델 이름이 비교 조건에서 빠지는 것은 서로 다른 모델을 비교하기 위해서입니다. 다만 같은 표에 묶였다는 사실만으로 반복 수나 wrapper 정책까지 같다고 보장하지는 않습니다. <code>adapter_config_sha256</code>는 별도 기록이며 그룹을 나누는 키가 아닙니다.</p>
+<p>OpenAI-compatible 단발 호출과 command agent는 서로 다른 protocol입니다. 반입 RTL을 채점하는 <code>grade</code>도 생성까지 실행한 <code>run</code>과 결과 종류가 다릅니다. 다른 그룹의 해시를 수동으로 같게 바꿔 순위를 만들지 마세요.</p>
+<div class="warning"><p>Command 설정에 <code>temperature</code>, <code>max_tokens</code>, <code>seed</code>를 적어도 wrapper에 자동 적용되지는 않습니다. Runner는 지정한 argv를 실행합니다. 실제 wrapper 설정과 기록이 일치하는지 확인해야 합니다.</p></div>
+</section>
+
+<section id="reports">
+<h2><span class="num">08 / 결과 파일</span>보고서에서 원인과 증거를 따라가는 법</h2>
+<p>처음에는 <code>report.html</code>을 열어 종류와 성공/계획, 인프라 오류, 미기록을 확인하세요. 이어서 업무별 결과를 보고 실패 과제를 펼칩니다. 과제의 reason에서 세부 check와 로그로 내려가면 어디에서 실패했는지 찾을 수 있습니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">파일</th><th scope="col">주로 보는 내용</th></tr></thead><tbody>
+<tr><td><code>report.html</code></td><td>사람이 읽는 상세 보고서. 과제·검사·seed, 실패 로그, 실행 조건</td></tr>
+<tr><td><code>summary.json</code></td><td>성공·계획·기록·인프라·미기록 수와 전체 성공률</td></tr>
+<tr><td><code>results.json</code></td><td>원본 실행·판정 기록. protocol, metadata, 도구, hash, 과제별 상세 결과</td></tr>
+<tr><td><code>tasks.csv</code></td><td>과제·반복별 상태, 채점 시간, 검사 수, agent 시간과 usage</td></tr>
+<tr><td><code>checks.csv</code></td><td>과제·반복·check·seed별 판정과 compile/simulation 결과</td></tr>
+<tr><td><code>report.md</code></td><td>텍스트로 검토할 보고서</td></tr>
+<tr><td><code>tasks/&lt;실행 키&gt;/submission/</code></td><td>실제로 채점한 RTL 사본. run에서는 예를 들어 <code>fifo-r1</code>, grade에서는 <code>fifo</code></td></tr>
+<tr><td><code>comparison.html</code></td><td><code>compare</code>가 만든 조건별 비교 표. 자동 종합 순위나 통계 검정은 없음</td></tr>
+</tbody></table></div>
+<div class="example"><p><strong>가상 summary.json을 읽어 보세요.</strong> <code>recorded_runs</code>가 17이고 <code>planned_runs</code>가 18이므로 미기록은 1입니다. 인프라 오류 2건도 분모에 남습니다.</p>
+<pre><code>{
+  "planned_runs": 18,
+  "recorded_runs": 17,
+  "passed": 12,
+  "pass_rate": 0.6666666666666666,
+  "infra_errors": 2,
+  "missing_runs": 1,
+  "statuses": {"pass": 12, "fail": 3, "infra_error": 2}
+}</code></pre></div>
+<p>결과를 다른 PC로 옮길 때는 HTML만 복사하지 말고 실행 디렉터리 전체를 복사하세요. 보고서가 가리키는 상대경로 로그와 채점 RTL도 있어야 증거를 검토할 수 있습니다. 이 가이드 자체는 한 파일만으로 읽을 수 있습니다.</p>
+<p>HWE 가져오기 결과는 세부 check와 시간 정보가 없을 수 있습니다. <code>--expected-ids</code>를 생략하면 원래 데이터셋에서 빠진 과제를 찾아낼 근거도 부족합니다. 원본 evaluator 버전과 로그를 별도로 보존하세요.</p>
+</section>
+
+<section id="run">
+<h2><span class="num">09 / 실행</span>첫 평가를 진행하는 순서</h2>
+<p>모든 명령은 저장소 루트에서 실행합니다. Linux, Python 3.10 이상, <code>iverilog</code>, <code>vvp</code>가 필요합니다. 격리가 필요한 채점에는 사용할 수 있는 <code>bubblewrap</code> 환경도 준비하세요. 아래 출력 경로가 이미 있다면 새 이름으로 바꿉니다.</p>
+<h3>1. 채점 환경부터 확인합니다</h3>
+<pre><code>python3 -m hwbench doctor
+python3 -m hwbench list
+python3 scripts/validate.py</code></pre>
+<p><code>doctor</code>는 도구 버전과 격리 가능 여부를 출력합니다. <code>validate.py</code>는 회귀 테스트, 정답·오류 구현, CVDP 변형을 검사하고 가능하면 전체 프로세스의 인터넷 차단 시험도 실행합니다. 출력된 <code>artifacts/validation-&lt;UTC시간&gt;/index.html</code>을 여세요. 인터넷 차단 시험이 SKIPPED라면 그 항목을 검증했다고 보고하지 않습니다.</p>
+<h3>2. 모델과 하네스 설정을 준비합니다</h3>
+<p>단발 모델은 <code>configs/openai-compatible.example.json</code>, 도구를 사용하는 에이전트는 <code>configs/command.example.json</code>을 복사해 사용합니다. 이름만 바꾸지 말고 실제 revision·양자화·하네스 버전도 기록하세요. 키는 평문 대신 환경변수 이름인 <code>api_key_env</code>로 지정합니다.</p>
+<pre><code>cp configs/openai-compatible.example.json configs/model-a.json
+# model-a.json의 base_url, model, model_revision, quantization 등 실제 값 입력
+# 같은 조건으로 비교할 model-b.json도 준비</code></pre>
+<p>HTTP adapter는 Chat Completions 단발 응답에서 허용 파일 전체를 담은 JSON을 받습니다. Command adapter는 wrapper에 workspace와 prompt 경로를 넘기고 wrapper가 허용 RTL을 수정한 뒤 종료하도록 연결합니다. 실제 사내 endpoint와 인증은 해당 환경에서 확인해야 합니다.</p>
+<h3>3. 같은 조건으로 실행합니다</h3>
+<pre><code>python3 -m hwbench run --config configs/model-a.json \
+  --repeats 3 --seeds 1,7,42 \
+  --agent-timeout 300 --check-timeout 10 \
+  --sandbox required --out artifacts/model-a-r1
+
+python3 -m hwbench run --config configs/model-b.json \
+  --repeats 3 --seeds 1,7,42 \
+  --agent-timeout 300 --check-timeout 10 \
+  --sandbox required --out artifacts/model-b-r1</code></pre>
+<p>위 명령은 두 설정 파일이 같은 실행 방식과 비교 조건으로 준비되었다는 가정입니다. <code>--sandbox required</code>가 실패하면 격리 환경을 먼저 확인하세요. 모델을 여러 번 실행하면 시간과 자원을 사용하므로 반복 수와 예산을 실험 기록에 남깁니다.</p>
+<div class="warning"><p>Command agent를 실제 blind 평가에 사용한다면 이 실행 명령만으로는 격리가 충분하지 않습니다. Agent가 채점 저장소를 볼 수 없는 별도 환경을 준비하거나 다음 장의 export·grade 방식을 사용하세요.</p></div>
+<h3>4. 보고서를 비교하고 원자료를 보존합니다</h3>
+<pre><code>python3 -m hwbench compare \
+  artifacts/model-a-r1 artifacts/model-b-r1 \
+  --out artifacts/model-comparison-r1
+
+# 기존 결과에서 상세 보고서 다시 만들기
+python3 -m hwbench report artifacts/model-a-r1</code></pre>
+<p>비교 파일은 <code>artifacts/model-comparison-r1/comparison.html</code>입니다. 예상과 달리 그룹이 나뉘면 protocol을 대조하세요. 재시도 결과는 새 디렉터리에 보존하고 원래 실패 기록을 지우지 않습니다.</p>
+<p class="caption">선택 실행에는 <code>--tasks counter,fifo</code>를 사용할 수 있습니다. 부분집합이 달라지면 평가 조건도 달라집니다. CVDP 변형은 <code>--suite benchmarks/cvdp_adapted/suite.json</code>으로 별도 선택합니다.</p>
+</section>
+
+<section id="offline">
+<h2><span class="num">10 / 폐쇄망</span>문제 실행 환경과 채점 환경을 분리합니다</h2>
+<p>에이전트가 정답 RTL이나 hidden checker를 읽으면 명세를 구현하는 능력과 답을 찾아오는 능력이 섞입니다. 실제 blind 평가에서는 명세·시작 RTL·허용 파일 목록만 전달하고 채점 자료는 접근할 수 없는 환경에 둡니다.</p>
+<ol class="flow" aria-label="분리 운영 순서"><li><b>채점 측: export</b><span>문제만 내보내기</span></li><li><b>Agent 측: 실행</b><span>허용 파일을 수정하고 실행 조건 기록</span></li><li><b>Agent 측: 제출</b><span>과제별 RTL과 실행 기록 반환</span></li><li><b>채점 측: grade</b><span>고정된 검사로 평가하고 증거 보존</span></li></ol>
+<pre><code># 채점 저장소에서 문제만 내보내기
+python3 -m hwbench export --out artifacts/prompts-r1
+
+# 별도 환경의 실행 결과를 반입한 뒤 채점
+python3 -m hwbench grade \
+  --submissions /path/to/returned-submissions \
+  --label 'model-A + harness-B / r1' \
+  --seeds 1,7,42 --check-timeout 10 --sandbox required \
+  --out artifacts/imported-r1</code></pre>
+<p>반환 디렉터리는 <code>&lt;task_id&gt;/rtl/...</code> 구조를 유지합니다. JSONL로 반환할 때는 각 줄을 <code>{"id":"task_id","files":{"rtl/file.sv":"전체 RTL 문자열"}}</code> 형식으로 작성하고 <code>import-files</code>로 변환합니다.</p>
+<pre><code>python3 -m hwbench import-files \
+  --responses /path/to/responses.jsonl --out artifacts/submissions-r1</code></pre>
+<p><code>grade</code>는 받은 RTL만 평가하므로 생성 시간·usage·모델 설정을 자동 복원하지 못합니다. CLI의 label만으로 조건을 충분히 설명할 수 없습니다. 생성 서버의 실행 기록, wrapper 버전, 예산, 오류와 재시도 내역을 별도 실험 기록으로 함께 반입하세요. 반복 평가에서는 각 반복의 제출과 채점 결과를 따로 보존합니다.</p>
+<div class="note"><p>RTL compile/simulation에 적용하는 bubblewrap은 에이전트 격리를 대신하지 않습니다. 에이전트의 파일·도구 접근은 별도 머신, 사용자 권한 또는 컨테이너 구성으로 제한해야 합니다. 사내 명세와 RTL을 외부 API로 보내지 말고 허용된 endpoint만 사용하세요.</p></div>
+<h3>오프라인 패키지 전달</h3>
+<pre><code>python3 -m hwbench bundle --out artifacts/hwbench-offline.tar.gz
+python3 -m hwbench verify-bundle artifacts/hwbench-offline.tar.gz</code></pre>
+<p>Bundle에는 소스와 과제·문서·설정이 들어가지만 Python·EDA 바이너리나 실행 결과는 들어가지 않습니다. 필요한 OS 패키지는 별도로 준비하고 <code>configs/</code>에 민감한 설정이 들어 있는지 확인하세요. 검증 결과는 실행 디렉터리 전체를 별도로 전달합니다.</p>
+</section>
+
+<section id="diagnosis">
+<h2><span class="num">11 / 진단</span>점수가 낮을 때 어디부터 확인하나요</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">관찰한 현상</th><th scope="col">먼저 확인할 내용</th><th scope="col">피해야 할 해석</th></tr></thead><tbody>
+<tr><td>컴파일 전에 제출 거부</td><td>파일 누락, 허용 경로, JSON 형식, 금지된 RTL 구문</td><td>회로 알고리즘을 이해하지 못했다고 바로 결론 내림</td></tr>
+<tr><td>컴파일 실패</td><td>문법, 포트·모듈 연결, 언어 지원, compile 로그</td><td>도구가 존재하는데도 모든 컴파일 오류를 인프라 문제로 분류</td></tr>
+<tr><td>특정 reset·경계 검사 실패</td><td>명세의 reset 우선순위, 동시 입출력, hold, wrap 규칙</td><td>대부분의 check가 통과했으므로 과제도 성공이라고 계산</td></tr>
+<tr><td>Agent는 ok인데 과제 실패</td><td>독립 채점의 reason과 check 로그</td><td>정상 종료를 기능 PASS로 취급</td></tr>
+<tr><td>Timeout이 많음</td><td>생성/컴파일/시뮬레이션 중 어느 단계인지, 예산과 서버 부하</td><td>모든 시간 초과를 하나의 원인으로 묶음</td></tr>
+<tr><td>정답·mutant 검증부터 실패</td><td>채점 환경과 checker·명세 변경 내역</td><td>채점기가 검증되지 않은 상태에서 모델 순위를 발표</td></tr>
+<tr><td>반복마다 결과가 크게 다름</td><td>과제별 변동, 생성 설정, 서버 상태, wrapper 재시도</td><td>가장 좋은 반복만 남겨 대표 점수로 사용</td></tr>
+<tr><td>100%인데 실무 IP에서 실패</td><td>벤치마크와 실제 IP의 범위 차이, parameter·통합·검증 요구</td><td>작은 suite 성공을 전체 SoC 설계 능력으로 일반화</td></tr>
+</tbody></table></div>
+<p>명세가 모호하거나 checker가 명세와 다른 동작을 요구한다면 먼저 과제를 수정해야 합니다. 수정한 조건은 새로운 평가 버전으로 취급하고 비교 대상 모두를 다시 실행하세요. 특정 모델의 제출만 통과하도록 checker를 바꾸지 않습니다.</p>
+</section>
+
+<section id="decision">
+<h2><span class="num">12 / 판단</span>결과를 이렇게 정리하세요</h2>
+<p>보고에는 관찰한 결과, 비교 조건, 해석 범위를 함께 적습니다. 아래 문장은 모두 평가가 끝난 가상 예시입니다.</p>
+<blockquote>동일한 rtl-core-v1 6과제를 각 3회 실행했다. 인프라 오류와 미기록은 없었다. A는 15/18회(83.3%), B는 12/18회(66.7%) 성공했다. 같은 하네스와 생성·채점 예산을 적용했으며, A가 이 조건에서 3회 더 성공했다. 공통 성공 집합에서는 B의 생성 시간 중앙값이 낮았다. 순차 회로의 과제별 실패를 추가로 분석한 뒤 사내 IP 과제로 재평가한다.</blockquote>
+<p>인프라 오류가 남았다면 다음처럼 씁니다.</p>
+<blockquote>A는 계획 18회 중 12회 성공했다(66.7%). 인프라 오류 2회와 미기록 1회가 있어 평가 미완료 상태다. 환경 복구 후 새 실행을 수행하며 원래 결과도 보존한다. 현재 결과만으로 모델 간 우열을 확정하지 않는다.</blockquote>
+<h3>결과 공유 전 점검표</h3>
+<ul>
+<li>어떤 모델·revision·하네스·wrapper를 평가했는지 식별할 수 있나요?</li>
+<li>Suite, 과제 목록, seed, 예산, 도구, sandbox, 반복 수가 비교 목적에 맞게 통제되었나요?</li>
+<li>Fixture 검증과 실제 model_run, 반입 submission, upstream_import를 구분했나요?</li>
+<li>성공/계획 수, 인프라 오류, 미기록을 비율과 함께 표시했나요?</li>
+<li>업무별 분모와 전체 분모의 차이, 시간의 측정 범위를 설명했나요?</li>
+<li>실패한 실행과 timeout, 미측정 usage를 빼거나 0으로 바꾸지 않았나요?</li>
+<li>실제로 채점한 RTL, 로그, config 식별값, hash를 다시 확인할 수 있나요?</li>
+<li>이번 결과로 판단할 수 있는 IP 범위와 추가 검증이 필요한 부분을 적었나요?</li>
+</ul>
+<p>합성·PPA를 추가한다면 기능 검증을 통과한 RTL을 대상으로 동일한 tool, library, clock·timing constraint를 적용하세요. 전력·성능·면적은 기능 성공률과 별도 축으로 보고해야 합니다. 현재 HWBench 기능 점수만으로 이 값을 추정할 수는 없습니다.</p>
+</section>
+
+<section id="faq">
+<h2>자주 묻는 질문</h2>
+<details open><summary>성공률 100%면 RTL 검증이 끝난 건가요?</summary><p>고정된 명세와 필수 시뮬레이션 검사를 모두 통과한 결과입니다. 유한한 검사가 모든 상황의 정확성이나 제품 signoff를 보장하지는 않습니다. 실제 IP에 필요한 검증을 별도로 수행해야 합니다.</p></details>
+<details open><summary>검증 seed를 늘리면 모델 평가 표본 수도 늘어나나요?</summary><p>Seed를 사용하는 검사에서는 같은 제출 RTL을 더 많은 입력 수열로 검사합니다. Seed를 사용하지 않는 boundary·exhaustive 검사는 같은 입력을 반복할 수 있으므로 seed 추가가 항상 새로운 경우의 수나 coverage 증가를 뜻하지는 않습니다. 생성한 제출물 수나 문제 종류는 늘어나지 않습니다. 검사를 엄격하게 바꾸었으므로 기존 seed 조건의 점수와 직접 비교하지 않습니다.</p></details>
+<details open><summary>3번 중 한 번 성공하면 pass@3인가요?</summary><p>현재 기본 성공률은 모든 계획 실행의 성공 비율입니다. 한 과제를 3회 실행해 한 번 성공했다면 그 과제의 반복 성공률은 1/3입니다. 여러 후보 중 하나라도 성공한 과제의 비율을 따로 분석하려면 생성·선택 정책과 분모를 정의해야 합니다. 도구가 이를 pass@k로 자동 계산하지는 않습니다.</p></details>
+<details open><summary>인프라 오류를 제외한 점수를 보고해도 되나요?</summary><p>보조 분석으로 별도 분모를 명시할 수는 있지만 기본 점수를 대신하면 안 됩니다. 계획 수 기준 성공률과 장애 수, 평가 미완료 상태를 함께 공개하고 장애 복구 후 다시 실행하세요.</p></details>
+<details open><summary>모델 A는 단발 호출, 모델 B는 도구 사용 agent로 비교해도 되나요?</summary><p>실무 구성의 차이를 관찰할 수는 있지만 모델만의 능력 차이로 해석할 수는 없습니다. 실행 protocol도 다르므로 자동 비교에서는 별도 그룹으로 표시합니다.</p></details>
+<details open><summary>실패할 때마다 다시 시도해서 가장 좋은 결과를 써도 되나요?</summary><p>현재 runner는 자동 best-of 선택을 하지 않습니다. 수동 재실행을 포함한 모든 시도와 예산을 기록하세요. 재시도 가능한 운영 정책을 평가하려면 그 정책을 사전에 정해 모든 대상에 동일하게 적용하고 첫 실행의 성공률과 구분해야 합니다.</p></details>
+<details open><summary>사용량이 비어 있거나 시간이 0이면 비용이 없었던 건가요?</summary><p>생성 오류가 난 경로는 채점 시간이 0일 수 있고 command 실행의 usage는 자동 수집되지 않습니다. 값의 존재 여부와 해당 단계 실행 여부부터 확인하세요. 미측정이나 미실행을 무료로 해석하지 않습니다.</p></details>
+</section>
+
+<section id="basis">
+<h2>구현 근거와 용어 찾아보기</h2>
+<p>이 가이드는 아래 저장소 파일의 현재 동작을 설명합니다. 파일 경로는 개발자가 확인할 위치이며 문서를 읽을 때 해당 파일이나 인터넷 연결이 필요하지는 않습니다. 구현이 바뀌면 지표 정의와 명령 예시도 함께 검토해야 합니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">설명한 내용</th><th scope="col">구현 근거</th></tr></thead><tbody>
+<tr><td>집계 분모, 보고서, 비교 그룹</td><td><code>hwbench/reporting.py</code>의 summary, write_report, compare_reports</td></tr>
+<tr><td>PASS, RTL 정책, 채점 시간, protocol</td><td><code>hwbench/grader.py</code>의 grade_task, new_result, grade</td></tr>
+<tr><td>Adapter, 반복, 생성 시간·usage</td><td><code>hwbench/execution.py</code>의 run, openai_completion, _http_request</td></tr>
+<tr><td>Suite hash, 경로, 실행 제한과 sandbox</td><td><code>hwbench/common.py</code>의 load_suite, execute, sandbox_prefix</td></tr>
+<tr><td>명령, 부분집합, fixture 검증, bundle</td><td><code>hwbench/cli.py</code>, <code>scripts/validate.py</code></td></tr>
+<tr><td>현재 과제와 검사 구성</td><td><code>benchmarks/core/suite.json</code>, <code>benchmarks/cvdp_adapted/suite.json</code></td></tr>
+<tr><td>HWE 결과 매핑과 가져오기 한계</td><td><code>hwbench/upstream.py</code></td></tr>
+</tbody></table></div>
+<dl><dt><b>Protocol</b></dt><dd>문제와 실행·채점 조건을 묶어 정한 평가 규약입니다. 같은 protocol로 평가했는지 확인한 뒤 결과를 비교합니다.</dd><dt><b>Token / tokenizer</b></dt><dd>Token은 모델이 텍스트를 처리할 때 나누는 단위이고, tokenizer는 텍스트를 그 단위로 나누는 도구입니다. 같은 문장도 tokenizer에 따라 token 수가 달라질 수 있습니다.</dd><dt><b>Temperature / max_tokens</b></dt><dd>각각 모델 생성의 무작위성을 조절하는 설정과 최대 출력 token 예산입니다. 같은 값을 사용해도 서버가 지원하고 적용하는 방식은 확인해야 합니다.</dd><dt><b>Revision</b></dt><dd>같은 모델 이름 안에서도 실제 평가한 가중치나 구현 버전을 구분하는 값입니다.</dd><dt><b>양자화</b></dt><dd>모델을 실행할 때 수치 표현 정밀도를 줄이는 방식입니다. 같은 모델 이름이라도 설정이 다르면 결과가 달라질 수 있어 기록합니다.</dd><dt><b>Fingerprint / hash</b></dt><dd>내용이나 설정을 해시 함수로 계산한 식별값입니다. 조건 변경을 찾는 데 사용하며 점수 자체가 아닙니다.</dd><dt><b>Backpressure</b></dt><dd>받는 쪽이 준비되지 않아 보내는 쪽의 전송을 멈추게 하는 흐름 제어입니다.</dd><dt><b>Formal / PPA / CDC·RDC</b></dt><dd>각각 형식 검증, 전력·성능·면적, 클록·리셋 도메인 간 신호 처리 검증을 뜻합니다. 현재 기능 점수에 포함되지 않습니다.</dd><dt><b>%p</b></dt><dd>백분율끼리 뺀 차이입니다. 80%와 60%의 차이는 20%p이며 60%를 기준으로 한 상대 증가율과 구분합니다.</dd></dl>
+</section>
+<footer>HWBench 평가 가이드 · 문서 기준일 2026-11-07 · 설명용 수치는 실제 모델 점수가 아닙니다.<br>이 파일 하나로 열람·계산·인쇄할 수 있습니다. 외부 자원을 자동으로 불러오지 않습니다.</footer>
+</main>
+<script>
+'use strict';
+(() => {
+  const keys = ['tasks','repeats','pass','fail','infra','missing'];
+  const inputs = Object.fromEntries(keys.map(k => [k,document.getElementById('n-'+k)]));
+  const score = document.getElementById('calc-score');
+  const detail = document.getElementById('calc-detail');
+  const state = document.getElementById('calc-state');
+  function calculate(values) {
+    if (!keys.every(k => Number.isSafeInteger(values[k]) && values[k] >= (k==='tasks'||k==='repeats'?1:0))) {
+      return {error:'과제 수와 반복 횟수는 1 이상의 정수, 나머지는 0 이상의 정수로 입력하세요.'};
+    }
+    const planned = values.tasks * values.repeats;
+    if (!Number.isSafeInteger(planned)) return {error:'계획 실행 수가 계산 가능한 범위를 넘었습니다.'};
+    const sum = values.pass + values.fail + values.infra + values.missing;
+    if (sum !== planned) return {error:`결과 합계 ${sum.toLocaleString('ko-KR')}회가 계획 ${planned.toLocaleString('ko-KR')}회와 다릅니다. 합계를 맞춰 주세요.`};
+    return {planned, recorded:planned-values.missing, rate:100*values.pass/planned, incomplete:values.infra>0||values.missing>0};
+  }
+  function update() {
+    const values = Object.fromEntries(keys.map(k=>[k,inputs[k].valueAsNumber]));
+    const result = calculate(values);
+    if(result.error){score.textContent='계산 보류';detail.textContent=result.error;state.textContent='입력값을 확인한 뒤 다시 계산합니다.';}
+    else {
+      score.textContent=result.rate.toFixed(1)+'%';
+      detail.textContent=`성공 ${values.pass} / 계획 ${result.planned} · 기록 ${result.recorded} · 인프라 오류 ${values.infra} · 미기록 ${values.missing}`;
+      state.textContent=result.incomplete?'평가 미완료. 인프라 오류와 미기록을 확인하세요.':'기록상 평가 완료. 성공률은 모든 계획 실행을 기준으로 계산했습니다.';
+    }
+    for(const key of ['pass','fail','infra','missing']) document.getElementById('bar-'+key).style.width=result.error?'0%':(values[key]/result.planned*100)+'%';
+  }
+  Object.values(inputs).forEach(input=>input.addEventListener('input',update));
+  document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{
+    const presets={incomplete:[6,3,12,3,2,1],complete:[6,3,15,3,0,0],perfect:[6,3,18,0,0,0]};
+    keys.forEach((key,i)=>{inputs[key].value=presets[button.dataset.preset][i];});update();
+  }));
+  document.getElementById('calc-buttons').hidden=false;
+  const printButton=document.getElementById('print-button');printButton.hidden=false;
+  printButton.addEventListener('click',()=>window.print());
+  let closed=[];
+  window.addEventListener('beforeprint',()=>{closed=[...document.querySelectorAll('details:not([open])')];closed.forEach(d=>{d.open=true;});});
+  window.addEventListener('afterprint',()=>{closed.forEach(d=>{d.open=false;});closed=[];});
+  update();
+})();
+</script>
+</body>
+</html>
