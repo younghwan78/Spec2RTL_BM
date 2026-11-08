@@ -76,8 +76,9 @@ def load_suite(path=DEFAULT_SUITE):
         if not re.fullmatch(r"[A-Za-z0-9_-]+", tid) or tid in ids:
             raise ValueError(f"Invalid or duplicate task ID: {tid}")
         ids.add(tid)
-        if "difficulty" in task and (not isinstance(task["difficulty"], str) or not task["difficulty"].strip()):
-            raise ValueError(f"Difficulty must be a nonempty declared label: {tid}")
+        for field in ("difficulty", "tier", "domain"):
+            if field in task and (not isinstance(task[field], str) or not task[field].strip()):
+                raise ValueError(f"{field} must be a nonempty declared label: {tid}")
         base = within(path.parent, task["path"])
         if not task["files"] or len(set(task["files"])) != len(task["files"]):
             raise ValueError(f"Empty/duplicate files: {tid}")

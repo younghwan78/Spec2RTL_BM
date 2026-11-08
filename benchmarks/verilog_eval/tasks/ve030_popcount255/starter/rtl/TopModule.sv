@@ -1,0 +1,6 @@
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+  // Implement the specified behaviour here.
+endmodule

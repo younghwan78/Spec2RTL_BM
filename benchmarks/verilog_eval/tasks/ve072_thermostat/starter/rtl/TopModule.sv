@@ -1,0 +1,11 @@
+module TopModule (
+  input mode,
+  input too_cold,
+  input too_hot,
+  input fan_on,
+  output heater,
+  output aircon,
+  output fan
+);
+  // Implement the specified behaviour here.
+endmodule

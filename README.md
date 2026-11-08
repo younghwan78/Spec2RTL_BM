@@ -2,9 +2,11 @@
 
 Python 표준 라이브러리와 Icarus Verilog로 실행하는 작은 HW 설계 평가기입니다. 설치형 Python 패키지 의존성이 없으며 **이 저장소 루트에서 명령을 실행**하면 됩니다. 모델/harness는 연결 설정으로 교체하고, 최종 RTL은 별도 작업 공간에서 공통 채점합니다.
 
+**폐쇄망 과제 확장:** VerilogEval·RTLLM 변형과 주입 결함 수정, SoC형 블록을 포함한 native 과제 308개를 제공합니다. 구성과 평가 수준은 [평가 기준](docs/EVALUATION_CRITERIA.md)을 따르며, 이는 공식 upstream 점수가 아닙니다.
+
 **현재 범위:** 자체 RTL 6과제와 CVDP LFSR 변형 1과제의 native 채점, 계획 분모·난이도·반복·실패 단계 집계, command/HTTP 연결, HWE 결과 반입을 지원합니다. CVDP no-commercial 469개 카탈로그 검사와 Heavy 저장소 준비·외부 evaluator 연결, 기능 PASS 후 별도 EDA 큐·캐시·결과 반입, 폐쇄망 자원 목록 검증도 제공합니다. 실제 상용 EDA·공식 CVDP 전체 평가·실제 모델 성능은 아직 검증하지 않았습니다.
 
-처음 읽는 분은 [평가 목적·지표·비교·운영 가이드](docs/guide/index.html)를 여십시오. 외부 자원 없이 열리는 단일 HTML이며 계산 예시, Heavy/PPA 해석과 반입 절차를 설명합니다.
+비전문가용 개요는 [RTL AI 비교 안내](docs/guide/benchmark-value.html), 사내 도입 절차는 [사내 적용 가이드](docs/INHOUSE_ADOPTION.md)를 참고하십시오. 처음 읽는 분은 [평가 목적·지표·비교·운영 가이드](docs/guide/index.html)를 여십시오. 외부 자원 없이 열리는 단일 HTML이며 계산 예시, Heavy/PPA 해석과 반입 절차를 설명합니다.
 
 ## 1. 가장 빠른 실행
 
@@ -150,6 +152,8 @@ python3 -m hwbench verify-bundle artifacts/hwbench-offline.tar.gz
 
 `run`과 `grade`는 첫 실행 전에 `task_plan`을 저장합니다. 전체 성공률뿐 아니라 category/difficulty/backend별 성공률도 계획 실행 수를 분모로 사용합니다. 예전 결과에 계획 목록이 없으면 분류별 계획 수·비율은 `null`이며, 기록된 결과의 비율은 `recorded_pass_rate`로 구분합니다. 난이도가 선언되지 않은 과제는 `unknown`입니다.
 
+등급(`tier`)·설계 영역(`domain`)별 집계, 고유 과제 기준 Wilson 95% 구간, 실패 원인, 진단 지표, `compare`의 과제 단위 짝비교, `hwbench quality`의 기능 PASS 사본 품질 측정을 제공합니다. 해석 순서는 [평가 기준](docs/EVALUATION_CRITERIA.md)에 있습니다.
+
 `summary.json`에는 과제별 반복 일관성, 실패 단계, 생성·채점 시간의 관측 수/합계/평균, token 관측량도 있습니다. Compile 시간은 task/repeat/check마다 한 번만 셉니다. 반복 일관성은 pass@k가 아니며 미측정 usage·비용을 0으로 만들지 않습니다. 비교 결과는 `comparison.html`과 `comparison.json`에 남습니다.
 
 ## 10. CVDP Heavy 저장소 연결
@@ -181,7 +185,7 @@ python3 -m hwbench eda-run artifacts/eda-queue-r1 \
 python3 -m hwbench eda-report artifacts/eda-queue-r1 --out artifacts/eda-report-r1
 ```
 
-첫 명령만 독립 실행 예제입니다. 나머지 native 결과·회사 설정·kit는 사내에서 준비합니다. 실제 RTLA/PowerPro/lint/Xprop 명령과 원본 보고서 parser는 설치 버전에 맞는 wrapper가 필요합니다. [EDA 계약](scripts/EDA_CONTRACT.md)에 필수 도구별 버전, library/PVT, constraints, activity, 단위, 입력·응답 JSON과 큐 복구 절차를 적었습니다.
+사용 도구가 확정되지 않았으면 [EDA 계약의 사내 도구 맞춤 절차](scripts/EDA_CONTRACT.md)에 따라 프로파일을 작성하고 `scripts/eda_calibrate.py`로 교정합니다. 첫 명령만 독립 실행 예제입니다. 나머지 native 결과·회사 설정·kit는 사내에서 준비합니다. 실제 RTLA/PowerPro/lint/Xprop 명령과 원본 보고서 parser는 설치 버전에 맞는 wrapper가 필요합니다. [EDA 계약](scripts/EDA_CONTRACT.md)에 필수 도구별 버전, library/PVT, constraints, activity, 단위, 입력·응답 JSON과 큐 복구 절차를 적었습니다.
 
 기본 동시 실행 수는 1입니다. 최종 제출물만 실행하고 timeout·총예산·잠금·중단 후 정리·캐시를 적용합니다. `eda-compare`는 같은 kind/protocol과 PPA 조건의 task/repeat 쌍만 비교하며 누락 수를 공개합니다. 기능 계획·EDA 요청·기능 통과·실행 시도·유효 측정을 구분하고 lint/Xprop은 별도 품질 결과로 남깁니다.
 

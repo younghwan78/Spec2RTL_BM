@@ -1,0 +1,8 @@
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+  // Implement the specified behaviour here.
+endmodule

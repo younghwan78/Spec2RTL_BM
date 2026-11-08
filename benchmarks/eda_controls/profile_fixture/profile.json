@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "_note": "Synthetic fixture for the profile wrapper and calibration. Not a real tool flow.",
+  "version_probes": [
+    {"role": "area_delay", "name": "fixture", "argv": ["python3", "--version"], "regex": "Python (\\S+)"}
+  ],
+  "steps": [
+    {"role": "area_delay", "argv": ["python3", "{asset:faketool}", "synth", "{top}"], "timeout_seconds": 30},
+    {"role": "power", "argv": ["python3", "{asset:faketool}", "power", "{top}"], "timeout_seconds": 30},
+    {"role": "lint", "argv": ["python3", "{asset:faketool}", "lint", "{top}"], "timeout_seconds": 30}
+  ],
+  "metrics": {
+    "area_um2": {"terms": [{"report": "area.rpt", "regex": "Total cell area:\\s*([0-9.]+)"}]},
+    "delay_ns": {"terms": [{"report": "timing.rpt", "regex": "data arrival time\\s+([0-9.]+)", "occurrence": -1}]},
+    "power_mw": {"terms": [
+      {"report": "power.rpt", "regex": "Dynamic Power:\\s*([0-9.]+) uW", "scale": 0.001},
+      {"report": "power.rpt", "regex": "Leakage Power:\\s*([0-9.]+) uW", "scale": 0.001}
+    ]}
+  },
+  "quality": {"lint": {"report": "lint.rpt", "fail_regex": "[1-9][0-9]* errors", "pass_regex": "\\b0 errors"}},
+  "activity": {"report": "activity.saif"}
+}

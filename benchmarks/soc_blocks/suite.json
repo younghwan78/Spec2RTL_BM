@@ -1,0 +1,957 @@
+{
+  "schema_version": 1,
+  "id": "soc-blocks-v1",
+  "title": "Locally authored SoC-style blocks",
+  "origin": "locally_authored",
+  "difficulty_basis": "author_judgement",
+  "tasks": [
+    {
+      "id": "sync_fifo",
+      "category": "generation",
+      "title": "parameterized first-word-fall-through FIFO",
+      "path": "tasks/sync_fifo",
+      "files": [
+        "rtl/sync_fifo.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "parameterized first-word-fall-through FIFO: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "parameterized first-word-fall-through FIFO: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "wrap_binary",
+          "path": "mutants/wrap_binary",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        },
+        {
+          "id": "count_simultaneous",
+          "path": "mutants/count_simultaneous",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "memory",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "sync_fifo_repair",
+      "category": "repair",
+      "title": "parameterized first-word-fall-through FIFO",
+      "path": "tasks/sync_fifo_repair",
+      "files": [
+        "rtl/sync_fifo.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "parameterized first-word-fall-through FIFO: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "parameterized first-word-fall-through FIFO: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "count_simultaneous",
+          "path": "mutants/count_simultaneous",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        },
+        {
+          "id": "write_when_full_read",
+          "path": "mutants/write_when_full_read",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "memory",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "skid_buffer",
+      "category": "generation",
+      "title": "registered ready/valid skid buffer",
+      "path": "tasks/skid_buffer",
+      "files": [
+        "rtl/skid_buffer.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "registered ready/valid skid buffer: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "registered ready/valid skid buffer: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "comb_ready",
+          "path": "mutants/comb_ready",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "skid_data",
+          "path": "mutants/skid_data",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "interface",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "skid_buffer_repair",
+      "category": "repair",
+      "title": "registered ready/valid skid buffer",
+      "path": "tasks/skid_buffer_repair",
+      "files": [
+        "rtl/skid_buffer.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "registered ready/valid skid buffer: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "registered ready/valid skid buffer: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "skid_data",
+          "path": "mutants/skid_data",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        },
+        {
+          "id": "lost_beat",
+          "path": "mutants/lost_beat",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "interface",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "apb_regs",
+      "category": "generation",
+      "title": "APB3 control/status register block",
+      "path": "tasks/apb_regs",
+      "files": [
+        "rtl/apb_regs.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "APB3 control/status register block: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "APB3 control/status register block: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "setup_write",
+          "path": "mutants/setup_write",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "clear_wins",
+          "path": "mutants/clear_wins",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "interface",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "apb_regs_repair",
+      "category": "repair",
+      "title": "APB3 control/status register block",
+      "path": "tasks/apb_regs_repair",
+      "files": [
+        "rtl/apb_regs.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "APB3 control/status register block: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "APB3 control/status register block: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "clear_wins",
+          "path": "mutants/clear_wins",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "unaligned_ok",
+          "path": "mutants/unaligned_ok",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "interface",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "axil_regs",
+      "category": "generation",
+      "title": "AXI4-Lite four-register slave",
+      "path": "tasks/axil_regs",
+      "files": [
+        "rtl/axil_regs.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "AXI4-Lite four-register slave: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "AXI4-Lite four-register slave: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "ignore_strobe",
+          "path": "mutants/ignore_strobe",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "r_valid_drop",
+          "path": "mutants/r_valid_drop",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "interface",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "axil_regs_repair",
+      "category": "repair",
+      "title": "AXI4-Lite four-register slave",
+      "path": "tasks/axil_regs_repair",
+      "files": [
+        "rtl/axil_regs.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "AXI4-Lite four-register slave: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "AXI4-Lite four-register slave: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "r_valid_drop",
+          "path": "mutants/r_valid_drop",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "read_index",
+          "path": "mutants/read_index",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "interface",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "axis_downsizer",
+      "category": "generation",
+      "title": "32-to-8 bit AXI-Stream width converter",
+      "path": "tasks/axis_downsizer",
+      "files": [
+        "rtl/axis_downsizer.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "32-to-8 bit AXI-Stream width converter: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "32-to-8 bit AXI-Stream width converter: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "ignore_keep",
+          "path": "mutants/ignore_keep",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "last_every_byte",
+          "path": "mutants/last_every_byte",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "interface",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "axis_downsizer_repair",
+      "category": "repair",
+      "title": "32-to-8 bit AXI-Stream width converter",
+      "path": "tasks/axis_downsizer_repair",
+      "files": [
+        "rtl/axis_downsizer.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "32-to-8 bit AXI-Stream width converter: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "32-to-8 bit AXI-Stream width converter: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "last_every_byte",
+          "path": "mutants/last_every_byte",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "shift_on_stall",
+          "path": "mutants/shift_on_stall",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "interface",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "rr_arbiter",
+      "category": "generation",
+      "title": "round-robin arbiter with lock and accept",
+      "path": "tasks/rr_arbiter",
+      "files": [
+        "rtl/rr_arbiter.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "round-robin arbiter with lock and accept: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "round-robin arbiter with lock and accept: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "advance_without_accept",
+          "path": "mutants/advance_without_accept",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "lock_ignored",
+          "path": "mutants/lock_ignored",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "rr_arbiter_repair",
+      "category": "repair",
+      "title": "round-robin arbiter with lock and accept",
+      "path": "tasks/rr_arbiter_repair",
+      "files": [
+        "rtl/rr_arbiter.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "round-robin arbiter with lock and accept: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "round-robin arbiter with lock and accept: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "lock_ignored",
+          "path": "mutants/lock_ignored",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "pointer_stays",
+          "path": "mutants/pointer_stays",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "crc32_byte",
+      "category": "generation",
+      "title": "byte-wide CRC-32 engine",
+      "path": "tasks/crc32_byte",
+      "files": [
+        "rtl/crc32_byte.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "byte-wide CRC-32 engine: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "byte-wide CRC-32 engine: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "wrong_poly",
+          "path": "mutants/wrong_poly",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "no_final_xor",
+          "path": "mutants/no_final_xor",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "datapath",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "crc32_byte_repair",
+      "category": "repair",
+      "title": "byte-wide CRC-32 engine",
+      "path": "tasks/crc32_byte_repair",
+      "files": [
+        "rtl/crc32_byte.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "byte-wide CRC-32 engine: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "byte-wide CRC-32 engine: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "no_final_xor",
+          "path": "mutants/no_final_xor",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "en_beats_init",
+          "path": "mutants/en_beats_init",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "datapath",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "secded_codec",
+      "category": "generation",
+      "title": "Hamming SEC-DED encoder and decoder",
+      "path": "tasks/secded_codec",
+      "files": [
+        "rtl/secded_codec.sv"
+      ],
+      "checks": [
+        {
+          "id": "exhaustive",
+          "tb": "checks/exhaustive.sv",
+          "top": "tb",
+          "description": "Hamming SEC-DED encoder and decoder: exhaustive"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "Hamming SEC-DED encoder and decoder: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "bad_parity",
+          "path": "mutants/bad_parity",
+          "expected_fail_checks": [
+            "exhaustive"
+          ]
+        },
+        {
+          "id": "miss_invalid_syndrome",
+          "path": "mutants/miss_invalid_syndrome",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "datapath",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "timer_irq",
+      "category": "generation",
+      "title": "prescaled compare timer with sticky interrupt",
+      "path": "tasks/timer_irq",
+      "files": [
+        "rtl/timer_irq.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "prescaled compare timer with sticky interrupt: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "prescaled compare timer with sticky interrupt: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "prescale_off_by_one",
+          "path": "mutants/prescale_off_by_one",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "clear_beats_set",
+          "path": "mutants/clear_beats_set",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "timer_irq_repair",
+      "category": "repair",
+      "title": "prescaled compare timer with sticky interrupt",
+      "path": "tasks/timer_irq_repair",
+      "files": [
+        "rtl/timer_irq.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "prescaled compare timer with sticky interrupt: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "prescaled compare timer with sticky interrupt: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "clear_beats_set",
+          "path": "mutants/clear_beats_set",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "oneshot_ignored",
+          "path": "mutants/oneshot_ignored",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "soc_repair",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_repair",
+        "injected_defect",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "credit_counter",
+      "category": "generation",
+      "title": "flow-control credit counter",
+      "path": "tasks/credit_counter",
+      "files": [
+        "rtl/credit_counter.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "flow-control credit counter: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "flow-control credit counter: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "consume_at_zero",
+          "path": "mutants/consume_at_zero",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "no_saturate",
+          "path": "mutants/no_saturate",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "control",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "async_fifo",
+      "category": "generation",
+      "title": "dual-clock Gray-pointer FIFO",
+      "path": "tasks/async_fifo",
+      "files": [
+        "rtl/async_fifo.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "dual-clock Gray-pointer FIFO: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "dual-clock Gray-pointer FIFO: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "full_equals_empty",
+          "path": "mutants/full_equals_empty",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "underflow",
+          "path": "mutants/underflow",
+          "expected_fail_checks": [
+            "seeded"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "cdc",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    },
+    {
+      "id": "mul_pipe",
+      "category": "generation",
+      "title": "three-stage signed multiplier with stall",
+      "path": "tasks/mul_pipe",
+      "files": [
+        "rtl/mul_pipe.sv"
+      ],
+      "checks": [
+        {
+          "id": "directed",
+          "tb": "checks/directed.sv",
+          "top": "tb",
+          "description": "three-stage signed multiplier with stall: directed"
+        },
+        {
+          "id": "seeded",
+          "tb": "checks/seeded.sv",
+          "top": "tb",
+          "description": "three-stage signed multiplier with stall: seeded"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "unsigned_product",
+          "path": "mutants/unsigned_product",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        },
+        {
+          "id": "valid_not_stalled",
+          "path": "mutants/valid_not_stalled",
+          "expected_fail_checks": [
+            "directed"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "datapath",
+      "tier": "soc_block",
+      "seed_sensitive": true,
+      "tags": [
+        "soc_block",
+        "locally_authored"
+      ]
+    }
+  ]
+}

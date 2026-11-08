@@ -1,0 +1,8 @@
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+  // Implement the specified behaviour here.
+endmodule

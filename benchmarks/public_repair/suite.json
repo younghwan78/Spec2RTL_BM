@@ -1,0 +1,5133 @@
+{
+  "schema_version": 1,
+  "id": "public-synthetic-repair-v1",
+  "title": "Injected-defect repair on public benchmark specs",
+  "origin": "injected_defects_on_adapted_public_tasks",
+  "difficulty_basis": "reference_loc_heuristic",
+  "tasks": [
+    {
+      "id": "fix_ve035_count1to10",
+      "category": "repair",
+      "title": "repair count1to10",
+      "path": "tasks/fix_ve035_count1to10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "lor_land_0",
+          "path": "mutants/lor_land_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve037_review2015_count1k",
+      "category": "repair",
+      "title": "repair review2015 count1k",
+      "path": "tasks/fix_ve037_review2015_count1k",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "lor_land_0",
+          "path": "mutants/lor_land_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve038_count15",
+      "category": "repair",
+      "title": "repair count15",
+      "path": "tasks/fix_ve038_count15",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve039_always_if",
+      "category": "repair",
+      "title": "repair always if",
+      "path": "tasks/fix_ve039_always_if",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve040_count10",
+      "category": "repair",
+      "title": "repair count10",
+      "path": "tasks/fix_ve040_count10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "lor_land_0",
+          "path": "mutants/lor_land_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve041_dff8r",
+      "category": "repair",
+      "title": "repair dff8r",
+      "path": "tasks/fix_ve041_dff8r",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve044_vectorgates",
+      "category": "repair",
+      "title": "repair vectorgates",
+      "path": "tasks/fix_ve044_vectorgates",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "lor_land_0",
+          "path": "mutants/lor_land_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve045_edgedetect2",
+      "category": "repair",
+      "title": "repair edgedetect2",
+      "path": "tasks/fix_ve045_edgedetect2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "xor_and_0",
+          "path": "mutants/xor_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "rhs_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve046_dff8p",
+      "category": "repair",
+      "title": "repair dff8p",
+      "path": "tasks/fix_ve046_dff8p",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve047_dff8ar",
+      "category": "repair",
+      "title": "repair dff8ar",
+      "path": "tasks/fix_ve047_dff8ar",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve048_m2014_q4c",
+      "category": "repair",
+      "title": "repair m2014 q4c",
+      "path": "tasks/fix_ve048_m2014_q4c",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve049_m2014_q4b",
+      "category": "repair",
+      "title": "repair m2014 q4b",
+      "path": "tasks/fix_ve049_m2014_q4b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve054_edgedetect",
+      "category": "repair",
+      "title": "repair edgedetect",
+      "path": "tasks/fix_ve054_edgedetect",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve055_conditional",
+      "category": "repair",
+      "title": "repair conditional",
+      "path": "tasks/fix_ve055_conditional",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "gt_lt_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve058_alwaysblock2",
+      "category": "repair",
+      "title": "repair alwaysblock2",
+      "path": "tasks/fix_ve058_alwaysblock2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "xor_and_0",
+          "path": "mutants/xor_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve060_m2014_q4k",
+      "category": "repair",
+      "title": "repair m2014 q4k",
+      "path": "tasks/fix_ve060_m2014_q4k",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve061_2014_q4a",
+      "category": "repair",
+      "title": "repair 2014 q4a",
+      "path": "tasks/fix_ve061_2014_q4a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_1",
+          "path": "mutants/if_negate_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve063_review2015_shiftcount",
+      "category": "repair",
+      "title": "repair review2015 shiftcount",
+      "path": "tasks/fix_ve063_review2015_shiftcount",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "const_1_0_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve066_edgecapture",
+      "category": "repair",
+      "title": "repair edgecapture",
+      "path": "tasks/fix_ve066_edgecapture",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve067_countslow",
+      "category": "repair",
+      "title": "repair countslow",
+      "path": "tasks/fix_ve067_countslow",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve068_countbcd",
+      "category": "repair",
+      "title": "repair countbcd",
+      "path": "tasks/fix_ve068_countbcd",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve069_truthtable1",
+      "category": "repair",
+      "title": "repair truthtable1",
+      "path": "tasks/fix_ve069_truthtable1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve070_ece241_2013_q2",
+      "category": "repair",
+      "title": "repair ece241 2013 q2",
+      "path": "tasks/fix_ve070_ece241_2013_q2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve071_always_casez",
+      "category": "repair",
+      "title": "repair always casez",
+      "path": "tasks/fix_ve071_always_casez",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve072_thermostat",
+      "category": "repair",
+      "title": "repair thermostat",
+      "path": "tasks/fix_ve072_thermostat",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve073_dff16e",
+      "category": "repair",
+      "title": "repair dff16e",
+      "path": "tasks/fix_ve073_dff16e",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve074_ece241_2014_q4",
+      "category": "repair",
+      "title": "repair ece241 2014 q4",
+      "path": "tasks/fix_ve074_ece241_2014_q4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve075_counter_2bc",
+      "category": "repair",
+      "title": "repair counter 2bc",
+      "path": "tasks/fix_ve075_counter_2bc",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "gt_lt_0",
+          "path": "mutants/gt_lt_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve076_always_case",
+      "category": "repair",
+      "title": "repair always case",
+      "path": "tasks/fix_ve076_always_case",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve077_wire_decl",
+      "category": "repair",
+      "title": "repair wire decl",
+      "path": "tasks/fix_ve077_wire_decl",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve078_dualedge",
+      "category": "repair",
+      "title": "repair dualedge",
+      "path": "tasks/fix_ve078_dualedge",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_2",
+          "path": "mutants/rhs_invert_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "rhs_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve079_fsm3onehot",
+      "category": "repair",
+      "title": "repair fsm3onehot",
+      "path": "tasks/fix_ve079_fsm3onehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve080_timer",
+      "category": "repair",
+      "title": "repair timer",
+      "path": "tasks/fix_ve080_timer",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve081_7458",
+      "category": "repair",
+      "title": "repair 7458",
+      "path": "tasks/fix_ve081_7458",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve082_lfsr32",
+      "category": "repair",
+      "title": "repair lfsr32",
+      "path": "tasks/fix_ve082_lfsr32",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve084_ece241_2013_q12",
+      "category": "repair",
+      "title": "repair ece241 2013 q12",
+      "path": "tasks/fix_ve084_ece241_2013_q12",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve085_shift4",
+      "category": "repair",
+      "title": "repair shift4",
+      "path": "tasks/fix_ve085_shift4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve086_lfsr5",
+      "category": "repair",
+      "title": "repair lfsr5",
+      "path": "tasks/fix_ve086_lfsr5",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve087_gates",
+      "category": "repair",
+      "title": "repair gates",
+      "path": "tasks/fix_ve087_gates",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve088_ece241_2014_q5b",
+      "category": "repair",
+      "title": "repair ece241 2014 q5b",
+      "path": "tasks/fix_ve088_ece241_2014_q5b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve089_ece241_2014_q5a",
+      "category": "repair",
+      "title": "repair ece241 2014 q5a",
+      "path": "tasks/fix_ve089_ece241_2014_q5a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve094_gatesv",
+      "category": "repair",
+      "title": "repair gatesv",
+      "path": "tasks/fix_ve094_gatesv",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve095_review2015_fsmshift",
+      "category": "repair",
+      "title": "repair review2015 fsmshift",
+      "path": "tasks/fix_ve095_review2015_fsmshift",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve096_review2015_fsmseq",
+      "category": "repair",
+      "title": "repair review2015 fsmseq",
+      "path": "tasks/fix_ve096_review2015_fsmseq",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve097_mux9to1v",
+      "category": "repair",
+      "title": "repair mux9to1v",
+      "path": "tasks/fix_ve097_mux9to1v",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve100_fsm3comb",
+      "category": "repair",
+      "title": "repair fsm3comb",
+      "path": "tasks/fix_ve100_fsm3comb",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve105_rotate100",
+      "category": "repair",
+      "title": "repair rotate100",
+      "path": "tasks/fix_ve105_rotate100",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve106_always_nolatches",
+      "category": "repair",
+      "title": "repair always nolatches",
+      "path": "tasks/fix_ve106_always_nolatches",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve107_fsm1s",
+      "category": "repair",
+      "title": "repair fsm1s",
+      "path": "tasks/fix_ve107_fsm1s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve108_rule90",
+      "category": "repair",
+      "title": "repair rule90",
+      "path": "tasks/fix_ve108_rule90",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve109_fsm1",
+      "category": "repair",
+      "title": "repair fsm1",
+      "path": "tasks/fix_ve109_fsm1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve110_fsm2",
+      "category": "repair",
+      "title": "repair fsm2",
+      "path": "tasks/fix_ve110_fsm2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve111_fsm2s",
+      "category": "repair",
+      "title": "repair fsm2s",
+      "path": "tasks/fix_ve111_fsm2s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve112_always_case2",
+      "category": "repair",
+      "title": "repair always case2",
+      "path": "tasks/fix_ve112_always_case2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "rhs_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve113_2012_q1g",
+      "category": "repair",
+      "title": "repair 2012 q1g",
+      "path": "tasks/fix_ve113_2012_q1g",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve114_bugs_case",
+      "category": "repair",
+      "title": "repair bugs case",
+      "path": "tasks/fix_ve114_bugs_case",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve115_shift18",
+      "category": "repair",
+      "title": "repair shift18",
+      "path": "tasks/fix_ve115_shift18",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve116_m2014_q3",
+      "category": "repair",
+      "title": "repair m2014 q3",
+      "path": "tasks/fix_ve116_m2014_q3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_2",
+          "path": "mutants/rhs_invert_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_4",
+          "path": "mutants/literal_flip_4",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_2",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve117_circuit9",
+      "category": "repair",
+      "title": "repair circuit9",
+      "path": "tasks/fix_ve117_circuit9",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve118_history_shift",
+      "category": "repair",
+      "title": "repair history shift",
+      "path": "tasks/fix_ve118_history_shift",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_1",
+          "path": "mutants/if_negate_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve119_fsm3",
+      "category": "repair",
+      "title": "repair fsm3",
+      "path": "tasks/fix_ve119_fsm3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve120_fsm3s",
+      "category": "repair",
+      "title": "repair fsm3s",
+      "path": "tasks/fix_ve120_fsm3s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve121_2014_q3bfsm",
+      "category": "repair",
+      "title": "repair 2014 q3bfsm",
+      "path": "tasks/fix_ve121_2014_q3bfsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve122_kmap4",
+      "category": "repair",
+      "title": "repair kmap4",
+      "path": "tasks/fix_ve122_kmap4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve123_bugs_addsubz",
+      "category": "repair",
+      "title": "repair bugs addsubz",
+      "path": "tasks/fix_ve123_bugs_addsubz",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve124_rule110",
+      "category": "repair",
+      "title": "repair rule110",
+      "path": "tasks/fix_ve124_rule110",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve125_kmap3",
+      "category": "repair",
+      "title": "repair kmap3",
+      "path": "tasks/fix_ve125_kmap3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve126_circuit6",
+      "category": "repair",
+      "title": "repair circuit6",
+      "path": "tasks/fix_ve126_circuit6",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_2",
+          "path": "mutants/rhs_invert_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "rhs_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve127_lemmings1",
+      "category": "repair",
+      "title": "repair lemmings1",
+      "path": "tasks/fix_ve127_lemmings1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve128_fsm_ps2",
+      "category": "repair",
+      "title": "repair fsm ps2",
+      "path": "tasks/fix_ve128_fsm_ps2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve129_ece241_2013_q8",
+      "category": "repair",
+      "title": "repair ece241 2013 q8",
+      "path": "tasks/fix_ve129_ece241_2013_q8",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve130_circuit5",
+      "category": "repair",
+      "title": "repair circuit5",
+      "path": "tasks/fix_ve130_circuit5",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve132_always_if2",
+      "category": "repair",
+      "title": "repair always if2",
+      "path": "tasks/fix_ve132_always_if2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve133_2014_q3fsm",
+      "category": "repair",
+      "title": "repair 2014 q3fsm",
+      "path": "tasks/fix_ve133_2014_q3fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve134_2014_q3c",
+      "category": "repair",
+      "title": "repair 2014 q3c",
+      "path": "tasks/fix_ve134_2014_q3c",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve135_m2014_q6b",
+      "category": "repair",
+      "title": "repair m2014 q6b",
+      "path": "tasks/fix_ve135_m2014_q6b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve136_m2014_q6",
+      "category": "repair",
+      "title": "repair m2014 q6",
+      "path": "tasks/fix_ve136_m2014_q6",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve137_fsm_serial",
+      "category": "repair",
+      "title": "repair fsm serial",
+      "path": "tasks/fix_ve137_fsm_serial",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve138_2012_q2fsm",
+      "category": "repair",
+      "title": "repair 2012 q2fsm",
+      "path": "tasks/fix_ve138_2012_q2fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve139_2013_q2bfsm",
+      "category": "repair",
+      "title": "repair 2013 q2bfsm",
+      "path": "tasks/fix_ve139_2013_q2bfsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve140_fsm_hdlc",
+      "category": "repair",
+      "title": "repair fsm hdlc",
+      "path": "tasks/fix_ve140_fsm_hdlc",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve141_count_clock",
+      "category": "repair",
+      "title": "repair count clock",
+      "path": "tasks/fix_ve141_count_clock",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve142_lemmings2",
+      "category": "repair",
+      "title": "repair lemmings2",
+      "path": "tasks/fix_ve142_lemmings2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve143_fsm_onehot",
+      "category": "repair",
+      "title": "repair fsm onehot",
+      "path": "tasks/fix_ve143_fsm_onehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "land_lor_0",
+          "path": "mutants/land_lor_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve144_conwaylife",
+      "category": "repair",
+      "title": "repair conwaylife",
+      "path": "tasks/fix_ve144_conwaylife",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve145_circuit8",
+      "category": "repair",
+      "title": "repair circuit8",
+      "path": "tasks/fix_ve145_circuit8",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve146_fsm_serialdata",
+      "category": "repair",
+      "title": "repair fsm serialdata",
+      "path": "tasks/fix_ve146_fsm_serialdata",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve147_circuit10",
+      "category": "repair",
+      "title": "repair circuit10",
+      "path": "tasks/fix_ve147_circuit10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve148_2013_q2afsm",
+      "category": "repair",
+      "title": "repair 2013 q2afsm",
+      "path": "tasks/fix_ve148_2013_q2afsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve149_ece241_2013_q4",
+      "category": "repair",
+      "title": "repair ece241 2013 q4",
+      "path": "tasks/fix_ve149_ece241_2013_q4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve150_review2015_fsmonehot",
+      "category": "repair",
+      "title": "repair review2015 fsmonehot",
+      "path": "tasks/fix_ve150_review2015_fsmonehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve151_review2015_fsm",
+      "category": "repair",
+      "title": "repair review2015 fsm",
+      "path": "tasks/fix_ve151_review2015_fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "lor_land_0",
+          "path": "mutants/lor_land_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve152_lemmings3",
+      "category": "repair",
+      "title": "repair lemmings3",
+      "path": "tasks/fix_ve152_lemmings3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve153_gshare",
+      "category": "repair",
+      "title": "repair gshare",
+      "path": "tasks/fix_ve153_gshare",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "gt_lt_0",
+          "path": "mutants/gt_lt_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve154_fsm_ps2data",
+      "category": "repair",
+      "title": "repair fsm ps2data",
+      "path": "tasks/fix_ve154_fsm_ps2data",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve155_lemmings4",
+      "category": "repair",
+      "title": "repair lemmings4",
+      "path": "tasks/fix_ve155_lemmings4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_ve156_review2015_fancytimer",
+      "category": "repair",
+      "title": "repair review2015 fancytimer",
+      "path": "tasks/fix_ve156_review2015_fancytimer",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_accu",
+      "category": "repair",
+      "title": "repair accu",
+      "path": "tasks/fix_rtllm_accu",
+      "files": [
+        "rtl/accu.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_valid_ready",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_adder_16bit",
+      "category": "repair",
+      "title": "repair adder 16bit",
+      "path": "tasks/fix_rtllm_adder_16bit",
+      "files": [
+        "rtl/adder_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "add16_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_adder_32bit",
+      "category": "repair",
+      "title": "repair adder 32bit",
+      "path": "tasks/fix_rtllm_adder_32bit",
+      "files": [
+        "rtl/adder_32bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "adder32_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "xor_and_0",
+          "path": "mutants/xor_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "and_or_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_adder_bcd",
+      "category": "repair",
+      "title": "repair adder bcd",
+      "path": "tasks/fix_rtllm_adder_bcd",
+      "files": [
+        "rtl/adder_bcd.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "gt_lt_0",
+          "path": "mutants/gt_lt_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_adder_pipe_64bit",
+      "category": "repair",
+      "title": "repair adder pipe 64bit",
+      "path": "tasks/fix_rtllm_adder_pipe_64bit",
+      "files": [
+        "rtl/adder_pipe_64bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_adder64",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_div_16bit",
+      "category": "repair",
+      "title": "repair div 16bit",
+      "path": "tasks/fix_rtllm_div_16bit",
+      "files": [
+        "rtl/div_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_division",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_multi_16bit",
+      "category": "repair",
+      "title": "repair multi 16bit",
+      "path": "tasks/fix_rtllm_multi_16bit",
+      "files": [
+        "rtl/multi_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_multi_16bit",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_multi_8bit",
+      "category": "repair",
+      "title": "repair multi 8bit",
+      "path": "tasks/fix_rtllm_multi_8bit",
+      "files": [
+        "rtl/multi_8bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_multi_pipe_8bit",
+      "category": "repair",
+      "title": "repair multi pipe 8bit",
+      "path": "tasks/fix_rtllm_multi_pipe_8bit",
+      "files": [
+        "rtl/multi_pipe_8bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_multi_pipe",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_JC_counter",
+      "category": "repair",
+      "title": "repair JC counter",
+      "path": "tasks/fix_rtllm_JC_counter",
+      "files": [
+        "rtl/JC_counter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_counter_12",
+      "category": "repair",
+      "title": "repair counter 12",
+      "path": "tasks/fix_rtllm_counter_12",
+      "files": [
+        "rtl/counter_12.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "counter_12_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_up_down_counter",
+      "category": "repair",
+      "title": "repair up down counter",
+      "path": "tasks/fix_rtllm_up_down_counter",
+      "files": [
+        "rtl/up_down_counter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_fsm",
+      "category": "repair",
+      "title": "repair fsm",
+      "path": "tasks/fix_rtllm_fsm",
+      "files": [
+        "rtl/fsm.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "main",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "land_lor_0",
+          "path": "mutants/land_lor_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "control",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "eq_ne_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_barrel_shifter",
+      "category": "repair",
+      "title": "repair barrel shifter",
+      "path": "tasks/fix_rtllm_barrel_shifter",
+      "files": [
+        "rtl/barrel_shifter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "barrel_shifter_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "memory",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_freq_div",
+      "category": "repair",
+      "title": "repair freq div",
+      "path": "tasks/fix_rtllm_freq_div",
+      "files": [
+        "rtl/freq_div.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "test",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "const_0_1_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_freq_divbyfrac",
+      "category": "repair",
+      "title": "repair freq divbyfrac",
+      "path": "tasks/fix_rtllm_freq_divbyfrac",
+      "files": [
+        "rtl/freq_divbyfrac.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "freq_divbyfrac_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_freq_divbyodd",
+      "category": "repair",
+      "title": "repair freq divbyodd",
+      "path": "tasks/fix_rtllm_freq_divbyodd",
+      "files": [
+        "rtl/freq_divbyodd.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testb_div_odd",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_parallel2serial",
+      "category": "repair",
+      "title": "repair parallel2serial",
+      "path": "tasks/fix_rtllm_parallel2serial",
+      "files": [
+        "rtl/parallel2serial.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "parallel2serial_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "add_sub_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_pulse_detect",
+      "category": "repair",
+      "title": "repair pulse detect",
+      "path": "tasks/fix_rtllm_pulse_detect",
+      "files": [
+        "rtl/pulse_detect.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "pulse_detect_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "drop_not_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_serial2parallel",
+      "category": "repair",
+      "title": "repair serial2parallel",
+      "path": "tasks/fix_rtllm_serial2parallel",
+      "files": [
+        "rtl/serial2parallel.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "const_1_0_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_synchronizer",
+      "category": "repair",
+      "title": "repair synchronizer",
+      "path": "tasks/fix_rtllm_synchronizer",
+      "files": [
+        "rtl/synchronizer.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_1",
+          "path": "mutants/if_negate_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_traffic_light",
+      "category": "repair",
+      "title": "repair traffic light",
+      "path": "tasks/fix_rtllm_traffic_light",
+      "files": [
+        "rtl/traffic_light.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_traffic_light",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "assign_invert_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_width_8to16",
+      "category": "repair",
+      "title": "repair width 8to16",
+      "path": "tasks/fix_rtllm_width_8to16",
+      "files": [
+        "rtl/width_8to16.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "drop_not_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_RAM",
+      "category": "repair",
+      "title": "repair RAM",
+      "path": "tasks/fix_rtllm_RAM",
+      "files": [
+        "rtl/RAM.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_RAM",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_2",
+          "path": "mutants/if_negate_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": true,
+      "injected_defect": "if_negate_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    },
+    {
+      "id": "fix_rtllm_ROM",
+      "category": "repair",
+      "title": "repair ROM",
+      "path": "tasks/fix_rtllm_ROM",
+      "files": [
+        "rtl/ROM.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "rom_tb",
+          "description": "Hidden bench; starter carries one injected defect"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "misc",
+      "tier": "synthetic_repair",
+      "seed_sensitive": false,
+      "injected_defect": "literal_flip_0",
+      "tags": [
+        "synthetic_repair",
+        "not_a_real_bug"
+      ]
+    }
+  ]
+}

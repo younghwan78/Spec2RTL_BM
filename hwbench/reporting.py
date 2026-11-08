@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from urllib.parse import quote
 
+DIMENSIONS = ('category', 'difficulty', 'backend', 'tier', 'domain')
 STATUSES = {'pass', 'fail', 'infra_error', 'invalid_submission', 'agent_error', 'timeout', 'missing', 'empty_patch', 'unresolved'}
 
 def validate(result):
@@ -34,7 +35,7 @@ def validate(result):
             key = identity(item)
             if key in planned_keys:
                 raise ValueError('Duplicate planned task/repeat')
-            metadata = tuple(item.get(field, 'unknown') for field in ('category', 'difficulty', 'backend'))
+            metadata = tuple(item.get(field, 'unknown') for field in DIMENSIONS)
             if any(not isinstance(value, str) or not value.strip() for value in metadata):
                 raise ValueError('Invalid planned metadata')
             if key[0] in task_metadata and task_metadata[key[0]] != metadata:
@@ -49,7 +50,7 @@ def validate(result):
         if plan is not None:
             if key not in planned_keys:
                 raise ValueError('Recorded task/repeat outside task_plan')
-            for field in ('category', 'difficulty', 'backend'):
+            for field in DIMENSIONS:
                 if row.get(field, 'unknown') != planned_keys[key].get(field, 'unknown'):
                     raise ValueError('Recorded task metadata differs from task_plan')
         for record in (row, row.get('agent', {})):
@@ -127,6 +128,60 @@ def failure_phase(row):
     return next(iter(phases)) if len(phases) == 1 else 'multiple' if phases else 'unknown'
 
 
+def wilson(rate, n, z=1.959964):
+    """95% Wilson interval. n is distinct tasks: repeats and seeds are not independent samples."""
+    if rate is None or not n:
+        return None
+    centre = rate + z * z / (2 * n)
+    margin = z * math.sqrt(rate * (1 - rate) / n + z * z / (4 * n * n))
+    denominator = 1 + z * z / n
+    return [max(0.0, (centre - margin) / denominator), min(1.0, (centre + margin) / denominator)]
+
+
+UNJUDGED = {'infra_error', 'missing', 'unresolved'}
+CHECK_CAUSES = (('compile_error', 'compile_error'), ('compile_timeout', 'compile_timeout'),
+                ('simulation_timeout', 'simulation_timeout'), ('output_limit', 'output_limit'),
+                ('assertion_or_completion_failure', 'functional_mismatch'))
+
+
+def failure_cause(row):
+    """Single most upstream cause of a non-passing run; failure_phase remains the coarse view."""
+    status = row['status']
+    if status == 'pass':
+        return 'none'
+    if status == 'infra_error':
+        return 'infra_error'
+    if status == 'timeout':
+        return 'agent_timeout' if row.get('agent') else 'timeout'
+    if status in ('agent_error', 'invalid_submission', 'missing', 'empty_patch', 'unresolved'):
+        return status
+    reasons = {c.get('reason') for c in row.get('checks', []) if c.get('status') != 'pass'}
+    for reason, cause in CHECK_CAUSES:
+        if reason in reasons:
+            return cause
+    return 'unknown'
+
+
+def diagnostics(rows):
+    """Near-miss information. Never a substitute for task PASS."""
+    fractions = []
+    partial = seed_dependent = 0
+    for row in rows:
+        checks = row.get('checks', [])
+        required = row.get('required_checks')
+        if not checks or not isinstance(required, int) or required < 1:
+            continue
+        fraction = sum(c['status'] == 'pass' for c in checks) / required
+        fractions.append(fraction)
+        partial += row['status'] != 'pass' and fraction > 0
+        by_check = defaultdict(set)
+        for check in checks:
+            by_check[check['id']].add(check['status'] == 'pass')
+        seed_dependent += any(len(states) == 2 for states in by_check.values())
+    return {'check_pass_fraction': observations(fractions), 'partial_runs': partial,
+            'seed_dependent_runs': seed_dependent}
+
+
 def observations(values):
     values = [v for v in values if number(v) is not None]
     return {'observed_runs': len(values), 'total': sum(values) if values else None,
@@ -152,14 +207,16 @@ def summary(result):
     counts = Counter(t['status'] for t in rows)
     plan = result.get('task_plan')
     groups = {}
-    for field in ('category', 'difficulty', 'backend'):
+    for field in DIMENSIONS:
         names = sorted({r.get(field, 'unknown') for r in (plan if plan is not None else rows)})
         groups[field] = {}
         for name in names:
             recorded = [r for r in rows if r.get(field, 'unknown') == name]
             passed = sum(r['status'] == 'pass' for r in recorded)
             planned = sum(r.get(field, 'unknown') == name for r in plan) if plan is not None else None
-            groups[field][name] = {'passed': passed, 'recorded_runs': len(recorded), 'planned_runs': planned,
+            distinct = len({r['task_id'] for r in (plan if plan is not None else recorded) if r.get(field, 'unknown') == name})
+            groups[field][name] = {'distinct_tasks': distinct,
+                'pass_rate_ci95': wilson(passed / planned, distinct) if planned else None, 'passed': passed, 'recorded_runs': len(recorded), 'planned_runs': planned,
                 'missing_runs': planned - len(recorded) if planned is not None else None,
                 'pass_rate': passed / planned if planned else None,
                 'recorded_pass_rate': passed / len(recorded) if recorded else None,
@@ -183,12 +240,18 @@ def summary(result):
     usage['cost'] = {'observed_runs': 0, 'total': None, 'mean': None}
     return {'planned_runs': result['planned_runs'], 'recorded_runs': len(rows),
             'passed': counts['pass'], 'pass_rate': counts['pass']/result['planned_runs'],
+            'distinct_tasks': len({r['task_id'] for r in (plan if plan is not None else rows)}),
+            'pass_rate_ci95': wilson(counts['pass']/result['planned_runs'], len({r['task_id'] for r in (plan if plan is not None else rows)})),
             'infra_errors': counts['infra_error'], 'missing_runs': result['planned_runs']-len(rows),
             'statuses': dict(counts), 'subgroups': groups, 'repeat_consistency': repeats,
             'failure_phases': dict(Counter(failure_phase(r) for r in rows if r['status'] != 'pass')),
+            'failure_causes': dict(Counter(failure_cause(r) for r in rows if r['status'] != 'pass')),
+            'diagnostics': diagnostics(rows),
             'timing': timings, 'usage': usage,
             'metric_notes': ['Subgroup planned coverage is unknown for legacy results without task_plan.',
                              'Repeat consistency is not pass@k; simulator seeds are not task repeats.',
+                             'Confidence intervals use distinct tasks as n; they describe this task set, not all RTL design work.',
+                             'check_pass_fraction and partial_runs are diagnostics; only full task PASS counts as success.',
                              'Timing totals cover observed runs only; compile time is counted once per task/repeat/check.',
                              'Missing usage and cost remain null; cost currency is not inferred or compared.']}
 
@@ -270,6 +333,10 @@ def write_report(result, out, source_root=None):
         parts+=['<p class="warning">평가 미완료: 인프라 오류 또는 미기록 실행이 있습니다. 계획 실행 수를 분모에 유지했습니다.</p>'];md+=['**평가 미완료: 인프라 오류/미기록 실행을 확인하십시오.**','']
     parts+=['<p>과제 수: '+text(result.get('task_count','unknown'))+' · 반복: '+text(result.get('repeats','unknown'))+' · seeds: '+text(result.get('protocol',{}).get('seeds',[]))+'</p><pre>'+text(json.dumps(result.get('metadata',{}),ensure_ascii=False,indent=2))+'</pre>']
     parts+=[table(['종류','성공/계획','성공률','인프라 오류','미기록'],[[kind,f"{s['passed']}/{s['planned_runs']}",f"{s['pass_rate']:.1%}",s['infra_errors'],s['missing_runs']]])]
+    if s['pass_rate_ci95']:
+        parts+=[f"<p>95% 구간(고유 과제 {s['distinct_tasks']}개 기준): {s['pass_rate_ci95'][0]:.1%}~{s['pass_rate_ci95'][1]:.1%}. 이 과제 집합에 대한 구간이며 RTL 설계 전반으로 일반화하지 않습니다.</p>"]
+    if len(s['subgroups']['tier']) > 1:
+        parts+=['<p class="warning">서로 다른 평가 등급이 섞인 실행입니다. 전체 성공률 대신 등급별 결과를 사용하십시오.</p>']
     def metric_table(title, headers, data):
         parts.extend(['<h2>'+text(title)+'</h2>', table(headers, data)])
         md.extend(['## '+title, '', '| '+' | '.join(headers)+' |',
@@ -283,20 +350,30 @@ def write_report(result, out, source_root=None):
     parts.append('<p>계획이 저장된 결과는 미기록 실행도 분모에 포함합니다. 구형 결과의 업무·난이도별 계획 분모는 알 수 없습니다. unknown은 난이도 미지정입니다.</p>')
     md.append('계획이 없는 구형 결과의 분류별 계획 분모는 알 수 없습니다. unknown은 난이도 미지정입니다.')
     group_csv = []
-    for field, title in [('category', '업무별 결과'), ('difficulty', '난이도별 결과'), ('backend', '실행 방식별 결과')]:
+    for field, title in [('tier', '평가 등급별 결과 (등급 간 합산 금지)'), ('category', '업무별 결과'), ('domain', '설계 영역별 결과'), ('difficulty', '난이도별 결과'), ('backend', '실행 방식별 결과')]:
         data = []
         for name, group in s['subgroups'][field].items():
+            interval = group['pass_rate_ci95']
             data.append([name, group['passed'], group['recorded_runs'], display(group['planned_runs']),
-                         display(group['missing_runs']), rate(group['pass_rate']), group['coverage']])
+                         display(group['missing_runs']), rate(group['pass_rate']), group['distinct_tasks'],
+                         '알 수 없음' if interval is None else f'{interval[0]:.1%}~{interval[1]:.1%}', group['coverage']])
             group_csv.append([field, name, group['passed'], group['recorded_runs'], group['planned_runs'],
-                              group['missing_runs'], group['pass_rate'], group['coverage']])
-        metric_table(title, ['분류', '성공', '기록', '계획', '미기록', '계획 대비 성공률', '분모 근거'], data)
-    write_csv(out/'subgroups.csv', ['dimension', 'group', 'passed', 'recorded_runs', 'planned_runs', 'missing_runs', 'pass_rate', 'coverage'], group_csv)
+                              group['missing_runs'], group['pass_rate'], group['distinct_tasks'],
+                              interval[0] if interval else None, interval[1] if interval else None, group['coverage']])
+        metric_table(title, ['분류', '성공', '기록', '계획', '미기록', '계획 대비 성공률', '고유 과제', '95% 구간(고유 과제 기준)', '분모 근거'], data)
+    write_csv(out/'subgroups.csv', ['dimension', 'group', 'passed', 'recorded_runs', 'planned_runs', 'missing_runs', 'pass_rate', 'distinct_tasks', 'ci95_low', 'ci95_high', 'coverage'], group_csv)
     repeat_headers = ['task_id', 'passed', 'recorded_runs', 'planned_runs', 'coverage', 'outcome', 'pass_rate']
     repeat_data = [[r[k] for k in repeat_headers] for r in s['repeat_consistency']]
     metric_table('과제별 반복 일관성', repeat_headers, [[display(v) for v in row] for row in repeat_data])
     write_csv(out/'repeats.csv', repeat_headers, repeat_data)
     metric_table('실패 단계', ['단계', '실행 수'], sorted(s['failure_phases'].items()))
+    metric_table('실패 원인', ['원인', '실행 수'], sorted(s['failure_causes'].items()))
+    diag = s['diagnostics']
+    metric_table('진단 지표 (성공률에 반영하지 않음)', ['지표', '값'],
+                 [['check 실행이 있는 실행 수', diag['check_pass_fraction']['observed_runs']],
+                  ['check×seed 통과 비율 평균', rate(diag['check_pass_fraction']['mean'])],
+                  ['일부 check만 통과한 실패 실행', diag['partial_runs']],
+                  ['seed에 따라 결과가 갈린 실행', diag['seed_dependent_runs']]])
     metric_table('관측 시간과 사용량', ['지표', '관측 실행 수', '합계', '관측 평균'],
                  [[name, item['observed_runs'], display(item['total']), display(item['mean'])]
                   for group in ('timing', 'usage') for name, item in s[group].items()])
@@ -304,7 +381,7 @@ def write_report(result, out, source_root=None):
     md.append('반복 일관성은 pass@k가 아닙니다. 시간은 관측 실행만 집계하고 compile은 check당 한 번 셉니다. 미측정 사용량·비용은 0이 아닙니다.')
     tasks=[]; checks=[]
     for t in result['tasks']:
-        tasks.append([t['task_id'],t.get('repeat',1),t.get('category','unknown'),t['status'],t.get('reason',''),t.get('seconds',''),len(t.get('checks',[])),t.get('required_checks',''),t.get('agent',{}).get('status',''),t.get('agent',{}).get('seconds',''),json.dumps(t.get('agent',{}).get('usage',{}),ensure_ascii=False),t.get('difficulty','unknown'),t.get('backend','unknown'),failure_phase(t),run_timing(t)['compile_seconds'],run_timing(t)['simulation_seconds']])
+        tasks.append([t['task_id'],t.get('repeat',1),t.get('category','unknown'),t['status'],t.get('reason',''),t.get('seconds',''),len(t.get('checks',[])),t.get('required_checks',''),t.get('agent',{}).get('status',''),t.get('agent',{}).get('seconds',''),json.dumps(t.get('agent',{}).get('usage',{}),ensure_ascii=False),t.get('difficulty','unknown'),t.get('backend','unknown'),failure_phase(t),run_timing(t)['compile_seconds'],run_timing(t)['simulation_seconds'],t.get('tier','unknown'),t.get('domain','unknown'),failure_cause(t)])
         parts+=['<details><summary>'+text(t['task_id'])+' — '+text(t['status'])+' (repeat '+text(t.get('repeat',1))+')</summary><p>'+text(t.get('reason',''))+'</p><pre>'+text(json.dumps(t.get('source_hashes',{}),ensure_ascii=False,indent=2))+'</pre>']
         md+=['### '+t['task_id']+' / repeat '+str(t.get('repeat',1)),'',t['status']+': '+t.get('reason',''),'']
         agent=t.get('agent',{})
@@ -320,7 +397,7 @@ def write_report(result, out, source_root=None):
             parts+=['<h3>'+text(c['id'])+' / seed '+text(c.get('seed',''))+'</h3><p>'+text(c.get('description',''))+'</p>',table(['결과','원인','compile exit','compile s','sim exit','sim s'],[row[4:]]),log_fragment(comp,out,c['status']!='pass'),log_fragment(sim,out,c['status']!='pass')]
             md+=['- '+c['id']+' seed='+str(c.get('seed',''))+': '+c['status']+' — '+c.get('reason','')]
         parts+=['</details>'];md+=['']
-    headers=['task_id','repeat','category','status','reason','seconds','checks','required_checks','agent_status','agent_seconds','usage','difficulty','backend','failure_phase','compile_seconds_unique','simulation_seconds']
+    headers=['task_id','repeat','category','status','reason','seconds','checks','required_checks','agent_status','agent_seconds','usage','difficulty','backend','failure_phase','compile_seconds_unique','simulation_seconds','tier','domain','failure_cause']
     write_csv(out/'tasks.csv',headers,tasks)
     write_csv(out/'checks.csv',['task_id','repeat','check','seed','status','reason','compile_exit','compile_seconds','simulation_exit','simulation_seconds'],checks)
     provenance={k:result.get(k) for k in ('run_id','created_at','suite_id','origin','suite_fingerprint','protocol_fingerprint','protocol','tools','metadata','file_hashes')}
@@ -334,12 +411,62 @@ def write_report(result, out, source_root=None):
     (out/'summary.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
 
+def sign_test(wins_a, wins_b):
+    """Exact two-sided sign test. With one repeat per task this equals the exact McNemar test."""
+    n = wins_a + wins_b
+    if n == 0:
+        return None
+    tail = sum(math.comb(n, k) for k in range(min(wins_a, wins_b) + 1)) / 2 ** n
+    return min(1.0, 2 * tail)
+
+
+def per_task_rates(result):
+    """Per-task pass rate over planned repeats, and tasks that cannot be judged fairly."""
+    plan = result.get('task_plan') or result['tasks']
+    rows = {identity(r): r for r in result['tasks']}
+    tally, unusable, tiers = defaultdict(lambda: [0, 0]), set(), {}
+    for item in plan:
+        key = identity(item)
+        row = rows.get(key)
+        tally[key[0]][1] += 1
+        tiers[key[0]] = item.get('tier', 'unknown')
+        # Not judged is different from judged as failing: unresolved and missing carry no verdict.
+        if row is None or row['status'] in UNJUDGED:
+            unusable.add(key[0])
+        elif row['status'] == 'pass':
+            tally[key[0]][0] += 1
+    return {t: p / n for t, (p, n) in tally.items()}, unusable, tiers
+
+
+def paired_comparison(a, b):
+    """One comparison per evaluation tier; tiers are never pooled into a single verdict."""
+    rates_a, bad_a, tiers_a = per_task_rates(a['result'])
+    rates_b, bad_b, tiers_b = per_task_rates(b['result'])
+    tiers = {**tiers_b, **tiers_a}
+    return [paired_tier(a['label'], b['label'], tier, {t: r for t, r in rates_a.items() if tiers[t] == tier},
+                        {t: r for t, r in rates_b.items() if tiers[t] == tier}, bad_a, bad_b)
+            for tier in sorted(set(tiers.values()))]
+
+
+def paired_tier(label_a, label_b, tier, rates_a, rates_b, bad_a, bad_b):
+    shared = set(rates_a) & set(rates_b)
+    usable = sorted(shared - bad_a - bad_b)
+    a_better = sum(rates_a[t] > rates_b[t] for t in usable)
+    b_better = sum(rates_b[t] > rates_a[t] for t in usable)
+    return {'tier': tier, 'a': label_a, 'b': label_b, 'compared_tasks': len(usable),
+            'excluded_infra_or_missing': len(shared) - len(usable), 'unshared_tasks': len(set(rates_a) ^ set(rates_b)),
+            'a_better': a_better, 'b_better': b_better, 'ties': len(usable) - a_better - b_better,
+            'mean_rate_a': sum(rates_a[t] for t in usable) / len(usable) if usable else None,
+            'mean_rate_b': sum(rates_b[t] for t in usable) / len(usable) if usable else None,
+            'sign_test_p': sign_test(a_better, b_better)}
+
+
 def compare_reports(paths, out):
     groups = defaultdict(list)
     for path in paths:
         p = Path(path); p = p/'results.json' if p.is_dir() else p
         r = json.loads(p.read_text()); s = summary(r)
-        groups[(r['protocol_fingerprint'], r['kind'])].append({'label': r['label'], 'summary': s})
+        groups[(r['protocol_fingerprint'], r['kind'])].append({'label': r['label'], 'summary': s, 'result': r})
     parts = ['<h1>평가 구성 비교</h1><p>동일 protocol hash와 결과 종류끼리만 묶었습니다. 서로 다른 그룹의 직접 순위 비교는 지원하지 않습니다. fixture는 실제 모델 점수가 아닙니다.</p>']
     exported = []
     csv_rows = []
@@ -355,7 +482,17 @@ def compare_reports(paths, out):
                   table(['구성', '성공', '계획', '성공률', '인프라', '미기록', '관측 agent 초', '관측 채점 초'], rows)]
         for entry in entries:
             parts += ['<details><summary>'+text(entry['label'])+' — 업무·난이도·반복·실패·사용량</summary><p>legacy의 계획 분모는 unknown_legacy / null입니다. 시간은 관측 실행만 합산합니다.</p><pre>'+text(json.dumps(entry['summary'], ensure_ascii=False, indent=2))+'</pre></details>']
-        exported.append({'protocol_fingerprint': protocol, 'kind': kind, 'runs': entries})
+        paired = [row for i, x in enumerate(entries) for y in entries[i + 1:] for row in paired_comparison(x, y)]
+        if paired:
+            parts += ['<h3>과제 단위 짝비교</h3><p>평가 등급별로 같은 과제의 결과만 비교합니다. 인프라 오류·미기록·미판정 과제는 제외합니다. 부호 검정 p값은 다중 비교 보정 전입니다.</p>',
+                      table(['등급', 'A', 'B', '비교 과제', '제외', 'A 우세', 'B 우세', '동률', 'A 평균', 'B 평균', 'p'],
+                            [[p['tier'], p['a'], p['b'], p['compared_tasks'], p['excluded_infra_or_missing'], p['a_better'], p['b_better'], p['ties'],
+                              '알 수 없음' if p['mean_rate_a'] is None else f"{p['mean_rate_a']:.1%}",
+                              '알 수 없음' if p['mean_rate_b'] is None else f"{p['mean_rate_b']:.1%}",
+                              '알 수 없음' if p['sign_test_p'] is None else f"{p['sign_test_p']:.4f}"] for p in paired])]
+        for entry in entries:
+            entry.pop('result')
+        exported.append({'protocol_fingerprint': protocol, 'kind': kind, 'runs': entries, 'paired': paired})
     out = Path(out); out.mkdir(parents=True, exist_ok=True)
     (out/'comparison.html').write_text('<!doctype html><html lang="ko"><meta charset="utf-8"><title>HW 비교</title><style>'+STYLE+'</style><body>'+''.join(parts)+'</body></html>', encoding='utf-8')
     (out/'comparison.json').write_text(json.dumps({'groups': exported}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')

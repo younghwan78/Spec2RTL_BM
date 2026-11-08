@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "_guide": "Copy this file and fill in every placeholder with what the site install actually uses, then delete nothing else. Procedure: scripts/EDA_CONTRACT.md, section on site tool adaptation. Refused while placeholders remain.",
+  "version_probes": [
+    {"role": "area_delay", "name": "REPLACE_SYNTHESIS_TOOL_NAME", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_VERSION_FLAG"], "regex": "REPLACE_REGEX_WITH_ONE_CAPTURE_GROUP"},
+    {"role": "power", "name": "REPLACE_POWER_TOOL_NAME", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_VERSION_FLAG"], "regex": "REPLACE_REGEX_WITH_ONE_CAPTURE_GROUP"},
+    {"role": "lint", "name": "REPLACE_LINT_TOOL_NAME", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_VERSION_FLAG"], "regex": "REPLACE_REGEX_WITH_ONE_CAPTURE_GROUP"}
+  ],
+  "steps": [
+    {"role": "area_delay", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_ARGS_USING", "{asset:synth_script}", "{filelist}", "{top}", "{clock_period_ns}"], "timeout_seconds": 3000},
+    {"role": "power", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_ARGS_USING", "{asset:power_script}", "{filelist}", "{top}", "{workload_id}"], "timeout_seconds": 3000},
+    {"role": "lint", "argv": ["REPLACE_TOOL_BINARY", "REPLACE_ARGS_USING", "{asset:lint_script}", "{filelist}", "{top}"], "timeout_seconds": 1200}
+  ],
+  "metrics": {
+    "area_um2": {"terms": [{"report": "REPLACE_area_report_file", "regex": "REPLACE_regex_capturing_cell_area", "scale": 1.0}]},
+    "delay_ns": {"terms": [{"report": "REPLACE_timing_report_file", "regex": "REPLACE_regex_capturing_data_path_delay", "occurrence": -1, "scale": 1.0}]},
+    "power_mw": {"terms": [
+      {"report": "REPLACE_power_report_file", "regex": "REPLACE_regex_capturing_dynamic_power", "scale": 1.0},
+      {"report": "REPLACE_power_report_file", "regex": "REPLACE_regex_capturing_leakage_power", "scale": 1.0}
+    ]}
+  },
+  "quality": {"lint": {"report": "REPLACE_lint_report_file", "fail_regex": "REPLACE_regex_when_lint_fails", "pass_regex": "REPLACE_regex_when_lint_is_clean"}},
+  "activity": {"report": "REPLACE_candidate_activity_file"}
+}

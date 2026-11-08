@@ -1,0 +1,5503 @@
+{
+  "schema_version": 1,
+  "id": "verilog-eval-adapted-v1",
+  "title": "VerilogEval spec-to-RTL (native adapted)",
+  "origin": "verilog_eval_adapted_not_official_score",
+  "difficulty_basis": "reference_loc_heuristic",
+  "tasks": [
+    {
+      "id": "ve001_zero",
+      "category": "generation",
+      "title": "zero",
+      "path": "tasks/ve001_zero",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve002_m2014_q4i",
+      "category": "generation",
+      "title": "m2014 q4i",
+      "path": "tasks/ve002_m2014_q4i",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve003_step_one",
+      "category": "generation",
+      "title": "step one",
+      "path": "tasks/ve003_step_one",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve005_notgate",
+      "category": "generation",
+      "title": "notgate",
+      "path": "tasks/ve005_notgate",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve010_mt2015_q4a",
+      "category": "generation",
+      "title": "mt2015 q4a",
+      "path": "tasks/ve010_mt2015_q4a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve011_norgate",
+      "category": "generation",
+      "title": "norgate",
+      "path": "tasks/ve011_norgate",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve012_xnorgate",
+      "category": "generation",
+      "title": "xnorgate",
+      "path": "tasks/ve012_xnorgate",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve013_m2014_q4e",
+      "category": "generation",
+      "title": "m2014 q4e",
+      "path": "tasks/ve013_m2014_q4e",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve014_andgate",
+      "category": "generation",
+      "title": "andgate",
+      "path": "tasks/ve014_andgate",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve019_m2014_q4f",
+      "category": "generation",
+      "title": "m2014 q4f",
+      "path": "tasks/ve019_m2014_q4f",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve020_mt2015_eq2",
+      "category": "generation",
+      "title": "mt2015 eq2",
+      "path": "tasks/ve020_mt2015_eq2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve026_alwaysblock1",
+      "category": "generation",
+      "title": "alwaysblock1",
+      "path": "tasks/ve026_alwaysblock1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve028_m2014_q4a",
+      "category": "generation",
+      "title": "m2014 q4a",
+      "path": "tasks/ve028_m2014_q4a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve029_m2014_q4g",
+      "category": "generation",
+      "title": "m2014 q4g",
+      "path": "tasks/ve029_m2014_q4g",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve030_popcount255",
+      "category": "generation",
+      "title": "popcount255",
+      "path": "tasks/ve030_popcount255",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve032_vector0",
+      "category": "generation",
+      "title": "vector0",
+      "path": "tasks/ve032_vector0",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve033_ece241_2014_q1c",
+      "category": "generation",
+      "title": "ece241 2014 q1c",
+      "path": "tasks/ve033_ece241_2014_q1c",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "land_lor_0",
+          "path": "mutants/land_lor_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve034_dff8",
+      "category": "generation",
+      "title": "dff8",
+      "path": "tasks/ve034_dff8",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve035_count1to10",
+      "category": "generation",
+      "title": "count1to10",
+      "path": "tasks/ve035_count1to10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve036_ringer",
+      "category": "generation",
+      "title": "ringer",
+      "path": "tasks/ve036_ringer",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve037_review2015_count1k",
+      "category": "generation",
+      "title": "review2015 count1k",
+      "path": "tasks/ve037_review2015_count1k",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve038_count15",
+      "category": "generation",
+      "title": "count15",
+      "path": "tasks/ve038_count15",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve039_always_if",
+      "category": "generation",
+      "title": "always if",
+      "path": "tasks/ve039_always_if",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve040_count10",
+      "category": "generation",
+      "title": "count10",
+      "path": "tasks/ve040_count10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve041_dff8r",
+      "category": "generation",
+      "title": "dff8r",
+      "path": "tasks/ve041_dff8r",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve043_vector5",
+      "category": "generation",
+      "title": "vector5",
+      "path": "tasks/ve043_vector5",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "xor_and_0",
+          "path": "mutants/xor_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve044_vectorgates",
+      "category": "generation",
+      "title": "vectorgates",
+      "path": "tasks/ve044_vectorgates",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve045_edgedetect2",
+      "category": "generation",
+      "title": "edgedetect2",
+      "path": "tasks/ve045_edgedetect2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "xor_and_0",
+          "path": "mutants/xor_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve046_dff8p",
+      "category": "generation",
+      "title": "dff8p",
+      "path": "tasks/ve046_dff8p",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve047_dff8ar",
+      "category": "generation",
+      "title": "dff8ar",
+      "path": "tasks/ve047_dff8ar",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve048_m2014_q4c",
+      "category": "generation",
+      "title": "m2014 q4c",
+      "path": "tasks/ve048_m2014_q4c",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve049_m2014_q4b",
+      "category": "generation",
+      "title": "m2014 q4b",
+      "path": "tasks/ve049_m2014_q4b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve050_kmap1",
+      "category": "generation",
+      "title": "kmap1",
+      "path": "tasks/ve050_kmap1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve051_gates4",
+      "category": "generation",
+      "title": "gates4",
+      "path": "tasks/ve051_gates4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve052_gates100",
+      "category": "generation",
+      "title": "gates100",
+      "path": "tasks/ve052_gates100",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve054_edgedetect",
+      "category": "generation",
+      "title": "edgedetect",
+      "path": "tasks/ve054_edgedetect",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve055_conditional",
+      "category": "generation",
+      "title": "conditional",
+      "path": "tasks/ve055_conditional",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "gt_lt_0",
+          "path": "mutants/gt_lt_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve056_ece241_2013_q7",
+      "category": "generation",
+      "title": "ece241 2013 q7",
+      "path": "tasks/ve056_ece241_2013_q7",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve057_kmap2",
+      "category": "generation",
+      "title": "kmap2",
+      "path": "tasks/ve057_kmap2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve058_alwaysblock2",
+      "category": "generation",
+      "title": "alwaysblock2",
+      "path": "tasks/ve058_alwaysblock2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve060_m2014_q4k",
+      "category": "generation",
+      "title": "m2014 q4k",
+      "path": "tasks/ve060_m2014_q4k",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve061_2014_q4a",
+      "category": "generation",
+      "title": "2014 q4a",
+      "path": "tasks/ve061_2014_q4a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve063_review2015_shiftcount",
+      "category": "generation",
+      "title": "review2015 shiftcount",
+      "path": "tasks/ve063_review2015_shiftcount",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve064_vector3",
+      "category": "generation",
+      "title": "vector3",
+      "path": "tasks/ve064_vector3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve065_7420",
+      "category": "generation",
+      "title": "7420",
+      "path": "tasks/ve065_7420",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_1",
+          "path": "mutants/assign_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve066_edgecapture",
+      "category": "generation",
+      "title": "edgecapture",
+      "path": "tasks/ve066_edgecapture",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve067_countslow",
+      "category": "generation",
+      "title": "countslow",
+      "path": "tasks/ve067_countslow",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve068_countbcd",
+      "category": "generation",
+      "title": "countbcd",
+      "path": "tasks/ve068_countbcd",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve069_truthtable1",
+      "category": "generation",
+      "title": "truthtable1",
+      "path": "tasks/ve069_truthtable1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve070_ece241_2013_q2",
+      "category": "generation",
+      "title": "ece241 2013 q2",
+      "path": "tasks/ve070_ece241_2013_q2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve071_always_casez",
+      "category": "generation",
+      "title": "always casez",
+      "path": "tasks/ve071_always_casez",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve072_thermostat",
+      "category": "generation",
+      "title": "thermostat",
+      "path": "tasks/ve072_thermostat",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve073_dff16e",
+      "category": "generation",
+      "title": "dff16e",
+      "path": "tasks/ve073_dff16e",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve074_ece241_2014_q4",
+      "category": "generation",
+      "title": "ece241 2014 q4",
+      "path": "tasks/ve074_ece241_2014_q4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve075_counter_2bc",
+      "category": "generation",
+      "title": "counter 2bc",
+      "path": "tasks/ve075_counter_2bc",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "gt_lt_0",
+          "path": "mutants/gt_lt_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve076_always_case",
+      "category": "generation",
+      "title": "always case",
+      "path": "tasks/ve076_always_case",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve077_wire_decl",
+      "category": "generation",
+      "title": "wire decl",
+      "path": "tasks/ve077_wire_decl",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve078_dualedge",
+      "category": "generation",
+      "title": "dualedge",
+      "path": "tasks/ve078_dualedge",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve079_fsm3onehot",
+      "category": "generation",
+      "title": "fsm3onehot",
+      "path": "tasks/ve079_fsm3onehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve080_timer",
+      "category": "generation",
+      "title": "timer",
+      "path": "tasks/ve080_timer",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve081_7458",
+      "category": "generation",
+      "title": "7458",
+      "path": "tasks/ve081_7458",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve082_lfsr32",
+      "category": "generation",
+      "title": "lfsr32",
+      "path": "tasks/ve082_lfsr32",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve083_mt2015_q4b",
+      "category": "generation",
+      "title": "mt2015 q4b",
+      "path": "tasks/ve083_mt2015_q4b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve084_ece241_2013_q12",
+      "category": "generation",
+      "title": "ece241 2013 q12",
+      "path": "tasks/ve084_ece241_2013_q12",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve085_shift4",
+      "category": "generation",
+      "title": "shift4",
+      "path": "tasks/ve085_shift4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "nba_const_0",
+          "path": "mutants/nba_const_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve086_lfsr5",
+      "category": "generation",
+      "title": "lfsr5",
+      "path": "tasks/ve086_lfsr5",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve087_gates",
+      "category": "generation",
+      "title": "gates",
+      "path": "tasks/ve087_gates",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve088_ece241_2014_q5b",
+      "category": "generation",
+      "title": "ece241 2014 q5b",
+      "path": "tasks/ve088_ece241_2014_q5b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve089_ece241_2014_q5a",
+      "category": "generation",
+      "title": "ece241 2014 q5a",
+      "path": "tasks/ve089_ece241_2014_q5a",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve091_2012_q2b",
+      "category": "generation",
+      "title": "2012 q2b",
+      "path": "tasks/ve091_2012_q2b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve092_gatesv100",
+      "category": "generation",
+      "title": "gatesv100",
+      "path": "tasks/ve092_gatesv100",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve093_ece241_2014_q3",
+      "category": "generation",
+      "title": "ece241 2014 q3",
+      "path": "tasks/ve093_ece241_2014_q3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve094_gatesv",
+      "category": "generation",
+      "title": "gatesv",
+      "path": "tasks/ve094_gatesv",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve095_review2015_fsmshift",
+      "category": "generation",
+      "title": "review2015 fsmshift",
+      "path": "tasks/ve095_review2015_fsmshift",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve096_review2015_fsmseq",
+      "category": "generation",
+      "title": "review2015 fsmseq",
+      "path": "tasks/ve096_review2015_fsmseq",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve097_mux9to1v",
+      "category": "generation",
+      "title": "mux9to1v",
+      "path": "tasks/ve097_mux9to1v",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve098_circuit7",
+      "category": "generation",
+      "title": "circuit7",
+      "path": "tasks/ve098_circuit7",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve100_fsm3comb",
+      "category": "generation",
+      "title": "fsm3comb",
+      "path": "tasks/ve100_fsm3comb",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve101_circuit4",
+      "category": "generation",
+      "title": "circuit4",
+      "path": "tasks/ve101_circuit4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve102_circuit3",
+      "category": "generation",
+      "title": "circuit3",
+      "path": "tasks/ve102_circuit3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve103_circuit2",
+      "category": "generation",
+      "title": "circuit2",
+      "path": "tasks/ve103_circuit2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve104_mt2015_muxdff",
+      "category": "generation",
+      "title": "mt2015 muxdff",
+      "path": "tasks/ve104_mt2015_muxdff",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve105_rotate100",
+      "category": "generation",
+      "title": "rotate100",
+      "path": "tasks/ve105_rotate100",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve106_always_nolatches",
+      "category": "generation",
+      "title": "always nolatches",
+      "path": "tasks/ve106_always_nolatches",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve107_fsm1s",
+      "category": "generation",
+      "title": "fsm1s",
+      "path": "tasks/ve107_fsm1s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve108_rule90",
+      "category": "generation",
+      "title": "rule90",
+      "path": "tasks/ve108_rule90",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve109_fsm1",
+      "category": "generation",
+      "title": "fsm1",
+      "path": "tasks/ve109_fsm1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve110_fsm2",
+      "category": "generation",
+      "title": "fsm2",
+      "path": "tasks/ve110_fsm2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve111_fsm2s",
+      "category": "generation",
+      "title": "fsm2s",
+      "path": "tasks/ve111_fsm2s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve112_always_case2",
+      "category": "generation",
+      "title": "always case2",
+      "path": "tasks/ve112_always_case2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "literal_flip_1",
+          "path": "mutants/literal_flip_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve113_2012_q1g",
+      "category": "generation",
+      "title": "2012 q1g",
+      "path": "tasks/ve113_2012_q1g",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve114_bugs_case",
+      "category": "generation",
+      "title": "bugs case",
+      "path": "tasks/ve114_bugs_case",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve115_shift18",
+      "category": "generation",
+      "title": "shift18",
+      "path": "tasks/ve115_shift18",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve116_m2014_q3",
+      "category": "generation",
+      "title": "m2014 q3",
+      "path": "tasks/ve116_m2014_q3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_2",
+          "path": "mutants/literal_flip_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_2",
+          "path": "mutants/rhs_invert_2",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve117_circuit9",
+      "category": "generation",
+      "title": "circuit9",
+      "path": "tasks/ve117_circuit9",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve118_history_shift",
+      "category": "generation",
+      "title": "history shift",
+      "path": "tasks/ve118_history_shift",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve119_fsm3",
+      "category": "generation",
+      "title": "fsm3",
+      "path": "tasks/ve119_fsm3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve120_fsm3s",
+      "category": "generation",
+      "title": "fsm3s",
+      "path": "tasks/ve120_fsm3s",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve121_2014_q3bfsm",
+      "category": "generation",
+      "title": "2014 q3bfsm",
+      "path": "tasks/ve121_2014_q3bfsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve122_kmap4",
+      "category": "generation",
+      "title": "kmap4",
+      "path": "tasks/ve122_kmap4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve123_bugs_addsubz",
+      "category": "generation",
+      "title": "bugs addsubz",
+      "path": "tasks/ve123_bugs_addsubz",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve124_rule110",
+      "category": "generation",
+      "title": "rule110",
+      "path": "tasks/ve124_rule110",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve125_kmap3",
+      "category": "generation",
+      "title": "kmap3",
+      "path": "tasks/ve125_kmap3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve126_circuit6",
+      "category": "generation",
+      "title": "circuit6",
+      "path": "tasks/ve126_circuit6",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve127_lemmings1",
+      "category": "generation",
+      "title": "lemmings1",
+      "path": "tasks/ve127_lemmings1",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve128_fsm_ps2",
+      "category": "generation",
+      "title": "fsm ps2",
+      "path": "tasks/ve128_fsm_ps2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve129_ece241_2013_q8",
+      "category": "generation",
+      "title": "ece241 2013 q8",
+      "path": "tasks/ve129_ece241_2013_q8",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve130_circuit5",
+      "category": "generation",
+      "title": "circuit5",
+      "path": "tasks/ve130_circuit5",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve131_mt2015_q4",
+      "category": "generation",
+      "title": "mt2015 q4",
+      "path": "tasks/ve131_mt2015_q4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "easy",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve132_always_if2",
+      "category": "generation",
+      "title": "always if2",
+      "path": "tasks/ve132_always_if2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve133_2014_q3fsm",
+      "category": "generation",
+      "title": "2014 q3fsm",
+      "path": "tasks/ve133_2014_q3fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve134_2014_q3c",
+      "category": "generation",
+      "title": "2014 q3c",
+      "path": "tasks/ve134_2014_q3c",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve135_m2014_q6b",
+      "category": "generation",
+      "title": "m2014 q6b",
+      "path": "tasks/ve135_m2014_q6b",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve136_m2014_q6",
+      "category": "generation",
+      "title": "m2014 q6",
+      "path": "tasks/ve136_m2014_q6",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve137_fsm_serial",
+      "category": "generation",
+      "title": "fsm serial",
+      "path": "tasks/ve137_fsm_serial",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve138_2012_q2fsm",
+      "category": "generation",
+      "title": "2012 q2fsm",
+      "path": "tasks/ve138_2012_q2fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve139_2013_q2bfsm",
+      "category": "generation",
+      "title": "2013 q2bfsm",
+      "path": "tasks/ve139_2013_q2bfsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve140_fsm_hdlc",
+      "category": "generation",
+      "title": "fsm hdlc",
+      "path": "tasks/ve140_fsm_hdlc",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve141_count_clock",
+      "category": "generation",
+      "title": "count clock",
+      "path": "tasks/ve141_count_clock",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve142_lemmings2",
+      "category": "generation",
+      "title": "lemmings2",
+      "path": "tasks/ve142_lemmings2",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve143_fsm_onehot",
+      "category": "generation",
+      "title": "fsm onehot",
+      "path": "tasks/ve143_fsm_onehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "land_lor_0",
+          "path": "mutants/land_lor_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve144_conwaylife",
+      "category": "generation",
+      "title": "conwaylife",
+      "path": "tasks/ve144_conwaylife",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve145_circuit8",
+      "category": "generation",
+      "title": "circuit8",
+      "path": "tasks/ve145_circuit8",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve146_fsm_serialdata",
+      "category": "generation",
+      "title": "fsm serialdata",
+      "path": "tasks/ve146_fsm_serialdata",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve147_circuit10",
+      "category": "generation",
+      "title": "circuit10",
+      "path": "tasks/ve147_circuit10",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "or_and_0",
+          "path": "mutants/or_and_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve148_2013_q2afsm",
+      "category": "generation",
+      "title": "2013 q2afsm",
+      "path": "tasks/ve148_2013_q2afsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve149_ece241_2013_q4",
+      "category": "generation",
+      "title": "ece241 2013 q4",
+      "path": "tasks/ve149_ece241_2013_q4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve150_review2015_fsmonehot",
+      "category": "generation",
+      "title": "review2015 fsmonehot",
+      "path": "tasks/ve150_review2015_fsmonehot",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "combinational",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve151_review2015_fsm",
+      "category": "generation",
+      "title": "review2015 fsm",
+      "path": "tasks/ve151_review2015_fsm",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve152_lemmings3",
+      "category": "generation",
+      "title": "lemmings3",
+      "path": "tasks/ve152_lemmings3",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve153_gshare",
+      "category": "generation",
+      "title": "gshare",
+      "path": "tasks/ve153_gshare",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "sequential",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve154_fsm_ps2data",
+      "category": "generation",
+      "title": "fsm ps2data",
+      "path": "tasks/ve154_fsm_ps2data",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve155_lemmings4",
+      "category": "generation",
+      "title": "lemmings4",
+      "path": "tasks/ve155_lemmings4",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "ve156_review2015_fancytimer",
+      "category": "generation",
+      "title": "review2015 fancytimer",
+      "path": "tasks/ve156_review2015_fancytimer",
+      "files": [
+        "rtl/TopModule.sv"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "fsm",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "verilog_eval_adapted_not_official_score"
+      ]
+    }
+  ]
+}

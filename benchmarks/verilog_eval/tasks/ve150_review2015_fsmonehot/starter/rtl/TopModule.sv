@@ -1,0 +1,16 @@
+module TopModule (
+  input d,
+  input done_counting,
+  input ack,
+  input [9:0] state, // 10-bit one-hot current state
+  output B3_next,
+  output S_next,
+  output S1_next,
+  output Count_next,
+  output Wait_next,
+  output done,
+  output counting,
+  output shift_ena
+);
+  // Implement the specified behaviour here.
+endmodule

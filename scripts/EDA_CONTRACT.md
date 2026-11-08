@@ -72,3 +72,29 @@ Wrapper는 request JSON에서 sources, assets의 경로, task_id/repeat, job_id,
 `mode: measured` 작업은 실행 전에 `offline-pack`으로 만든 자료 묶음을 확인한다. `eda-run QUEUE --kit /data/kit --profile eda`를 사용한다. `eda` profile에는 tool_installation과 configuration 역할이 있어야 한다. 누락·해시·권한 불일치는 wrapper 실행 전에 거부한다. 목록 검증은 실제 도구 설치나 라이선스 checkout 검증이 아니다. 사내 설치·버전·라이선스는 별도로 확인한다. Mock control은 이 자료 없이 실행한다. 자세한 목록과 실행 절차는 `scripts/OFFLINE_CONTRACT.md`에 있다.
 
 여러 job의 결과를 반입할 때는 모든 응답을 먼저 검사한다. 유효한 transfer 전체를 하나의 디렉터리로 설치한 뒤 queue 상태를 교체하므로, 후반 job의 잘못된 값이나 상태 저장 중단 때문에 앞선 job의 일부 파일이 재시도를 막지 않는다. Export/import의 원본과 대상 디렉터리는 서로를 포함할 수 없다.
+
+## 사내 실제 도구에 맞추기
+
+사용할 도구와 버전이 확정되지 않아도 시작할 수 있다. 도구 명령과 보고서 해석은 코드가 아니라 JSON 프로파일에 있다. 도구나 버전이 바뀌면 프로파일만 고친다. 프로파일은 큐 자산이므로 내용이 바뀌면 PPA 조건 hash도 바뀌어 이전 측정과 자동 비교되지 않는다. 아래 절차는 `benchmarks/eda_controls/profile_fixture`의 가짜 도구로만 검증했다. 실제 RTL Architect, PowerPro, lint 도구의 명령과 보고서 형식은 사내에서 채워야 한다.
+
+1. **템플릿 복사.** `configs/eda-tool-profile.template.json`, `configs/eda-company.template.json`을 사내 경로로 복사한다. `REPLACE_`가 남아 있으면 wrapper와 `eda-plan`이 거부한다. 실제로 쓰는 도구의 항목만 남긴다.
+2. **버전 확인.** 프로파일의 `version_probes`에 버전 명령과 버전을 잡는 정규식(capture group 1개)을 적고 실행한다. 다른 항목이 미완성이어도 동작한다. 미작성 항목은 `not_configured`로 나온다.
+   ```bash
+   python3 scripts/eda_calibrate.py versions --profile /data/eda/profile.json --out /data/eda/versions-r1.json
+   ```
+   확인한 이름과 버전을 회사 설정의 `tool.components`에 옮긴다.
+3. **수동 1회 실행.** 사내 기준 설계 하나를 도구로 직접 돌려 원본 보고서를 얻는다. 합성·전력 스크립트는 자산(`synth_script` 등)으로 고정한다.
+4. **파싱 규칙 작성.** `metrics`의 각 `terms`에 보고서 파일명, 값을 잡는 정규식, 정규화 단위로 바꾸는 `scale`을 적는다. 같은 패턴이 여러 번 나오면 `occurrence`(기본 마지막)로 고른다. 전력처럼 합산 값은 term을 여러 개 둔다. 단위 정의는 위 절의 area/delay/power 정의를 따른다. 예: 보고서가 uW이면 `scale: 0.001`.
+5. **교정.** 사람이 원본 보고서에서 직접 읽어 정규화 단위로 환산한 값을 `expected.json`에 적고 대조한다. 도구는 실행하지 않는다.
+   ```json
+   {"read_by": "담당자", "reference_design": "설계명", "metrics": {"area_um2": 0, "delay_ns": 0, "power_mw": 0}, "quality": {"lint": "pass"}}
+   ```
+   ```bash
+   python3 scripts/eda_calibrate.py reports --profile /data/eda/profile.json --reports /data/eda/ref-run \
+     --expected /data/eda/expected.json --tolerance-pct 0.5 --out /data/eda/calibration-r1.json
+   ```
+   결과는 `calibrated`, `mismatch`, `parse_failed` 중 하나이고 프로파일·보고서 hash와 함께 남는다. `calibrated`가 아니면 측정을 시작하지 않는다.
+6. **큐 연결.** 회사 설정에 `argv: ["python3", "{asset:wrapper}", "{asset:profile}", "{request}", "{response}"]`를 쓰고 `eda-plan`/`eda-run`을 실행한다. 정상 측정 전에 `measured` 모드는 `--kit`로 자료 묶음을 확인한다.
+7. **재교정 조건.** 도구 버전, 보고서 형식, 프로파일, library, constraint가 바뀌면 3~5를 다시 한다.
+
+`steps[].argv`에서 쓸 수 있는 치환자는 `{sources}`, `{filelist}`, `{top}`, `{work}`, `{params_json}`, `{clock_period_ns}`, `{workload_id}`, `{library_name}`, `{corner}`, `{effort}`, `{asset:이름}`이다. 단계 실패·시간 초과·파싱 실패는 수치 없이 `infra_error`로 남는다. 교정은 파서와 단위의 정확성만 확인한다. 합성 옵션이나 constraint가 적절한지, 측정값이 signoff 수준인지는 보증하지 않는다.

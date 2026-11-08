@@ -1,0 +1,10 @@
+{
+  "type": "command",
+  "label": "claude-code-RECORD_MODEL_NAME",
+  "model": "RECORD_MODEL_NAME_SAME_AS_HWB_CC_MODEL",
+  "model_revision": "RECORD_MODEL_REVISION_OR_GATEWAY_ROUTE",
+  "harness": "claude-code",
+  "harness_version": "RECORD_OUTPUT_OF_claude_--version",
+  "argv": ["python3", "/absolute/path/to/hwbench/scripts/wrappers/claude_code_agent.py", "{workspace}", "{prompt}"],
+  "notes": "Record tools, permission mode, max turns and retry policy here. Set HWB_CC_MODEL in the environment. Wrapper does not isolate the agent; for blind evaluation run only on export output in a separate environment."
+}
