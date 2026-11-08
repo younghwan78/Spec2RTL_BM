@@ -1,0 +1,10 @@
+module parallel2serial(
+	input wire clk  ,
+	input wire rst_n  ,
+	input wire [3:0]d ,
+	output wire valid_out ,
+	output wire dout
+	);
+
+  // Implement the specified behaviour here.
+endmodule

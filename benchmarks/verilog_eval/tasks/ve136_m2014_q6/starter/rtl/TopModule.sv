@@ -1,0 +1,8 @@
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+  // Implement the specified behaviour here.
+endmodule

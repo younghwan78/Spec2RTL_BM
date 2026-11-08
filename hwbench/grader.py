@@ -33,6 +33,7 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
     out.mkdir(parents=True, exist_ok=True)
     result = {"task_id": task["id"], "title": task["title"], "category": task["category"],
               "difficulty": task.get("difficulty", "unknown"), "backend": "native",
+              "tier": task.get("tier", "unknown"), "domain": task.get("domain", "unknown"),
               "failure_phase": "submission", "status": "fail", "reason": "", "checks": [], "source_hashes": {},
               "required_checks": len(task["checks"]) * len(seeds), "seeds": seeds}
     texts = {}
@@ -138,7 +139,8 @@ def grade_task(suite, task, candidate, out, seeds, timeout=10, sandbox=False):
 def task_plan(suite, repeats=1):
     """Plan identities are independent of checker seeds and survive interrupted runs."""
     return [{"task_id": t["id"], "repeat": repeat, "category": t.get("category", "unknown"),
-             "difficulty": t.get("difficulty", "unknown"), "backend": "native"}
+             "difficulty": t.get("difficulty", "unknown"), "backend": "native",
+             "tier": t.get("tier", "unknown"), "domain": t.get("domain", "unknown")}
             for repeat in range(1, repeats + 1) for t in suite["tasks"]]
 
 

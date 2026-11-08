@@ -1,0 +1,9 @@
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+  // Implement the specified behaviour here.
+endmodule

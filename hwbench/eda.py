@@ -59,6 +59,7 @@ def locked(root):
 
 def config(path):
     path = Path(path).resolve(); c = read(path)
+    if 'REPLACE_' in path.read_text() or '/REPLACE/' in path.read_text(): raise ValueError('EDA config still has REPLACE_ placeholders; fill in the actual site tool values')
     if c.get('schema_version') != 1 or c.get('mode') not in ('mock', 'measured') or c.get('stage') not in ('synthesis', 'rtl_estimate'):
         raise ValueError('EDA config requires mode and analysis stage')
     for field, keys in [('tool', ('name', 'version')), ('library', ('name', 'corner')), ('workload', ('id', 'clock_period_ns', 'window'))]:

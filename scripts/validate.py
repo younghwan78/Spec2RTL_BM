@@ -25,8 +25,12 @@ def main():
               ('fixture-controls',[sys.executable,'benchmarks/core/verify.py']),
               ('core-demo',[sys.executable,'-m','hwbench','demo','--out',str(out/'core'),'--sandbox','required' if sandbox_available() else 'auto']),
               ('cvdp-adapted',[sys.executable,'-m','hwbench','demo','--suite','benchmarks/cvdp_adapted/suite.json','--out',str(out/'cvdp'),'--sandbox','required' if sandbox_available() else 'auto'])]
+    commands+=[('suite-'+name,[sys.executable,'-m','hwbench','demo','--suite',f'benchmarks/{name}/suite.json','--out',str(out/name),'--sandbox','required' if sandbox_available() else 'auto'])
+               for name in ('soc_blocks','verilog_eval','rtllm','public_repair')]
+    commands+=[('audit-'+name,[sys.executable,'-m','hwbench','audit-checkers','--suite',f'benchmarks/{name}/suite.json','--out',str(out/('audit-'+name)),'--sandbox','required' if sandbox_available() else 'auto'])
+               for name in ('core','cvdp_adapted','soc_blocks','verilog_eval','rtllm','public_repair')]
     for name,argv in commands:
-        result=execute(argv,ROOT,out/(name+'.log'),180)
+        result=execute(argv,ROOT,out/(name+'.log'),900 if name.startswith(('suite-','audit-')) else 180)
         result['name']=name;steps.append(result)
         print(name, 'PASS' if result['returncode']==0 and not result['timeout'] else 'FAIL',flush=True)
     if sandbox_available():

@@ -1,0 +1,25 @@
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  x
+ - output z
+
+The module should implement a finite state machine with the following
+behavior. Input x goes to three different two-input gates: an XOR, an
+AND, and a OR gate. Each of the three gates is connected to the input of
+a D flip-flop and then the flip-flop outputs all go to a three-input
+NOR gate, whose output is Z. The second input of the XOR is its corresponding
+flip-flop's output, the second input of the AND is its corresponding
+flip-flop's complemented output, and finally the second input of the OR
+is its corresponding flip-flop's complementary output.
+
+Assume that the D flip-flops are initially reset to zero before the
+machine begins. Assume all sequential logic is triggered on the positive
+edge of the clock.
+
+The module must be named `TopModule`. Provide synthesizable SystemVerilog only; no testbench or simulation system tasks belong in the submitted RTL.
+
+
+The RTL file provided in this workspace was written for the specification above but contains a functional defect. Repair it so that it fully meets the specification. Keep the module name and ports. Do not rewrite unrelated logic.

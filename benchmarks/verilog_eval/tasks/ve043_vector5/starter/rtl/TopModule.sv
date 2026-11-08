@@ -1,0 +1,10 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  input e,
+  output [24:0] out
+);
+  // Implement the specified behaviour here.
+endmodule

@@ -136,6 +136,10 @@ def main(argv=None):
         if name == "import-files": p.add_argument("--responses", required=True)
     p = sub.add_parser("report"); p.add_argument("results");p.add_argument("--out")
     p = sub.add_parser("compare");p.add_argument("results", nargs="+");p.add_argument("--out", required=True)
+    p = sub.add_parser("audit-checkers");p.add_argument("--suite", default=str(DEFAULT_SUITE));p.add_argument("--out", required=True)
+    p.add_argument("--sandbox", choices=("auto", "required", "off"), default="auto");p.add_argument("--jobs", type=int, default=4)
+    p = sub.add_parser("quality");p.add_argument("results");p.add_argument("--suite", default=str(DEFAULT_SUITE));p.add_argument("--out", required=True)
+    p.add_argument("--sandbox", choices=("auto", "required", "off"), default="auto")
     p = sub.add_parser("import-hwe");p.add_argument("final_report");p.add_argument("--out", required=True)
     p.add_argument("--label", required=True);p.add_argument("--dataset-id", required=True)
     p.add_argument("--expected-ids", help="JSON list of IDs from the pinned dataset")
@@ -224,6 +228,20 @@ def main(argv=None):
             write_report(result, args.out or p.parent, source_root=p.parent)
             print(Path(args.out or p.parent).resolve() / 'report.html');return 0
         if args.cmd == "compare": compare_reports(args.results, args.out);return 0
+        if args.cmd == "audit-checkers":
+            from .checker_audit import audit_suite
+            r = audit_suite(load_suite(args.suite), args.out, sandbox=args.sandbox, jobs=args.jobs)
+            print(json.dumps(r["counts"], ensure_ascii=False))
+            for row in r["tasks"]:
+                if row["status"] != "pass":
+                    print(row["task_id"], row["status"], row.get("reason") or ", ".join(row["findings"]))
+            print(Path(args.out).resolve() / "checker_audit.json")
+            return 0 if not r["counts"].get("weak") else 1
+        if args.cmd == "quality":
+            from .quality import analyze
+            r = analyze(args.results, load_suite(args.suite), args.out, args.sandbox)
+            print(json.dumps({k: r[k] for k in ("functional_pass_runs", "yosys_status", "verilator_status", "repair_patch_lines")}, ensure_ascii=False))
+            print(Path(args.out).resolve() / "quality.json");return 0
         if args.cmd == "import-hwe":
             expected = json.loads(Path(args.expected_ids).read_text()) if args.expected_ids else None
             if expected is not None and (not isinstance(expected, list) or not all(isinstance(x, str) for x in expected) or len(set(expected)) != len(expected)):

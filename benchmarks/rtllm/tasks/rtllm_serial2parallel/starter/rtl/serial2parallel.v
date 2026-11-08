@@ -1,0 +1,11 @@
+module serial2parallel(
+	input clk,
+	input rst_n,
+	input din_serial,
+	input din_valid,
+	output reg [7:0]dout_parallel,
+	output reg dout_valid
+);
+
+  // Implement the specified behaviour here.
+endmodule

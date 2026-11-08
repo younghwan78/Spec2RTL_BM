@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="RTL 설계 AI를 사내에서 객관적으로 비교하려는 이유와 방법을 설명하는 비전문가용 안내서">
+<title>RTL AI 비교 안내</title>
+<style>
+:root{--bg:#f5f6f8;--paper:#ffffff;--ink:#17242f;--muted:#55636f;--line:#d9e0e6;--accent:#0b6b62;--accent-soft:#e4f3f0;--blue:#1c54ad;--blue-soft:#e9f0fb;--amber:#7d4f00;--amber-soft:#fdf2dc;--red:#9a2f37;--red-soft:#fbe9ea;--grey-soft:#eceff2;--code:#eef1f4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11171c;--paper:#1a2229;--ink:#e6ecf1;--muted:#a3b0bb;--line:#33404b;--accent:#5ccabb;--accent-soft:#17342f;--blue:#8db6f5;--blue-soft:#1c2c44;--amber:#f0c070;--amber-soft:#3a2c13;--red:#f09aa1;--red-soft:#3d2023;--grey-soft:#262f37;--code:#252f37}}
+:root[data-theme="dark"]{--bg:#11171c;--paper:#1a2229;--ink:#e6ecf1;--muted:#a3b0bb;--line:#33404b;--accent:#5ccabb;--accent-soft:#17342f;--blue:#8db6f5;--blue-soft:#1c2c44;--amber:#f0c070;--amber-soft:#3a2c13;--red:#f09aa1;--red-soft:#3d2023;--grey-soft:#262f37;--code:#252f37}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 system-ui,-apple-system,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+main{max-width:880px;margin:0 auto;padding:48px 16px 80px}
+header.top{padding-bottom:28px;border-bottom:2px solid var(--ink)}
+.eyebrow{color:var(--accent);font-size:14px;font-weight:700;letter-spacing:.5px;margin:0}
+h1{font-size:clamp(30px,6vw,44px);line-height:1.3;margin:10px 0 16px;letter-spacing:-.5px}
+.lead{font-size:20px;line-height:1.75;margin:0}
+h2{font-size:27px;line-height:1.4;margin:0 0 14px}
+h3{font-size:20px;line-height:1.5;margin:28px 0 8px}
+section{padding:40px 0 12px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+p{margin:12px 0}
+a{color:var(--blue)}
+nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:28px 0 0}
+nav.toc strong{display:block;margin-bottom:4px}
+nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
+@media (max-width:640px){nav.toc ol{columns:1}}
+.note,.warn,.example{padding:16px 20px;border-radius:8px;margin:20px 0;border-left:4px solid}
+.note{background:var(--accent-soft);border-color:var(--accent)}
+.warn{background:var(--amber-soft);border-color:var(--amber)}
+.example{background:var(--blue-soft);border-color:var(--blue)}
+.note p,.warn p,.example p{margin:6px 0}
+.tablewrap{overflow-x:auto;margin:18px 0;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.6}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--grey-soft);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.no{color:var(--muted);background:var(--grey-soft)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;font-size:15.5px;line-height:1.65}
+svg{display:block;width:100%;height:auto;margin:18px 0;font-family:inherit}
+svg .box{fill:var(--paper);stroke:var(--line);stroke-width:1.5}
+svg .box-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5}
+svg .box-b{fill:var(--amber-soft);stroke:var(--amber);stroke-width:1.5}
+svg text{fill:var(--ink);font-size:15px}
+svg text.sub{fill:var(--muted);font-size:12.5px}
+svg line,svg path.flow{stroke:var(--muted);stroke-width:1.6;fill:none}
+svg .head{fill:var(--muted)}
+figcaption{color:var(--muted);font-size:14.5px;margin-top:-6px}
+figure{margin:0;overflow-x:auto}
+@media (max-width:640px){figure svg{min-width:600px}}
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:20px 0}
+.calc label{display:block;font-weight:600;margin:10px 0 2px}
+.calc input{width:100%;accent-color:var(--accent)}
+.calc output{font-weight:700}
+.bar{position:relative;height:26px;background:var(--grey-soft);border-radius:6px;margin:14px 0 6px;overflow:hidden}
+.bar i{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.55}
+.bar b{position:absolute;top:0;bottom:0;width:3px;background:var(--ink)}
+.scale{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.calc-fallback{display:none}
+dl{margin:14px 0}
+dt{font-weight:700;margin-top:12px}
+dd{margin:2px 0 0}
+details{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:10px 0}
+summary{font-weight:650;cursor:pointer}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em}
+@media print{body{background:#fff;font-size:12pt}nav.toc{display:none}.calc{display:none}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+<p class="eyebrow">HWBench 안내서 · 처음 읽는 분을 위한 설명</p>
+<h1>어떤 AI가 우리 RTL을 제대로 만드는지, 증거로 비교합니다</h1>
+<p class="lead">이 문서는 사내 폐쇄망에서 여러 AI 구성의 RTL 설계 능력을 같은 시험으로 비교하는 이유와 방법을 설명합니다. RTL이나 AI를 깊이 몰라도 읽을 수 있게 썼습니다.</p>
+<nav class="toc" aria-label="목차"><strong>목차</strong><ol>
+<li><a href="#why">왜 필요한가</a></li>
+<li><a href="#idea">기본 아이디어</a></li>
+<li><a href="#who">무엇을 비교하는가</a></li>
+<li><a href="#what">어떤 문제를 푸는가</a></li>
+<li><a href="#grade">어떻게 채점하는가</a></li>
+<li><a href="#read">결과는 어떻게 읽는가</a></li>
+<li><a href="#value">회사에 주는 가치</a></li>
+<li><a href="#limits">할 수 없는 것</a></li>
+<li><a href="#status">지금 어디까지 왔는가</a></li>
+<li><a href="#faq">자주 묻는 질문과 용어</a></li>
+</ol></nav>
+</header>
+
+<section id="why">
+<h2>1. 왜 필요한가</h2>
+<p>요즘 AI는 RTL 코드를 그럴듯하게 작성합니다. 문제는 <strong>그럴듯한 것과 맞는 것이 다르다</strong>는 점입니다. 소프트웨어는 실행해 보고 바로 고칠 수 있지만, 칩 설계의 오류는 검증 후반이나 그 이후에 발견될수록 수정 비용이 커집니다. 겉으로 멀쩡한 RTL이 reset 직후나 데이터가 밀리는 상황에서만 틀리면 데모로는 드러나지 않습니다.</p>
+<p>사내에서는 선택지가 많습니다. 사내 서버에서 돌리는 여러 오픈 모델(온프레미스 LLM), Claude 같은 상용 모델, 그리고 Claude Code와 같은 CLI 코딩 도구가 있습니다. 이들을 다음 방식으로 고르면 판단이 흔들립니다.</p>
+<div class="cards">
+<div class="card"><h3>데모로 고르기</h3><p>잘 나온 예시 몇 개는 평균 실력을 말해 주지 않습니다.</p></div>
+<div class="card"><h3>공개 순위로 고르기</h3><p>공개 벤치마크의 과제와 도구 환경은 사내 IP 개발 조건과 다릅니다.</p></div>
+<div class="card"><h3>사용 후기로 고르기</h3><p>사람마다 시킨 일과 도구 설정이 달라 서로 비교할 수 없습니다.</p></div>
+</div>
+<p>HWBench는 이 판단을 <strong>같은 문제, 같은 채점, 남는 기록</strong>으로 바꾸기 위한 사내 평가 도구입니다. 외부 인터넷 없이 동작합니다.</p>
+</section>
+
+<section id="idea">
+<h2>2. 기본 아이디어: AI에게 입사 시험을 봅니다</h2>
+<p>채용 시험과 같습니다. 모든 지원자에게 같은 문제지를 주고, 답안은 정답을 아는 채점관이 같은 기준으로 봅니다. 지원자는 채점 기준을 볼 수 없습니다.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>입사 시험</th><th>HWBench</th></tr></thead>
+<tbody>
+<tr><td>문제지</td><td>설계 명세. 포트, clock, reset, 동작 조건을 글로 적은 문서</td></tr>
+<tr><td>지원자</td><td>평가 대상 AI 구성</td></tr>
+<tr><td>답안지</td><td>AI가 작성하거나 고친 RTL 파일</td></tr>
+<tr><td>비공개 채점표</td><td>AI에게 숨긴 검사 코드(testbench). 시뮬레이터로 실제 동작을 확인</td></tr>
+<tr><td>성적표</td><td>과제별 합격 여부, 실패 원인, 소요 시간과 전체 기록</td></tr>
+</tbody></table></div>
+<p>핵심은 AI의 설명을 믿지 않는다는 점입니다. AI가 "완료했습니다"라고 말해도 점수가 되지 않습니다. 제출된 RTL이 시뮬레이션을 통과해야만 합격입니다.</p>
+</section>
+
+<section id="who">
+<h2>3. 무엇을 비교하는가: 모델과 도구는 다릅니다</h2>
+<p>많은 사람이 "AI"라고 묶어 말하지만, 실제로는 두 부분으로 나뉩니다.</p>
+<div class="cards">
+<div class="card"><h3>모델 (두뇌)</h3><p>답을 생성하는 LLM입니다. 사내 서버의 오픈 모델이나 Claude 모델이 여기에 해당합니다.</p></div>
+<div class="card"><h3>실행 도구 (손발)</h3><p>모델이 파일을 읽고 고치고 시뮬레이터를 돌리게 해 주는 프로그램입니다. Claude Code 같은 CLI가 여기에 해당합니다. harness라고도 부릅니다.</p></div>
+<div class="card"><h3>실행 구성 (팀)</h3><p>모델과 도구의 조합, 그리고 허용 도구·시간 제한 같은 설정까지 합친 단위입니다. 실제로 시험 보는 단위입니다.</p></div>
+</div>
+<figure>
+<svg viewBox="0 0 760 300" role="img" aria-label="모델과 실행 방식의 조합 표. 단발 호출과 CLI 도구를 사내 모델과 Claude 모델에 조합하며, Claude Code에 비 Claude 모델을 연결하는 칸은 지원되지 않는다.">
+<rect class="box" x="10" y="10" width="170" height="60" rx="6"/><text x="95" y="46" text-anchor="middle" font-weight="700">조합</text>
+<rect class="box" x="190" y="10" width="180" height="60" rx="6"/><text x="280" y="38" text-anchor="middle" font-weight="700">단발 호출</text><text class="sub" x="280" y="57" text-anchor="middle">한 번 묻고 RTL을 받음</text>
+<rect class="box" x="380" y="10" width="180" height="60" rx="6"/><text x="470" y="38" text-anchor="middle" font-weight="700">Claude Code</text><text class="sub" x="470" y="57" text-anchor="middle">파일 수정 agent</text>
+<rect class="box" x="570" y="10" width="180" height="60" rx="6"/><text x="660" y="38" text-anchor="middle" font-weight="700">다른 CLI agent</text><text class="sub" x="660" y="57" text-anchor="middle">사내 wrapper로 연결</text>
+<rect class="box" x="10" y="80" width="170" height="95" rx="6"/><text x="95" y="122" text-anchor="middle" font-weight="700">사내 모델</text><text class="sub" x="95" y="143" text-anchor="middle">온프레미스 LLM</text>
+<rect class="box-a" x="190" y="80" width="180" height="95" rx="6"/><text x="280" y="134" text-anchor="middle">비교 가능</text>
+<rect class="box-b" x="380" y="80" width="180" height="95" rx="6"/><text x="470" y="125" text-anchor="middle">지원되지 않음</text><text class="sub" x="470" y="146" text-anchor="middle">평가 구성에서 제외</text>
+<rect class="box-a" x="570" y="80" width="180" height="95" rx="6"/><text x="660" y="134" text-anchor="middle">비교 가능</text>
+<rect class="box" x="10" y="185" width="170" height="95" rx="6"/><text x="95" y="227" text-anchor="middle" font-weight="700">Claude 모델</text><text class="sub" x="95" y="248" text-anchor="middle">Opus, Sonnet 등</text>
+<rect class="box-a" x="190" y="185" width="180" height="95" rx="6"/><text x="280" y="229" text-anchor="middle">사내 연결 방식에</text><text x="280" y="250" text-anchor="middle">따라 가능</text>
+<rect class="box-a" x="380" y="185" width="180" height="95" rx="6"/><text x="470" y="239" text-anchor="middle">비교 가능</text>
+<rect class="box-a" x="570" y="185" width="180" height="95" rx="6"/><text x="660" y="229" text-anchor="middle">해당 CLI가</text><text x="660" y="250" text-anchor="middle">지원할 때만</text>
+</svg>
+<figcaption>Anthropic은 Claude Code를 비 Claude 모델에 연결하는 구성을 지원하지 않는다고 안내합니다. 단발 호출과 agent는 일하는 방식이 달라 한 순위표에 합치지 않습니다.</figcaption>
+</figure>
+<h3>공정한 비교의 규칙: 한 번에 하나만 바꿉니다</h3>
+<p>두 조건을 동시에 바꾸면 무엇 때문에 좋아졌는지 알 수 없습니다.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>알고 싶은 것</th><th>고정할 것</th><th>바꿀 것</th><th>예시</th></tr></thead>
+<tbody>
+<tr><td>어떤 사내 모델이 나은가</td><td>실행 도구, 온도, 시간 제한</td><td>모델</td><td>모델 A와 B를 같은 도구로 비교</td></tr>
+<tr><td>어떤 Claude 모델이 나은가</td><td>Claude Code 버전, 허용 도구, 예산</td><td>Claude 모델</td><td>Opus와 Sonnet을 같은 Claude Code 설정으로 비교</td></tr>
+<tr><td>어떤 CLI 도구가 나은가</td><td>모델과 추론 설정</td><td>실행 도구</td><td>같은 모델을 쓸 수 있는 두 CLI를 비교</td></tr>
+<tr><td>사내 조합과 상용 조합 중 무엇이 나은가</td><td>문제, 채점, 시간 제한</td><td>조합 전체</td><td>"조합 간 차이"로만 말하고 원인을 단정하지 않음</td></tr>
+</tbody></table></div>
+<div class="warn"><p><strong>주의할 해석:</strong> 사내 모델과 Claude Code 조합을 비교해 차이가 났다면, 모델이 좋아서인지 도구가 좋아서인지 알 수 없습니다. 이 경우 어느 쪽이 실무에 쓸 만한지는 판단할 수 있지만 원인은 말할 수 없습니다.</p></div>
+</section>
+
+<section id="what">
+<h2>4. 어떤 문제를 푸는가</h2>
+<p>현재 저장소에는 인터넷 없이 돌릴 수 있는 RTL 과제 308개가 들어 있습니다. 문제 유형은 크게 두 가지입니다. <strong>생성</strong>은 명세만 보고 처음부터 작성하고, <strong>수정</strong>은 결함이 있는 RTL을 명세에 맞게 고칩니다.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>묶음</th><th class="num">과제 수</th><th>내용</th><th>무엇을 보여 주는가</th></tr></thead>
+<tbody>
+<tr><td>공개 소형 과제</td><td class="num">159</td><td>VerilogEval, RTLLM을 변형한 조합·순차·FSM 회로</td><td>기본기의 하한선</td></tr>
+<tr><td>주입 결함 수정</td><td class="num">122</td><td>공개 과제 정답에 결함을 넣어 고치게 함</td><td>명세와 코드를 대조해 고치는 능력</td></tr>
+<tr><td>SoC형 블록</td><td class="num">20</td><td>APB, AXI-Lite, AXI-Stream, CDC FIFO, ECC, CRC, 타이머 등</td><td>실제 IP에 가까운 인터페이스 설계</td></tr>
+<tr><td>기존 소형 과제</td><td class="num">7</td><td>카운터, FIFO, LFSR 등</td><td>동작 확인용 기준 과제</td></tr>
+</tbody></table></div>
+<div class="example"><p><strong>문제 예시: skid buffer</strong></p><p>"데이터를 두 개까지 저장하는 파이프라인 레지스터를 만드세요. 뒤쪽이 멈춰도 데이터를 잃으면 안 되고, 받을 수 있다는 신호는 뒤쪽 신호에 조합적으로 의존하면 안 됩니다." 이런 조건이 표로 정리된 명세가 주어집니다. 흔한 오답은 평소에는 동작하지만 뒤쪽이 멈추는 순간 데이터를 하나 잃는 코드입니다.</p></div>
+<p>과제가 이렇게 많은 이유는 단순합니다. 다음 절에서 보듯 과제 수가 적으면 우연히 잘 본 것인지 실력인지 구분할 수 없습니다. 다만 공개 과제가 많아도 실제 사내 IP를 대표하지는 않으므로, 사내 RTL의 실제 버그 수정 이력으로 만든 과제를 추가하는 것이 다음 단계입니다.</p>
+</section>
+
+<section id="grade">
+<h2>5. 어떻게 채점하는가</h2>
+<figure>
+<svg viewBox="0 0 760 210" role="img" aria-label="채점 흐름: 문제지만 AI 작업 공간으로 전달하고, AI가 낸 RTL 사본을 숨은 검사로 시뮬레이션하여 합격 여부와 기록을 남긴다.">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="box" x="8" y="30" width="165" height="90" rx="8"/><text x="90" y="68" text-anchor="middle" font-weight="700">문제지</text><text class="sub" x="90" y="92" text-anchor="middle">명세 + 시작 코드</text>
+<rect class="box-a" x="205" y="30" width="165" height="90" rx="8"/><text x="287" y="68" text-anchor="middle" font-weight="700">AI 구성</text><text class="sub" x="287" y="92" text-anchor="middle">격리된 작업 공간</text>
+<rect class="box" x="402" y="30" width="165" height="90" rx="8"/><text x="484" y="68" text-anchor="middle" font-weight="700">제출 RTL 사본</text><text class="sub" x="484" y="92" text-anchor="middle">해시와 함께 보존</text>
+<rect class="box-b" x="598" y="30" width="154" height="90" rx="8"/><text x="675" y="68" text-anchor="middle" font-weight="700">숨은 검사</text><text class="sub" x="675" y="92" text-anchor="middle">시뮬레이션</text>
+<line x1="173" y1="75" x2="203" y2="75" marker-end="url(#arr)"/><line x1="370" y1="75" x2="400" y2="75" marker-end="url(#arr)"/><line x1="567" y1="75" x2="596" y2="75" marker-end="url(#arr)"/>
+<rect class="box" x="402" y="150" width="350" height="48" rx="8"/><text x="577" y="180" text-anchor="middle">합격 여부 · 실패 원인 · 로그 · 도구 버전</text>
+<path class="flow" d="M675 120 V135 H577 V148" marker-end="url(#arr)"/>
+</svg>
+<figcaption>AI는 정답과 숨은 검사에 접근할 수 없어야 합니다. 정답과 검사는 별도 환경에 둡니다.</figcaption>
+</figure>
+<p><strong>합격 기준은 엄격합니다.</strong> 컴파일 성공, 시뮬레이션 정상 종료, 준비된 모든 검사를 입력 조합(seed)별로 전부 통과해야 합니다. 하나라도 어긋나면 그 과제는 불합격입니다. 빈 답안, 시간 초과, 문법 오류도 모두 불합격입니다. 반대로 서버 장애처럼 AI 잘못이 아닌 문제는 불합격과 구분해 "평가 미완료"로 표시합니다.</p>
+<h3>채점기 자신도 먼저 시험합니다</h3>
+<p>시험지가 잘못되면 성적도 의미가 없습니다. 그래서 모든 과제는 평가에 쓰기 전에 다음을 통과합니다.</p>
+<div class="cards">
+<div class="card"><h3>정답은 합격하는가</h3><p>기준 RTL이 모든 검사를 통과해야 합니다.</p></div>
+<div class="card"><h3>오답은 잡아내는가</h3><p>일부러 결함을 넣은 RTL이 기능 오류로 탈락해야 합니다. 빈 코드와 입력을 무시하고 값을 고정한 RTL도 탈락해야 합니다.</p></div>
+<div class="card"><h3>다른 정답도 인정하는가</h3><p>구조가 다른 올바른 구현이 통과하는지 일부 과제에서 확인했습니다.</p></div>
+</div>
+<p>기준을 통과하지 못한 공개 과제는 조용히 지우지 않고 제외 사유와 함께 기록했습니다.</p>
+</section>
+
+<section id="read">
+<h2>6. 결과는 어떻게 읽는가</h2>
+<p>성공률 하나만 보면 놓치는 것이 많습니다. 보고서는 아래 순서로 읽습니다.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>질문</th><th>보는 지표</th><th>쉽게 말하면</th></tr></thead>
+<tbody>
+<tr><td>시험이 제대로 치러졌나</td><td>인프라 오류, 미기록</td><td>정전으로 시험이 중단된 답안은 없는가</td></tr>
+<tr><td>얼마나 맞혔나</td><td>등급별 성공률</td><td>합격한 과제 수 / 계획한 과제 수</td></tr>
+<tr><td>어디에 강하고 약한가</td><td>영역·난이도별 결과</td><td>연산은 잘하지만 인터페이스는 약한가</td></tr>
+<tr><td>얼마나 믿을 수 있나</td><td>95% 구간</td><td>우연을 감안한 성적의 범위</td></tr>
+<tr><td>왜 틀렸나</td><td>실패 원인</td><td>문법 오류인가, 동작이 틀렸는가, 시간이 부족했는가</td></tr>
+<tr><td>매번 같은가</td><td>반복 일관성</td><td>같은 문제를 다시 풀어도 맞히는가</td></tr>
+<tr><td>A가 B보다 나은가</td><td>과제 단위 짝비교</td><td>같은 문제끼리 비교해 어느 쪽이 더 자주 이겼는가</td></tr>
+<tr><td>통과한 코드가 쓸 만한가</td><td>품질 지표, PPA</td><td>불필요한 latch는 없는가, 면적·속도·전력은 어떤가</td></tr>
+<tr><td>비용은 얼마나 드나</td><td>시간, 사용량</td><td>측정된 값만 사용하고 측정하지 않은 값은 비워 둠</td></tr>
+</tbody></table></div>
+<h3>과제 수가 왜 중요한가</h3>
+<p>성공률이 같아도 시험 문제 수에 따라 믿을 수 있는 정도가 다릅니다. 아래 막대를 움직여 보세요. 진한 구간이 넓을수록 불확실합니다.</p>
+<div class="calc" id="calc">
+<label for="n">시험 과제 수: <output id="nv">40</output>개</label><input id="n" type="range" min="5" max="400" step="5" value="40">
+<label for="r">관측 성공률: <output id="rv">75</output>%</label><input id="r" type="range" min="0" max="100" step="1" value="75">
+<div class="bar" aria-hidden="true"><i id="band"></i><b id="point"></b></div>
+<div class="scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+<p id="out" aria-live="polite" style="margin-bottom:0">95% 구간: 약 60%에서 86%</p>
+</div>
+<div class="example"><p><strong>설명용 가상 수치입니다. 실제 측정 결과가 아닙니다.</strong></p><p>구성 A가 40개 중 30개를 맞혀 75%이면 실제 실력의 범위는 대략 60%에서 86%입니다. 과제가 300개이고 225개를 맞혔다면 범위가 70%에서 80%로 좁아집니다. 40개 시험에서 75%와 70%가 나온 두 구성은 사실상 구분되지 않습니다.</p></div>
+<p>대략적인 기준으로, 같은 과제로 짝지어 비교할 때 성공률 20%p 차이를 가리려면 약 60개, 10%p 차이를 가리려면 약 230개의 서로 다른 과제가 필요합니다. 같은 과제를 여러 번 반복하는 것은 과제 수를 늘리는 것과 같지 않습니다.</p>
+<h3>등급을 합치지 않습니다</h3>
+<p>쉬운 공개 과제 300개와 어려운 SoC 블록 20개를 합쳐 평균 내면 쉬운 과제가 점수를 결정합니다. 그래서 보고서는 등급별로 따로 보여 주고, 전체를 합친 순위는 만들지 않습니다.</p>
+</section>
+
+<section id="value">
+<h2>7. 회사에 주는 가치</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>결정 사항</th><th>벤치마크가 주는 근거</th></tr></thead>
+<tbody>
+<tr><td>어떤 사내 모델을 운영할까</td><td>같은 도구로 여러 온프레미스 모델을 비교해 RTL 과제에서 실제 성적이 좋은 모델을 고릅니다.</td></tr>
+<tr><td>GPU 투자가 값어치를 하나</td><td>더 큰 모델이 RTL 성공률을 얼마나 올리는지, 추가 시간은 얼마인지 측정합니다. 비용 환산은 측정된 값에만 적용합니다.</td></tr>
+<tr><td>사내 모델과 상용 모델의 간격은</td><td>사내 조합과 Claude 조합의 성공률 차이를 과제 영역별로 봅니다.</td></tr>
+<tr><td>어떤 CLI를 표준으로 할까</td><td>같은 모델을 쓸 수 있는 도구끼리 비교해 도구 자체의 효과를 분리합니다.</td></tr>
+<tr><td>AI를 어떤 업무에 먼저 쓸까</td><td>생성·수정·인터페이스 영역별 성적으로 잘하는 일부터 적용합니다.</td></tr>
+<tr><td>업그레이드해도 괜찮을까</td><td>모델이나 도구 버전이 바뀔 때 같은 시험을 다시 치러 성능 하락을 사전에 발견합니다.</td></tr>
+<tr><td>사람 검토는 어디에 집중할까</td><td>실패 원인 통계로 AI가 자주 틀리는 유형을 검토 항목에 넣습니다.</td></tr>
+</tbody></table></div>
+<p>무엇보다 판단의 근거가 <strong>재현 가능한 기록</strong>으로 남습니다. 어떤 모델과 설정으로, 어떤 RTL을 제출해, 어떤 검사에서 왜 실패했는지 파일로 보존되므로 나중에 누구든 다시 확인할 수 있습니다. 사내 명세와 RTL은 외부로 나가지 않고 평가됩니다.</p>
+</section>
+
+<section id="limits">
+<h2>8. 할 수 없는 것</h2>
+<div class="warn">
+<p><strong>아직 실제 모델 성적은 없습니다.</strong> 지금까지 검증한 것은 채점기가 맞게 동작하는지입니다.</p>
+<p><strong>합격이 곧 양산 품질은 아닙니다.</strong> 정해진 시뮬레이션을 통과했다는 뜻이며, 전체 정확성의 증명이나 signoff가 아닙니다.</p>
+<p><strong>소수 과제 결과를 일반화하지 않습니다.</strong> 작은 블록을 잘 만든다고 SoC IP 전체를 설계할 수 있다는 뜻은 아닙니다.</p>
+<p><strong>주입 결함은 실제 버그가 아닙니다.</strong> 실제 버그 수정 능력은 사내 이력으로 만든 과제로 재야 합니다.</p>
+<p><strong>공식 점수와 비교하지 않습니다.</strong> 공개 과제는 변형했으므로 원본 벤치마크 점수와 다릅니다.</p>
+<p><strong>측정하지 않은 값을 채우지 않습니다.</strong> 비용이나 PPA를 측정하지 않았으면 0이 아니라 "미측정"입니다.</p>
+</div>
+</section>
+
+<section id="status">
+<h2>9. 지금 어디까지 왔는가</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>단계</th><th>상태</th></tr></thead>
+<tbody>
+<tr><td>오픈소스 시뮬레이터 채점과 보고서</td><td>구현 및 자동 검증 완료</td></tr>
+<tr><td>폐쇄망용 과제 308개</td><td>정답·오답 검증과 약한 채점 기준 감사 완료</td></tr>
+<tr><td>세분화한 평가 기준</td><td>구현 완료</td></tr>
+<tr><td>사내 EDA 도구 연결 틀</td><td>구현 완료. 실제 도구 교정은 사내에서 필요</td></tr>
+<tr><td>사내 모델과 CLI 연결</td><td>연결 방법 준비됨. 실제 연결은 사내에서 확인 필요</td></tr>
+<tr><td>Xcelium·UVM 채점 연결</td><td>미구현</td></tr>
+<tr><td>사내 실제 RTL 기반 과제</td><td>미착수</td></tr>
+<tr><td>실제 모델 간 비교 평가</td><td>미실행</td></tr>
+</tbody></table></div>
+<p>담당자용 적용 절차는 <code>docs/INHOUSE_ADOPTION.md</code>에, 지표 정의는 <code>docs/EVALUATION_CRITERIA.md</code>에 있습니다. 평가 방법의 상세한 해설은 <a href="index.html">HWBench 이해와 평가 가이드</a>를 참고하십시오.</p>
+</section>
+
+<section id="faq">
+<h2>10. 자주 묻는 질문과 용어</h2>
+<details><summary>AI가 정답을 미리 볼 수 있지 않나요?</summary><p>평가 시 AI에게는 문제지만 전달하고, 정답과 숨은 검사는 다른 환경에 둡니다. 도구 자체가 이를 자동으로 막아 주지는 않으므로 운영 절차로 분리해야 합니다.</p></details>
+<details><summary>Claude Code로 사내 모델을 돌려서 도구를 고정할 수 없나요?</summary><p>Anthropic은 Claude Code를 비 Claude 모델로 연결하는 구성을 지원하지 않는다고 안내합니다. 사내 모델끼리는 공통 실행 도구를 사용해 비교하고, Claude Code 구성은 별도로 비교합니다.</p></details>
+<details><summary>왜 공개 벤치마크 순위를 쓰지 않나요?</summary><p>공개 순위는 참고가 되지만 사내의 명세 스타일, 인터페이스, 도구 제약을 반영하지 않고, 사내 모델과 설정은 애초에 포함되어 있지 않습니다.</p></details>
+<details><summary>시간이 얼마나 걸리나요?</summary><p>채점 자체는 공개 과제 기준으로 짧습니다. 대부분의 시간은 AI가 답을 만드는 데 들어가며, 모델 속도와 과제·반복 수에 따라 달라집니다. 상용 시뮬레이터와 UVM을 쓰면 채점 시간과 라이선스가 주요 제약이 됩니다.</p></details>
+<details><summary>몇 번 반복해야 하나요?</summary><p>같은 조건에서 3회 정도로 안정성을 보는 것을 권장합니다. 다만 비교의 신뢰도를 높이는 데는 반복보다 서로 다른 과제를 늘리는 것이 더 효과적입니다.</p></details>
+<dl>
+<dt>RTL</dt><dd>칩의 동작을 기술하는 코드 수준입니다. Verilog, SystemVerilog로 작성합니다.</dd>
+<dt>testbench, checker</dt><dd>RTL에 입력을 주고 결과가 맞는지 확인하는 검사 코드입니다.</dd>
+<dt>시뮬레이션</dt><dd>칩을 만들기 전에 RTL의 동작을 컴퓨터에서 실행해 보는 일입니다.</dd>
+<dt>mutant</dt><dd>채점기를 시험하기 위해 일부러 결함을 넣은 RTL입니다.</dd>
+<dt>seed</dt><dd>무작위 입력을 다르게 만드는 번호입니다.</dd>
+<dt>온프레미스 LLM</dt><dd>회사 내부 서버에서 운영하는 언어 모델입니다.</dd>
+<dt>harness, CLI agent</dt><dd>모델이 파일을 읽고 수정하며 도구를 실행하도록 돕는 프로그램입니다.</dd>
+<dt>PPA</dt><dd>Power, Performance, Area. 전력·속도·면적입니다.</dd>
+<dt>UVM</dt><dd>대규모 RTL 검증에 쓰는 표준 방법론입니다.</dd>
+<dt>signoff</dt><dd>제조로 넘기기 전 최종 검증 승인입니다.</dd>
+</dl>
+</section>
+</main>
+<script>
+(function(){
+  var n=document.getElementById('n'),r=document.getElementById('r');
+  if(!n||!r)return;
+  function draw(){
+    var N=+n.value,p=+r.value/100,z=1.959964;
+    var d=1+z*z/N,c=p+z*z/(2*N),m=z*Math.sqrt(p*(1-p)/N+z*z/(4*N*N));
+    var lo=Math.max(0,(c-m)/d)*100,hi=Math.min(1,(c+m)/d)*100;
+    document.getElementById('nv').textContent=N;
+    document.getElementById('rv').textContent=r.value;
+    var band=document.getElementById('band');band.style.left=lo+'%';band.style.width=(hi-lo)+'%';
+    document.getElementById('point').style.left='calc('+(p*100)+'% - 1.5px)';
+    document.getElementById('out').textContent='95% 구간: 약 '+Math.round(lo)+'%에서 '+Math.round(hi)+'%';
+  }
+  n.addEventListener('input',draw);r.addEventListener('input',draw);draw();
+})();
+</script>
+</body>
+</html>

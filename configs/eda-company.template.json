@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "_guide": "Copy this file and fill in every placeholder with what the site install actually uses, then delete nothing else. Procedure: scripts/EDA_CONTRACT.md, section on site tool adaptation. Refused while placeholders remain.",
+  "mode": "measured",
+  "stage": "synthesis",
+  "tool": {
+    "name": "REPLACE_FLOW_NAME",
+    "version": "REPLACE_FLOW_VERSION",
+    "components": {
+      "area_delay": {"name": "REPLACE_SYNTHESIS_TOOL_NAME", "version": "REPLACE_SYNTHESIS_TOOL_VERSION"},
+      "power": {"name": "REPLACE_POWER_TOOL_NAME", "version": "REPLACE_POWER_TOOL_VERSION"},
+      "lint": {"name": "REPLACE_LINT_TOOL_NAME", "version": "REPLACE_LINT_TOOL_VERSION"}
+    }
+  },
+  "library": {"name": "REPLACE_LIBRARY_NAME", "corner": "REPLACE_PVT_CORNER"},
+  "effort": "REPLACE_EFFORT",
+  "workload": {"id": "REPLACE_WORKLOAD_ID", "clock_period_ns": 2.0, "window": "REPLACE_ACTIVITY_WINDOW"},
+  "assets": {
+    "wrapper": "../scripts/eda_profile_wrapper.py",
+    "profile": "/REPLACE/path/eda-tool-profile.json",
+    "library": "/REPLACE/path/library-manifest.txt",
+    "constraints": "/REPLACE/path/constraints.sdc",
+    "workload": "/REPLACE/path/workload.txt",
+    "synth_script": "/REPLACE/path/synth.tcl",
+    "power_script": "/REPLACE/path/power.tcl",
+    "lint_script": "/REPLACE/path/lint.tcl"
+  },
+  "argv": ["python3", "{asset:wrapper}", "{asset:profile}", "{request}", "{response}"],
+  "env_names": ["REPLACE_LICENSE_ENV_NAME"],
+  "tasks": {"REPLACE_TASK_ID": {"top": "REPLACE_TOP_MODULE", "parameters": {}, "limits": {}}}
+}

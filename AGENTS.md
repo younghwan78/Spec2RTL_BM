@@ -16,6 +16,7 @@
 - 기능 채점에는 `iverilog`와 `vvp`를 사용한다. `bubblewrap` 사용 가능 시 compile/simulation을 격리한다. Verilator/Yosys는 현재 버전 기록 대상이며 기능 채점 엔진이 아니다.
 - 기본 suite는 `benchmarks/core/suite.json`이다. 생성 2과제(`saturating_add`, `priority_encoder`), 수정 2과제(`counter`, `fifo`), 작은 다중 파일 수정 2과제(`stream_pipeline`, `round_robin`)가 있다.
 - `benchmarks/cvdp_adapted`에는 공개 CVDP LFSR 예제 1과제를 native Icarus checker로 변형한 suite가 있다. 공식 CVDP evaluator 점수와 동일하지 않다.
+- 추가 native suite는 `benchmarks/verilog_eval`(134), `benchmarks/rtllm`(25), `benchmarks/public_repair`(주입 결함 122), `benchmarks/soc_blocks`(자체 작성 20)이다. 공개 변형은 공식 점수가 아니고 주입 결함은 실제 버그가 아니다. 평가 수준과 등급 규칙은 `docs/EVALUATION_CRITERIA.md`를 따른다.
 - HWE는 공식 `final_report.json`의 결과 가져오기를 지원한다. 공식 evaluator와 Ibex 이미지 실행은 구현 검증 범위에 포함되지 않는다.
 - Native 채점은 작은 고정 폭 RTL의 순차 평가이다. `task_plan`으로 계획 분모를 보존하며 난이도·반복·실패 단계와 관측 시간·usage를 집계한다.
 - CVDP no-commercial 469개는 pinned 카탈로그 검증 범위이다. Heavy는 sanitized Git bundle의 context commit 준비·작업공간 export·제출·외부 evaluator 반입을 지원한다. 실제 RVX 준비를 검증했으며 전체 75개 실행을 주장하지 않는다. 해결되지 않은 submodule은 명시적으로 거부한다.
@@ -36,7 +37,11 @@
 | `hwbench/eda.py`, `hwbench/eda_supervisor.py` | native PASS 기반 EDA 큐·예산·캐시·비교·중단 정리 |
 | `hwbench/offline.py`, `scripts/offline_controls.py` | 자원 목록·해시·권한 검사와 원본 checkout 없는 이식 검증 |
 | `hwbench/upstream.py` | HWE 결과 가져오기와 task ID 검증 |
-| `benchmarks/*/suite.json` | 과제 목록, 허용 RTL 파일, checker, 오류 구현의 예상 실패 |
+| `hwbench/checker_audit.py` | 기준 RTL 기반 출력 고정·상수 출력 대조로 checker 강도 감사 |
+| `hwbench/quality.py` | 기능 PASS 사본의 품질 측정(Yosys, Verilator, repair patch 크기). 기능 점수와 별도 |
+| `scripts/wrappers/` | Claude Code 등 command adapter용 headless wrapper. 격리를 제공하지 않음 |
+| `scripts/eda_profile_wrapper.py`, `scripts/eda_calibrate.py` | 사내 EDA 명령·보고서 파싱 프로파일 실행과 원본 보고서 대조 교정 |
+| `benchmarks/*/suite.json` | 과제 목록, 허용 RTL 파일, checker, 오류 구현의 예상 실패, 등급·영역 |
 | `benchmarks/*/tasks/` | `prompt.md`, `starter/`, `reference/`, `checks/`, `mutants/` |
 | `tests/` | `unittest` 기반 엔진·adapter·보고서 회귀 테스트 |
 | `scripts/validate.py` | 회귀 테스트, 정답·오류 RTL, CVDP 변형, 가능한 환경의 인터넷 차단 검증 |
@@ -65,10 +70,11 @@
 - Checker는 공개 명세로부터 기대 동작을 도출해야 한다. 기준 RTL의 내부 구현이나 명세에 없는 동작을 정답 조건으로 강요하지 않는다. 명세가 모호하면 평가 전에 명확히 하고 변경된 조건으로 다시 실행한다.
 - Native 제출물은 허용된 `.v`/`.sv` 파일만 사용하고 포트 계약을 유지한다. Heavy 저장소 제출은 dataset patch key의 allowlist를 따르며 `.md` 등도 포함될 수 있다. 테스트벤치 제어, 완료 표식 위조, 파일 접근 등으로 판정을 우회하지 않는다.
 - 과제에는 `prompt.md`, 허용 파일에 대응하는 `starter/`와 `reference/`, 독립 `checks/`, 의도적인 오류 `mutants/` 및 suite 항목을 갖춘다. 현재 `demo`는 과제마다 최소 2개 mutant와 기능적으로 실패하는 starter를 요구한다.
+- 새 과제는 `demo`와 함께 `hwbench audit-checkers`도 통과해야 한다. 이 감사는 출력 고정·상수 출력 RTL이 통과하는 약한 checker를 찾으며, 통과가 checker의 완전성을 뜻하지는 않는다.
 - 정답 구현은 모든 필수 check × seed를 통과해야 한다. Mutant는 정상 컴파일된 뒤 선언한 `expected_fail_checks`에서 기능 오류로 검출되어야 한다. 컴파일 오류나 인프라 장애만으로 검출 성공이라 하지 않는다.
 - 각 checker 소스에는 `HWBENCH_PASS` 완료 표식이 정확히 한 번 있어야 한다. 채점기는 이를 실행별 표식으로 치환한다. PASS에는 정상 compile/simulation 종료와 정확히 한 번의 완료 표식이 필요하다.
 - 현재 제출 RTL의 system function 허용 목록은 `$clog2`, `$bits`, `$signed`, `$unsigned`이며 include/macro 등 전처리와 테스트벤치 간섭도 제한한다. 실제 IP 지원을 위해 완화할 때는 무결성 검사·격리·테스트를 함께 검토한다.
-- `benchmarks/core/build_fixtures.py`와 `scripts/prepare_cvdp_example.py`는 과제 파일을 덮어쓰는 생성기이다. 일상 검증 목적으로 실행하지 않는다. 생성된 과제 수정 시 생성기와의 불일치를 확인하고, 재생성할 경우 기존 수정을 잃지 않는지 diff를 검토한다.
+- `benchmarks/core/build_fixtures.py`, `benchmarks/soc_blocks/build_fixtures.py`, `scripts/import_public_suites.py`, `scripts/prepare_cvdp_example.py`는 과제 파일을 덮어쓰는 생성기이다. 일상 검증 목적으로 실행하지 않는다. 생성된 과제 수정 시 생성기와의 불일치를 확인하고, 재생성할 경우 기존 수정을 잃지 않는지 diff를 검토한다.
 
 ## 폐쇄망과 평가 데이터 격리
 

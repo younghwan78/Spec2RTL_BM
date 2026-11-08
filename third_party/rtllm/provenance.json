@@ -1,0 +1,343 @@
+{
+  "source": "https://github.com/hkust-zhiyao/RTLLM",
+  "revision": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+  "license_file": "LICENSE",
+  "notes": "Checkers are adapted (HWBench verdict, seeded stimulus where random). Results are not official RTLLM scores.",
+  "kept": {
+    "rtllm_accu": {
+      "source": "Arithmetic/Accumulator/accu",
+      "sha256": {
+        "design_description.txt": "b90ba45a643f49833e221fbe0cd27c92356a76bd4ce9df5b4ccdbf134208a048",
+        "verified_accu.v": "67067237d33fa00128ceb7f60c3139cc1daae46d5c4af1d3e0ba140e63846fa2",
+        "testbench.v": "caa0a4c575f65691ab0dc1ceb018a64611b64cf3f6a20049c6f191c720f724b0"
+      }
+    },
+    "rtllm_adder_16bit": {
+      "source": "Arithmetic/Adder/adder_16bit",
+      "sha256": {
+        "design_description.txt": "6a8e0c8e21e5b050cea03be7ad433027349695a51b6162a65a95b718436bf9f5",
+        "verified_adder_16bit.v": "3ee85639497d6a85eeec48faea60a5aa47fc6bdeaa48066fb135602f11d92275",
+        "testbench.v": "5be2dc776570bcb1148ad08ff17612ecd198046eae3f8a45680be2701c478f39"
+      }
+    },
+    "rtllm_adder_32bit": {
+      "source": "Arithmetic/Adder/adder_32bit",
+      "sha256": {
+        "design_description.txt": "48f1483db542ce225ab8bbbf8e20e79ab47a5dcf1775ff194ecda1f439aec852",
+        "verified_adder_32bit.v": "a5529a8fe85748de646ebf34da72cd9fdc5457f706101b3c77fd7f17ef26d57a",
+        "testbench.v": "ebca058493802ceeb3819c8758ef003c14d08f86affc3c896a207af00dc9b1c1"
+      }
+    },
+    "rtllm_adder_bcd": {
+      "source": "Arithmetic/Adder/adder_bcd",
+      "sha256": {
+        "design_description.txt": "b38196c578dd6285cb2fefbd693b63098509818f5c9d206481b70fdbe13c8c36",
+        "verified_adder_bcd.v": "7bc3695726c0dc21f88fb6752e092dfb781eee82974af1e1f5e371986fd8c779",
+        "testbench.v": "05c80fdf3f9660c5bcfc35f24dd73f46cb40b3be506589bc8747db4703f70323"
+      }
+    },
+    "rtllm_adder_pipe_64bit": {
+      "source": "Arithmetic/Adder/adder_pipe_64bit",
+      "sha256": {
+        "design_description.txt": "f5f1f2f71dcc559f37b2b0f41ccf286110e3afeb147f894cb94ded1ad90547bc",
+        "verified_adder_64bit.v": "78ddd3f77dac5c273a906698773f19087d4a915c0a003857137188da4c26b8cb",
+        "testbench.v": "07a84afbcfea71800dd87410ca75e27e77b2ed66363b296d10241897d63745da"
+      }
+    },
+    "rtllm_div_16bit": {
+      "source": "Arithmetic/Divider/div_16bit",
+      "sha256": {
+        "design_description.txt": "95fc527ad373c18a7c39770875b4c3a280d8a7c7596a52380246428154219f79",
+        "verified_div_16bit.v": "89625978c731ef4c91640ee144e5caca17ffdfeca855e3b32168d64cf5ea8837",
+        "testbench.v": "f4b0a45fb280868e1e13c5f01a83028895f0ffba30ec2257734a9f28595e9d3f"
+      }
+    },
+    "rtllm_multi_16bit": {
+      "source": "Arithmetic/Multiplier/multi_16bit",
+      "sha256": {
+        "design_description.txt": "47576648e3df1a57490f542571f6f15fb51f86674aaef98f363a7823b05c4aed",
+        "verified_multi_16bit.v": "e8f856d7b09ef1cbf301ae699b13954c1638ac8f57a53ffbd7783155e2d54ea9",
+        "testbench.v": "78e9b599707b0c5686ddd05266fe705015bec816297d5890061d97beea353b69"
+      }
+    },
+    "rtllm_multi_8bit": {
+      "source": "Arithmetic/Multiplier/multi_8bit",
+      "sha256": {
+        "design_description.txt": "8d21cf2b47a9c529eb0830ca6eb3ca4b9021be254eeed2063319f18a9d601895",
+        "verified_multi_8bit.v": "2dbbc317ac7f55a4be3b4a763df9226969ec98bc05c7162c16b206a3b563321b",
+        "testbench.v": "d3cae1657ade1c6443e3a33e85417aaa61f55db12bc5fff20d7e5d5d689276e9"
+      }
+    },
+    "rtllm_multi_pipe_8bit": {
+      "source": "Arithmetic/Multiplier/multi_pipe_8bit",
+      "sha256": {
+        "design_description.txt": "a44b00ce1bb84f8d91192a599392b52c29800a975af4b4ca13b9d44ff7c72fdc",
+        "verified_multi_pipe_8bit.v": "c7b1f309806650b74c998ff3a1c4ae6afd60ebb66f746134aca0bc8ea5928192",
+        "testbench.v": "0a898344f33c3a10d0d49250a050f53ee1c45695cfe73eb4d796b6ec0c70c91a"
+      }
+    },
+    "rtllm_JC_counter": {
+      "source": "Control/Counter/JC_counter",
+      "sha256": {
+        "design_description.txt": "562151aa7c605e33648ccfdd2c1f768950e6fbe16ad52ddc35e33b896bc57b5b",
+        "verified_JC_counter.v": "063822c3c64f8e0e0cf66dc1e1e06edfd48571e01dc73b728ac2aed225c4b48b",
+        "testbench.v": "c04f5550514414ee42da3d4ab2efe33eb10649ef0f8859c0e8de50f0bdf33857"
+      }
+    },
+    "rtllm_counter_12": {
+      "source": "Control/Counter/counter_12",
+      "sha256": {
+        "design_description.txt": "7619e91759a69d54556766ecf5d370345a9445d279108aa38700258a9cbdfc0e",
+        "verified_counter_12.v": "e3551f7d82fa522f9e9afe01a2c4ff35bd61143d395f490e17d340cb16a6ae04",
+        "testbench.v": "e47a642c0cece07786ec5d19f417221345fabb9dd22cdd51dbacedd5f731223a"
+      }
+    },
+    "rtllm_up_down_counter": {
+      "source": "Control/Counter/up_down_counter",
+      "sha256": {
+        "design_description.txt": "c14e7e7b9c465d9b65a4e69ea437ca57c76fae5ef9dbd7711aff5765745efcaa",
+        "verified_up_down_counter.v": "4af9a3fe6a61aefa2e6ba8df99bf10e2f1432a9c2cf460b8267d2ce14e739445",
+        "testbench.v": "d7fde8db2019384d00c5933ebad11757a37f2e21e49c0e778986f57739723f95"
+      }
+    },
+    "rtllm_fsm": {
+      "source": "Control/Finite State Machine/fsm",
+      "sha256": {
+        "design_description.txt": "a7eea663bbfb91998dffefae2fbffb20f9840cb1ce361286c92c4569b6769674",
+        "verified_fsm.v": "ea1e64be378b21e14efa99484ed4763237328cb5def9fd51fee8f93d4d959c2d",
+        "testbench.v": "77f50dcd0b5c748cab25508efe0685e1af5bd037e2c0b7299bc75aef6f67f667"
+      }
+    },
+    "rtllm_barrel_shifter": {
+      "source": "Memory/Shifter/barrel_shifter",
+      "sha256": {
+        "design_description.txt": "2dd37415a83c7238200cbc07b50d00239f4f2532af3832aa00a060d3ae52929c",
+        "verified_barrel_shifter.v": "dbfdb5cbbbd3f15709ef5918308c5400839cedf66f3bcb97af48f9b0de986571",
+        "testbench.v": "1530b99a5cee55a9b6e4b12b878e772ee52cff84abafa4ad41d05718959cd563"
+      }
+    },
+    "rtllm_freq_div": {
+      "source": "Miscellaneous/Frequency divider/freq_div",
+      "sha256": {
+        "design_description.txt": "781fb97e943c0998f6cc7573b772214ab8c242905531d2e95577593e9d0910e0",
+        "verified_freq_div.v": "01e245de204b7d8b33f04909e7ed05a4e1f0ec2ef3667dadb7283e9058738950",
+        "testbench.v": "3a24463619481aa88979edeb0721fef154f62d2c9aa09d9c4b56c3a24c0e3300"
+      }
+    },
+    "rtllm_freq_divbyfrac": {
+      "source": "Miscellaneous/Frequency divider/freq_divbyfrac",
+      "sha256": {
+        "design_description.txt": "1ec158d00b58c44e167142f10fbd87b9182dc4c2c6c15f24f80ae8a9e6ba6881",
+        "verified_freq_divbyfrac.v": "b252ccc57171c1807f30bcd7ddd9064d66c424108f361e2d050cefce6714edcd",
+        "testbench.v": "b9ce1c1af21970c3f039fc6324a6746c91fd85138de3dc1fa1414285c72bddcf"
+      }
+    },
+    "rtllm_freq_divbyodd": {
+      "source": "Miscellaneous/Frequency divider/freq_divbyodd",
+      "sha256": {
+        "design_description.txt": "1a6d51f8ec73f8512ab356c32472cc7cf3218bb4e32283ac4905857ff9ebf555",
+        "verified_freq_divbyodd.v": "8b90949d26263926cce4f9298b7482594e502cf8b103a3028abf1327f8fadaea",
+        "testbench.v": "4a166ba5583588e19cef2403c5d112f99186075a20c65165cb75f271fe603426"
+      }
+    },
+    "rtllm_parallel2serial": {
+      "source": "Miscellaneous/Others/parallel2serial",
+      "sha256": {
+        "design_description.txt": "690e82a1f60b4a170a1d39f4277b66ec46ed9dddb5ee5f0ab980dd83301e9ee4",
+        "verified_parallel2serial.v": "730ebfdfce685f046173499418944f1d0cf07a8bc99f9f9f85abbbbaebeb1e1e",
+        "testbench.v": "5e58d526baa6e5e4c04141b85b6e7b512c469bb209829bb657e67df63fda4721"
+      }
+    },
+    "rtllm_pulse_detect": {
+      "source": "Miscellaneous/Others/pulse_detect",
+      "sha256": {
+        "design_description.txt": "cdc350928bd3af1c4849fb1c04382096164236ffbdc979420628715bb1727c5a",
+        "verified_pulse_detect.v": "6f131f4e47a60986b4dc3c7f9f42f75b82c10ddbc188f9e7b3d2d3ffeb48beda",
+        "testbench.v": "747cba291a0151428565d6418e228c62fa7265b93da146d412e179e67acf8b13"
+      }
+    },
+    "rtllm_serial2parallel": {
+      "source": "Miscellaneous/Others/serial2parallel",
+      "sha256": {
+        "design_description.txt": "0730e357999dae6475a27a96c2993520a6f46c03b8d12978195adb4e0cd08682",
+        "verified_serial2parallel.v": "a8c4734b6c7551b1a3e15df46a1f1cd6546d18f451fd3ba944445a76e75ac03a",
+        "testbench.v": "46dc38c814e75fe6806820fc4fdccc687a775f2b4c2004793ad6a9496382a0e6"
+      }
+    },
+    "rtllm_synchronizer": {
+      "source": "Miscellaneous/Others/synchronizer",
+      "sha256": {
+        "design_description.txt": "2a763a4120bcffae5dd421f9e5cf6292fb65fcf16433f40c91282c119228cb3f",
+        "verified_synchronizer.v": "384bdb6c873e02763cecbe80647460d6eb86222ce0d0fcdeacf6e405f46dd679",
+        "testbench.v": "0d20968418301ed61df89fe95dc3b76b9cc8bbc231cf4f03bd31546cfd92a7df"
+      }
+    },
+    "rtllm_traffic_light": {
+      "source": "Miscellaneous/Others/traffic_light",
+      "sha256": {
+        "design_description.txt": "9b10903e7cc88e7da0ecd7acc60685302e74c33891dc030d362fd64afcc25506",
+        "verified_traffic_light.v": "f4fe30d2867d48011e1c9d459b318d3cae99ed1959cfb419317d98708a9e89bc",
+        "testbench.v": "270cdacf8544889440e53fb0d457516723918893c5f5cc47aa8ccc57fc098b76"
+      }
+    },
+    "rtllm_width_8to16": {
+      "source": "Miscellaneous/Others/width_8to16",
+      "sha256": {
+        "design_description.txt": "e5ead5c4adb9523c6d3bb9a036a9e53197afc138963a08afcadde5ad35a16acd",
+        "verified_width_8to16.v": "2edba8f052b476d73ab83105a06269c1750199a38cd5e418538cfc7cc925685f",
+        "testbench.v": "55ace40c26b5e38451f171a7650a0035c933898c0b17b7f2d5039582b8fc1c12"
+      }
+    },
+    "rtllm_RAM": {
+      "source": "Miscellaneous/RISC-V/RAM",
+      "sha256": {
+        "design_description.txt": "a3bf09a92c659ede1d5c4a417af1e232da4852dacc497da221db1f3d6eaa285c",
+        "verified_RAM.v": "ddaa3c540dadc1c1d2b6982d7b306e805be5e41c01a3b43ce7038c4aba98333e",
+        "testbench.v": "7bf2b2180c7a48d39d868cc6219b0bd54e30cb3a57f189f37a12a428ec5f6cd9"
+      }
+    },
+    "rtllm_ROM": {
+      "source": "Miscellaneous/RISC-V/ROM",
+      "sha256": {
+        "design_description.txt": "8f70db969671ec10d3f50f19be6eb4faed3208e90401fe1e536446c8de60b773",
+        "verified_ROM.v": "374b0ab3509914d23f170f35a9d28ced2446cb9770a16484c3cd2c6c2c39b64a",
+        "testbench.v": "1c8385dd83551284e592e0e9a1fc54908be3408fc8cedd36d848f40deb428dbd"
+      }
+    }
+  },
+  "excluded": [
+    {
+      "id": "rtllm_adder_8bit",
+      "source": "Arithmetic/Adder/adder_8bit",
+      "excluded": "checker audit weak: ['tie:cout=0', 'tie:cout=1s']"
+    },
+    {
+      "id": "rtllm_comparator_3bit",
+      "source": "Arithmetic/Comparator/comparator_3bit",
+      "excluded": "stub starter passes"
+    },
+    {
+      "id": "rtllm_comparator_4bit",
+      "source": "Arithmetic/Comparator/comparator_4bit",
+      "excluded": "stub starter passes"
+    },
+    {
+      "id": "rtllm_radix2_div",
+      "source": "Arithmetic/Divider/radix2_div",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "Error: dividend=156, divisor= 10, expected=00f6, got=faf1\nError: dividend=156, divisor=246, expected=000a, got=fa0f\nError: dividend=123, divisor=123, expected=0001, got=6400\nFATAL: trusted_tb.sv:84: Test completed with 3/8 failures ===========\n       Time: 825000  Scope: radix2_div_tb\n"
+    },
+    {
+      "id": "rtllm_multi_booth_8bit",
+      "source": "Arithmetic/Multiplier/multi_booth_8bit",
+      "excluded": "stub starter passes"
+    },
+    {
+      "id": "rtllm_multi_pipe_4bit",
+      "source": "Arithmetic/Multiplier/multi_pipe_4bit",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "FATAL: trusted_tb.sv:56: Test completed with           2 / 100 failures===========\n       Time: 3010  Scope: multi_pipe_tb\n"
+    },
+    {
+      "id": "rtllm_fixed_point_adder",
+      "source": "Arithmetic/Other/fixed_point_adder",
+      "excluded": "only 0 killable mutants found"
+    },
+    {
+      "id": "rtllm_fixed_point_substractor",
+      "source": "Arithmetic/Other/fixed_point_substractor",
+      "excluded": "only 0 killable mutants found"
+    },
+    {
+      "id": "rtllm_float_multi",
+      "source": "Arithmetic/Other/float_multi",
+      "excluded": "checker audit weak: ['constant:00111101101110000101000111101100']"
+    },
+    {
+      "id": "rtllm_sub_64bit",
+      "source": "Arithmetic/Substractor/sub_64bit",
+      "excluded": "checker audit weak: ['tie:overflow=1s']"
+    },
+    {
+      "id": "rtllm_ring_counter",
+      "source": "Control/Counter/ring_counter",
+      "excluded": "verdict lines passed=1 failed=0"
+    },
+    {
+      "id": "rtllm_sequence_detector",
+      "source": "Control/Finite State Machine/sequence_detector",
+      "excluded": "stub starter passes"
+    },
+    {
+      "id": "rtllm_asyn_fifo",
+      "source": "Memory/FIFO/asyn_fifo",
+      "excluded": "reference gate: ['compile_error', 'compile_error', 'compile_error']",
+      "detail": "trusted_tb.sv:102: sorry: break statements not supported.\n"
+    },
+    {
+      "id": "rtllm_LIFObuffer",
+      "source": "Memory/LIFO/LIFObuffer",
+      "excluded": "checker audit weak: ['tie:EMPTY=0', 'tie:FULL=1s']"
+    },
+    {
+      "id": "rtllm_LFSR",
+      "source": "Memory/Shifter/LFSR",
+      "excluded": "checker audit weak: ['constant:1101']"
+    },
+    {
+      "id": "rtllm_right_shifter",
+      "source": "Memory/Shifter/right_shifter",
+      "excluded": "checker audit weak: ['constant:11101010']"
+    },
+    {
+      "id": "rtllm_freq_divbyeven",
+      "source": "Miscellaneous/Frequency divider/freq_divbyeven",
+      "excluded": "reference gate: ['compile_error', 'compile_error', 'compile_error']",
+      "detail": "trusted_tb.sv:24: syntax error\ntrusted_tb.sv:24: error: Invalid module instantiation\n"
+    },
+    {
+      "id": "rtllm_calendar",
+      "source": "Miscellaneous/Others/calendar",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "ERROR: trusted_tb.sv:31: $readmemh: Unable to open reference.txt for reading.\nFATAL: trusted_tb.sv:45: Error===========\n       Time: 40035000  Scope: main\n"
+    },
+    {
+      "id": "rtllm_edge_detect",
+      "source": "Miscellaneous/Others/edge_detect",
+      "excluded": "only 1 killable mutants found"
+    },
+    {
+      "id": "rtllm_alu",
+      "source": "Miscellaneous/RISC-V/alu",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "ERROR: trusted_tb.sv:43: $readmemh: Unable to open reference.dat for reading.\nFATAL: trusted_tb.sv:84: Error===========\n       Time: 175000  Scope: test_alu\n"
+    },
+    {
+      "id": "rtllm_clkgenerator",
+      "source": "Miscellaneous/RISC-V/clkgenerator",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "FATAL: trusted_tb.sv:26: Test completed with          20 failures ===========\n       Time: 100  Scope: clkgenerator_tb\n"
+    },
+    {
+      "id": "rtllm_instr_reg",
+      "source": "Miscellaneous/RISC-V/instr_reg",
+      "excluded": "checker audit weak: ['constant:010,11100,00000000']"
+    },
+    {
+      "id": "rtllm_pe",
+      "source": "Miscellaneous/RISC-V/pe",
+      "excluded": "checker audit weak: ['constant:00000000000000000000000000001110']"
+    },
+    {
+      "id": "rtllm_signal_generator",
+      "source": "Miscellaneous/Signal generation/signal_generator",
+      "excluded": "reference gate: ['functional', 'functional', 'functional']",
+      "detail": "ERROR: trusted_tb.sv:17: $readmemh: Unable to open tri_gen.txt for reading.\nFATAL: trusted_tb.sv:37: Error===========\n       Time: 1010  Scope: tb_signal_generator\n"
+    },
+    {
+      "id": "rtllm_square_wave",
+      "source": "Miscellaneous/Signal generation/square_wave",
+      "excluded": "verdict lines passed=1 failed=0"
+    }
+  ]
+}

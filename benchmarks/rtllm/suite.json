@@ -1,0 +1,1034 @@
+{
+  "schema_version": 1,
+  "id": "rtllm-adapted-v1",
+  "title": "RTLLM 2.0 (native adapted)",
+  "origin": "rtllm_adapted_not_official_score",
+  "difficulty_basis": "reference_loc_heuristic",
+  "tasks": [
+    {
+      "id": "rtllm_accu",
+      "category": "generation",
+      "title": "accu",
+      "path": "tasks/rtllm_accu",
+      "files": [
+        "rtl/accu.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_valid_ready",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_adder_16bit",
+      "category": "generation",
+      "title": "adder 16bit",
+      "path": "tasks/rtllm_adder_16bit",
+      "files": [
+        "rtl/adder_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "add16_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_adder_32bit",
+      "category": "generation",
+      "title": "adder 32bit",
+      "path": "tasks/rtllm_adder_32bit",
+      "files": [
+        "rtl/adder_32bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "adder32_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "and_or_0",
+          "path": "mutants/and_or_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_adder_bcd",
+      "category": "generation",
+      "title": "adder bcd",
+      "path": "tasks/rtllm_adder_bcd",
+      "files": [
+        "rtl/adder_bcd.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_adder_pipe_64bit",
+      "category": "generation",
+      "title": "adder pipe 64bit",
+      "path": "tasks/rtllm_adder_pipe_64bit",
+      "files": [
+        "rtl/adder_pipe_64bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_adder64",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_div_16bit",
+      "category": "generation",
+      "title": "div 16bit",
+      "path": "tasks/rtllm_div_16bit",
+      "files": [
+        "rtl/div_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_division",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_multi_16bit",
+      "category": "generation",
+      "title": "multi 16bit",
+      "path": "tasks/rtllm_multi_16bit",
+      "files": [
+        "rtl/multi_16bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_multi_16bit",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_multi_8bit",
+      "category": "generation",
+      "title": "multi 8bit",
+      "path": "tasks/rtllm_multi_8bit",
+      "files": [
+        "rtl/multi_8bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_multi_pipe_8bit",
+      "category": "generation",
+      "title": "multi pipe 8bit",
+      "path": "tasks/rtllm_multi_pipe_8bit",
+      "files": [
+        "rtl/multi_pipe_8bit.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_multi_pipe",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "arithmetic",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_JC_counter",
+      "category": "generation",
+      "title": "JC counter",
+      "path": "tasks/rtllm_JC_counter",
+      "files": [
+        "rtl/JC_counter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_counter_12",
+      "category": "generation",
+      "title": "counter 12",
+      "path": "tasks/rtllm_counter_12",
+      "files": [
+        "rtl/counter_12.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "counter_12_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_up_down_counter",
+      "category": "generation",
+      "title": "up down counter",
+      "path": "tasks/rtllm_up_down_counter",
+      "files": [
+        "rtl/up_down_counter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "control",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_fsm",
+      "category": "generation",
+      "title": "fsm",
+      "path": "tasks/rtllm_fsm",
+      "files": [
+        "rtl/fsm.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "main",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "control",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_barrel_shifter",
+      "category": "generation",
+      "title": "barrel shifter",
+      "path": "tasks/rtllm_barrel_shifter",
+      "files": [
+        "rtl/barrel_shifter.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "barrel_shifter_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "memory",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_freq_div",
+      "category": "generation",
+      "title": "freq div",
+      "path": "tasks/rtllm_freq_div",
+      "files": [
+        "rtl/freq_div.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "test",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_0_1_0",
+          "path": "mutants/const_0_1_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_freq_divbyfrac",
+      "category": "generation",
+      "title": "freq divbyfrac",
+      "path": "tasks/rtllm_freq_divbyfrac",
+      "files": [
+        "rtl/freq_divbyfrac.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "freq_divbyfrac_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_freq_divbyodd",
+      "category": "generation",
+      "title": "freq divbyodd",
+      "path": "tasks/rtllm_freq_divbyodd",
+      "files": [
+        "rtl/freq_divbyodd.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testb_div_odd",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_parallel2serial",
+      "category": "generation",
+      "title": "parallel2serial",
+      "path": "tasks/rtllm_parallel2serial",
+      "files": [
+        "rtl/parallel2serial.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "parallel2serial_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "add_sub_0",
+          "path": "mutants/add_sub_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_pulse_detect",
+      "category": "generation",
+      "title": "pulse detect",
+      "path": "tasks/rtllm_pulse_detect",
+      "files": [
+        "rtl/pulse_detect.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "pulse_detect_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_serial2parallel",
+      "category": "generation",
+      "title": "serial2parallel",
+      "path": "tasks/rtllm_serial2parallel",
+      "files": [
+        "rtl/serial2parallel.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "eq_ne_0",
+          "path": "mutants/eq_ne_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_synchronizer",
+      "category": "generation",
+      "title": "synchronizer",
+      "path": "tasks/rtllm_synchronizer",
+      "files": [
+        "rtl/synchronizer.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_1",
+          "path": "mutants/if_negate_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_traffic_light",
+      "category": "generation",
+      "title": "traffic light",
+      "path": "tasks/rtllm_traffic_light",
+      "files": [
+        "rtl/traffic_light.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_traffic_light",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "assign_invert_0",
+          "path": "mutants/assign_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "const_1_0_0",
+          "path": "mutants/const_1_0_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_width_8to16",
+      "category": "generation",
+      "title": "width 8to16",
+      "path": "tasks/rtllm_width_8to16",
+      "files": [
+        "rtl/width_8to16.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "testbench",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "drop_not_0",
+          "path": "mutants/drop_not_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "hard",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_RAM",
+      "category": "generation",
+      "title": "RAM",
+      "path": "tasks/rtllm_RAM",
+      "files": [
+        "rtl/RAM.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "tb_RAM",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "if_negate_0",
+          "path": "mutants/if_negate_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_1",
+          "path": "mutants/rhs_invert_1",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": true,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    },
+    {
+      "id": "rtllm_ROM",
+      "category": "generation",
+      "title": "ROM",
+      "path": "tasks/rtllm_ROM",
+      "files": [
+        "rtl/ROM.v"
+      ],
+      "checks": [
+        {
+          "id": "equivalence",
+          "tb": "checks/equivalence.sv",
+          "top": "rom_tb",
+          "description": "Hidden equivalence or directed bench from the public benchmark"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "literal_flip_0",
+          "path": "mutants/literal_flip_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        },
+        {
+          "id": "rhs_invert_0",
+          "path": "mutants/rhs_invert_0",
+          "expected_fail_checks": [
+            "equivalence"
+          ]
+        }
+      ],
+      "difficulty": "medium",
+      "domain": "misc",
+      "tier": "public_small",
+      "seed_sensitive": false,
+      "tags": [
+        "public_small",
+        "rtllm_adapted_not_official_score"
+      ]
+    }
+  ]
+}

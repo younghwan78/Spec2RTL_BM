@@ -195,6 +195,7 @@ def run(suite, config, out, repeats=1, seeds=None, check_timeout=10, agent_timeo
             else:
                 row = {"task_id": task["id"], "title": task["title"], "category": task["category"],
                        "difficulty": task.get("difficulty", "unknown"), "backend": "native",
+                       "tier": task.get("tier", "unknown"), "domain": task.get("domain", "unknown"),
                        "failure_phase": "agent", "status": agent["status"], "reason": agent.get("reason", ""), "checks": [],
                        "source_hashes": {}, "required_checks": len(task["checks"]) * len(seeds), "seconds": None}
             row.update(repeat=repeat, agent=agent)
